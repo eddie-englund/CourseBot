@@ -3,13 +3,22 @@ const { model, Schema } = require('mongoose');
 
 const profileSchema = Schema({
     userID: String,
-    username: String,
-    guildID: String,
+    user: String,
+    reps: [
+        {
+            useriD: String,
+            user: String,
+            date: String
+        }
+    ],
     credits: {
-        type: Number,
-        default: 0
+        amount: {
+            type: Number,
+            default: 0
+        },
+        date: String
     },
-    createdAt: String
+    timestap: String
 });
 
 const Profile = model('Profile', profileSchema);

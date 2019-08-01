@@ -1,0 +1,7 @@
+node_modules
+test
+.eslintrc
+yarn-error.log
+.env
+dist
+package-lock.json

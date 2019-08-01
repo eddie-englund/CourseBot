@@ -43,6 +43,7 @@ class CourseClient extends AkairoClient {
 
 const client = new CourseClient();
 require('./util/functions')(client);
+require('./util/embeds')(client);
 
 // Final steps
 client.mongoose.init();

@@ -2,7 +2,7 @@ module.exports = {
     owner: process.env.ownerID,
     prefix: '!',
     defaultSettings: {
-        prefix: '!',
+        prefix: 'c/',
         log: 'modlog',
         user: {
             username: String,
