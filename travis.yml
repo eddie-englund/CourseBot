@@ -1,0 +1,5 @@
+sudo: false
+language: node_js
+node_js:
+  - '12'
+install: npm i -G discordjs/discord.js discord-akairo/discord-akairo mongoose ms pm2

@@ -518,14 +518,13 @@ detect-libc@^1.0.2:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
-discord-akairo@8.0.0-beta.8:
+discord-akairo@discord-akairo/discord-akairo:
   version "8.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/discord-akairo/-/discord-akairo-8.0.0-beta.8.tgz#664c1f4fb819ec1d057ed7a36d2e38a68f53367b"
-  integrity sha512-aT64C1vvntCoSV/i/yAVAHrYyz1Y+5IAWagUaDsrv8M2zKmakcOvT62Iqhz5oK89k8UgVU23aIsLiq01U1bJDQ==
+  resolved "https://codeload.github.com/discord-akairo/discord-akairo/tar.gz/817327e64546062353ac595d64b52924896d032a"
 
 discord.js@discordjs/discord.js:
   version "12.0.0-dev"
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/e562564123912f09725a6e03ecf4ba44d85de35a"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/5af8cb8e6e7591e81f758a8b0f6748db7c2f12f1"
   dependencies:
     form-data "^2.3.3"
     node-fetch "^2.3.0"

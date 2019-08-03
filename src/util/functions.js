@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 /* eslint-disable no-console */
 const { Guild, Profile } = require('../models');
 const mongoose = require('mongoose');
@@ -9,19 +10,6 @@ module.exports = client => {
         else return client.config.defaultSettings;
     };
 
-    client.newUser = user => {
-        const newUser = {
-            user: user.displayName,
-            userID: user.id,
-            credits: {
-                amount: 0,
-                date: String
-            },
-            timestamp: Date()
-        };
-        return newUser;
-    };
-
     client.getProfile = async user => {
         const data = await Profile.findOne({ userID: user.id });
         if (data) return data;
@@ -30,7 +18,10 @@ module.exports = client => {
     };
 
     client.deleteProfile = async (guild, user) => {
-        const data = await Profile.deleteOne({ userID: user.id, guildID: guild.id });
+        const data = await Profile.deleteOne({
+            userID: user.id,
+            guildID: guild.id
+        });
         if (data) return data;
         else throw new Error('Failed to supply valid user data');
     };
@@ -44,7 +35,9 @@ module.exports = client => {
             else return;
         }
         console.log(
-            `Guild "${data.guildName}" (${data.guildID}) updated settings: ${Object.keys(settings)}`
+            `Guild "${data.guildName}" (${
+                data.guildID
+            }) updated settings: ${Object.keys(settings)}`
         );
         // eslint-disable-next-line consistent-return, no-return-await
         return await data.updateOne(settings);
@@ -64,17 +57,25 @@ module.exports = client => {
 
     client.createGuild = async settings => {
         // eslint-disable-next-line new-cap
-        const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, settings);
+        const merged = Object.assign(
+            { _id: mongoose.Types.ObjectId() },
+            settings
+        );
 
         const newGuild = await new Guild(merged);
         return newGuild.save().then(g => {
-            console.log(`Created db instance for guild "${g.guildName}" (${g.guildID})`);
+            console.log(
+                `Created db instance for guild "${g.guildName}" (${g.guildID})`
+            );
         });
     };
 
     client.createProfile = async settings => {
         // eslint-disable-next-line new-cap
-        const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, settings);
+        const merged = Object.assign(
+            { _id: mongoose.Types.ObjectId() },
+            settings
+        );
 
         const newProfile = await new Profile(merged);
         return newProfile.save().then(g => {

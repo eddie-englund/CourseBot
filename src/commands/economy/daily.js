@@ -12,34 +12,35 @@ class Daily extends Command {
     }
 
     async exec(message) {
-        let today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const yyyy = today.getFullYear();
-        today = `${mm}/${dd}/${yyyy}`;
+        const embed = this.client.dailyEmbed(message.author);
+        await this.client.models.Profile.findOne(
+            {
+                userID: message.author.id
+            },
+            async (err, res) => {
+                if (err) console.error(err);
 
-        const Profile = await this.client.getProfile(message.author);
-        if (!Profile) {
-            await this.client.createProfile(this.client.newUser(message.author)).then(
-                await this.client
-                    .updateProfile(message.author, {
+                if (!res) {
+                    const newProfile = {
+                        userID: message.author.id,
+                        user: message.author.tag,
                         credits: {
                             amount: 100,
-                            date: Date()
-                        }
-                    })
-                    .then(message.util.send(this.client.dailyEmbed(message.author)))
-            );
-        } else if (Profile.credits.date.includes(today)) {
-            return message.reply('You\'ve already recived your daily! Come back tommorow!');
-        } else {
-            const newAmount = Profile.credits.amount + 100;
-            await this.client.updateProfile(message.author, {
-                credits: { amount: newAmount, date: today }
-            });
-            return message.util.send(this.client.dailyEmbed(message.author));
-        }
-        return undefined;
+                            date: this.client.today
+                        },
+                        date: this.client.today
+                    };
+                    await this.client.createProfile(newProfile);
+                    return message.util.send(embed);
+                } else {
+                    const newMoney = res.credits.amount + 100;
+                    await this.client.updateProfile(message.author, {
+                        credits: { amount: newMoney, date: this.client.today }
+                    });
+                    return message.util.send(embed);
+                }
+            }
+        );
     }
 }
 
