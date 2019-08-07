@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const ms = require('ms');
 
 class Daily extends Command {
     constructor() {
@@ -6,8 +7,13 @@ class Daily extends Command {
             aliases: ['daily', 'daly'],
             clientPermissions: ['SEND_MESSAGES'],
             userPermissions: ['SEND_MESSAGES'],
+            cooldown: ms('1d'),
             channel: 'guild',
-            category: 'economy'
+            category: 'economy',
+            description: {
+                content: 'Rewards you with a amount of credits each day!',
+                usage: ['daily']
+            }
         });
     }
 
@@ -25,15 +31,18 @@ class Daily extends Command {
                         userID: message.author.id,
                         user: message.author.tag,
                         credits: {
-                            amount: 100,
+                            amount: 25,
                             date: this.client.today
                         },
-                        date: this.client.today
+                        timestamp: this.client.today
                     };
                     await this.client.createProfile(newProfile);
                     return message.util.send(embed);
                 } else {
-                    const newMoney = res.credits.amount + 100;
+                    if (res.credits.date === this.client.today) {
+                        return message.reply('Please wait until tomorrow!');
+                    }
+                    const newMoney = res.credits.amount + 25;
                     await this.client.updateProfile(message.author, {
                         credits: { amount: newMoney, date: this.client.today }
                     });

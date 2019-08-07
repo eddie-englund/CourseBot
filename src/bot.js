@@ -1,10 +1,6 @@
 const { config } = require('dotenv');
 const { join } = require('path');
-const {
-    AkairoClient,
-    CommandHandler,
-    ListenerHandler
-} = require('discord-akairo');
+const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
 config();
 
 class CourseClient extends AkairoClient {
@@ -39,12 +35,27 @@ class CourseClient extends AkairoClient {
             blockClient: true,
             allowMention: true,
             commandUtil: true,
-            cooldown: 2000,
+            defaultCooldown: 3000,
+            ignoreCooldown: [],
             handleEdits: true,
-            directory: join(__dirname, 'commands')
+            directory: join(__dirname, 'commands'),
+            prompt: {
+                modifyStart: (_, str) => `${str}\n\nType \`cancel\` to cancel the command.`,
+                modifyRetry: (_, str) => `${str}\n\nType \`cancel\` to cancel the command.`,
+                timeout: 'Guess you took too long, the command has been cancelled.',
+                ended:
+                    'You\'ve tried to use this command 3 times. The command has now been canceled',
+                cancel: 'The command has been cancelled.',
+                retries: 3,
+                time: 30000
+            }
         });
         this.listenerHandler = new ListenerHandler(this, {
             directory: join(__dirname, 'listeners')
+        });
+        this.listenerHandler.setEmitters({
+            commandHandler: this.commandHandler,
+            listenerHandler: this.listenerHandler
         });
         this.commandHandler.useListenerHandler(this.ListenerHandler);
         this.listenerHandler.loadAll();

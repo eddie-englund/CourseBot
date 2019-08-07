@@ -1,4 +1,5 @@
 const { Command } = require('discord-akairo');
+const ms = require('ms');
 
 class ReputationCommand extends Command {
     constructor() {
@@ -8,14 +9,21 @@ class ReputationCommand extends Command {
             userPermissions: ['SEND_MESSAGES'],
             channel: 'guild',
             category: 'social',
+            cooldown: ms('1d'),
+            ratelimit: 2,
             description: {
-                content: 'Adds a reputation point to another user'
+                content: 'Adds a reputation point to another user',
+                usage: ['rep <@user>']
             },
             args: [
                 {
                     id: 'member',
                     type: 'member',
-                    optional: false
+                    prompt: {
+                        retry: 'Invalid member! Please try again.',
+                        limit: 3,
+                        optional: false
+                    }
                 }
             ]
         });
@@ -23,23 +31,51 @@ class ReputationCommand extends Command {
 
     async exec(message, args) {
         if (!args.member) return message.reply('You must provide a valid user!');
-
+        if (args.member.user.bot) return `You can't rep user: ${args.member} because it's a bot!`;
         const today = new Date();
+        const Profile = {
+            userID: args.member.id,
+            user: args.member.user.tag,
+            reps: [
+                {
+                    userID: message.author.id,
+                    user: message.author.tag,
+                    date: today
+                }
+            ]
+        };
 
-        const Profile = this.client.getProfile(args.member.user);
-        if (!Profile) {
-            await this.client.createProfile(args.member.user).then(
-                await this.client.updateProfile(args.member.user, {
-                    reps: { userID: message.author.id, user: message.author.tag, date: today }
-                }),
-                message.util.send(this.client.embeds.rep(args.member.user, message.author))
-            );
-        } else {
-            await this.client.updateProfile(Profile, {
-                reps: { userID: message.author.id, user: message.author.tag, date: today }
-            });
-            return message.util.send(this.client.embeds.rep(args.member.user, message.author));
+        function createProfile(client) {
+            return client.createProfile(Profile);
         }
+
+        await this.client.models.Profile.findOne(
+            {
+                userID: args.member.id
+            },
+            async (err, res) => {
+                if (err) console.error(err);
+                if (!res) {
+                    await createProfile(this.client);
+                    return message.util.send(
+                        `${message.author}, has given ${args.member.user} a reputation point!`
+                    );
+                } else {
+                    await this.client.updateProfile(args.member.user, {
+                        reps: [
+                            {
+                                user: message.author.tag,
+                                userID: message.author.id,
+                                date: today
+                            }
+                        ]
+                    });
+                    return message.util.send(
+                        `${message.author}, has given ${args.member.user} a reputation point!`
+                    );
+                }
+            }
+        );
         return undefined;
     }
 }

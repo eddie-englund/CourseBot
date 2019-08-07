@@ -6,8 +6,10 @@ class FormatCommand extends Command {
             aliases: ['format'],
             channel: 'guild',
             category: 'misc',
+            clientPermissions: ['SEND_MESSAGES'],
+            ratelimit: 1,
             description: {
-                content: 'returns a guideline on how to ask for help with code issues'
+                content: 'returns a guide on how to ask for help with code issues'
             }
         });
     }

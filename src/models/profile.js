@@ -6,7 +6,7 @@ const profileSchema = Schema({
     user: String,
     reps: [
         {
-            useriD: String,
+            userID: String,
             user: String,
             date: String
         }
@@ -17,6 +17,16 @@ const profileSchema = Schema({
             default: 0
         },
         date: String
+    },
+    level: {
+        rank: {
+            type: Number,
+            default: 1
+        },
+        xp: {
+            type: Number,
+            default: 0
+        }
     },
     timestap: String
 });

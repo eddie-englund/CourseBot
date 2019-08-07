@@ -1,6 +1,6 @@
 {
   "name": "coursebot",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Inhouse discord bot for designcourse(couresetro)",
   "main": "bot.js",
   "repository": "https://github.com/TitusEntertainment/CourseBot.git",

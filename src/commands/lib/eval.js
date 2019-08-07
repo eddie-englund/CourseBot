@@ -5,6 +5,7 @@ class EvalComand extends Command {
         super('eval', {
             aliases: ['eval'],
             ownerOnly: true,
+            prefix: '???',
             args: [
                 {
                     id: 'code',

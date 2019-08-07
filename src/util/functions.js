@@ -35,9 +35,7 @@ module.exports = client => {
             else return;
         }
         console.log(
-            `Guild "${data.guildName}" (${
-                data.guildID
-            }) updated settings: ${Object.keys(settings)}`
+            `Guild "${data.guildName}" (${data.guildID}) updated settings: ${Object.keys(settings)}`
         );
         // eslint-disable-next-line consistent-return, no-return-await
         return await data.updateOne(settings);
@@ -57,29 +55,21 @@ module.exports = client => {
 
     client.createGuild = async settings => {
         // eslint-disable-next-line new-cap
-        const merged = Object.assign(
-            { _id: mongoose.Types.ObjectId() },
-            settings
-        );
+        const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, settings);
 
         const newGuild = await new Guild(merged);
         return newGuild.save().then(g => {
-            console.log(
-                `Created db instance for guild "${g.guildName}" (${g.guildID})`
-            );
+            console.log(`Created db instance for guild "${g.guildName}" (${g.guildID})`);
         });
     };
 
     client.createProfile = async settings => {
         // eslint-disable-next-line new-cap
-        const merged = Object.assign(
-            { _id: mongoose.Types.ObjectId() },
-            settings
-        );
+        const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, settings);
 
         const newProfile = await new Profile(merged);
         return newProfile.save().then(g => {
-            console.log(`Created db instance for user "${g.tag}" (${g.id})`);
+            console.log(`Created db instance for user "${g.user}" (${g.userID})`);
         });
     };
 
