@@ -27,7 +27,9 @@ class CommandCount extends Command {
                     .setColor(this.client.color.main)
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .setDescription([
-                        `${this.client.user.username} has successfully executed ${res.commandsFinished} commands!`
+                        `${this.client.user.username} has successfully executed \`\`${res.commandsFinished}\`\` commands!`,
+                        '',
+                        `Last command executed: \`\`${res.lastCommand}\`\``
                     ])
                     .setTimestamp(this.client.today);
                 return message.util.send(embed);

@@ -1,6 +1,6 @@
 module.exports = {
     owner: process.env.ownerID,
-    prefix: '!',
+    prefix: 'c/',
     defaultSettings: {
         prefix: 'c/',
         log: 'modlog',

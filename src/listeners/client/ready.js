@@ -9,7 +9,7 @@ class ReadyEvent extends Listener {
     }
 
     exec() {
-        this.client.user.setActivity('@runa help', { type: 'LISTENING' });
+        this.client.user.setActivity('@Course', { type: 'LISTENING' });
         // eslint-disable-next-line no-console
         console.log('CourseBot has connected');
     }

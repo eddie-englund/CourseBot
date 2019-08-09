@@ -12,12 +12,16 @@ class SetPrefix extends Command {
             aliases: ['newprefix', 'setprefix'],
             clientPermissions: ['SEND_MESSAGES'],
             userPermissions: ['MANAGE_CHANNELS'],
+            ratelimit: 2,
             args: [
                 {
                     id: 'newPrefix',
                     type: 'string',
-                    promt: {
-                        optional: false
+                    prompt: {
+                        optional: false,
+                        start: message => `${message.author}, What prefix would you like to set?`,
+                        retry: message =>
+                            `${message.author}, it has to be a string! Numbers are not valid!`
                     }
                 }
             ]
@@ -25,9 +29,6 @@ class SetPrefix extends Command {
     }
 
     async exec(message, args) {
-        // Args handling
-        if (!args.newPrefix) return message.reply('Please provide a prefix!');
-
         // Get embed from embed func
         const embed = await this.client.prefixEmbed(message.author, message.guild, args.newPrefix);
 

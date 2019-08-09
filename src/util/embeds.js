@@ -18,11 +18,7 @@ const embed = client => {
             .setColor(client.color.main)
             .setAuthor(user.tag, user.displayAvatarURL())
             .setThumbnail(guild.iconURL())
-            .setDescription([
-                '**2000 A new prefix has been set!**',
-                '',
-                `New prefix: \`\`${prefix}\`\``
-            ])
+            .setDescription(['**A new prefix has been set!**', '', `New prefix: \`\`${prefix}\`\``])
             .setTimestamp(today);
         return newEmbed;
     };

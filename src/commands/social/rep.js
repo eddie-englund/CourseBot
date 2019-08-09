@@ -20,8 +20,9 @@ class ReputationCommand extends Command {
                     id: 'member',
                     type: 'member',
                     prompt: {
-                        retry: 'Invalid member! Please try again.',
-                        limit: 3,
+                        start: message => `${message.author}, Please mention a valid user!`,
+                        retry: message =>
+                            `${message.author}, invalid member provided! Please try again.`,
                         optional: false
                     }
                 }
@@ -32,7 +33,7 @@ class ReputationCommand extends Command {
     async exec(message, args) {
         if (!args.member) return message.reply('You must provide a valid user!');
         if (args.member.user.bot) return `You can't rep user: ${args.member} because it's a bot!`;
-        const today = new Date();
+
         const Profile = {
             userID: args.member.id,
             user: args.member.user.tag,
@@ -40,7 +41,7 @@ class ReputationCommand extends Command {
                 {
                     userID: message.author.id,
                     user: message.author.tag,
-                    date: today
+                    date: this.client.today
                 }
             ]
         };
@@ -66,7 +67,7 @@ class ReputationCommand extends Command {
                             {
                                 user: message.author.tag,
                                 userID: message.author.id,
-                                date: today
+                                date: this.client.today
                             }
                         ]
                     });

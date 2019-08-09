@@ -39,15 +39,18 @@ class CourseClient extends AkairoClient {
             ignoreCooldown: [],
             handleEdits: true,
             directory: join(__dirname, 'commands'),
-            prompt: {
-                modifyStart: (_, str) => `${str}\n\nType \`cancel\` to cancel the command.`,
-                modifyRetry: (_, str) => `${str}\n\nType \`cancel\` to cancel the command.`,
-                timeout: 'Guess you took too long, the command has been cancelled.',
-                ended:
-                    'You\'ve tried to use this command 3 times. The command has now been canceled',
-                cancel: 'The command has been cancelled.',
-                retries: 3,
-                time: 30000
+            argumentDefaults: {
+                prompt: {
+                    modifyStart: (_, str) => `${str}\n\nType \`cancel\` to cancel the command.`,
+                    modifyRetry: (_, str) => `${str}\n\nType \`cancel\` to cancel the command.`,
+                    timeout: 'Guess you took too long, the command has been cancelled.',
+                    ended:
+                        'You\'ve tried to use this command 3 times. The command has now been canceled',
+                    cancel: 'The command has been cancelled.',
+                    retries: 3,
+                    time: 30000
+                },
+                otherwise: ''
             }
         });
         this.listenerHandler = new ListenerHandler(this, {
