@@ -1,0 +1,77 @@
+import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
+import { config } from 'dotenv';
+import { join } from 'path';
+import Guild from '../../db/models/Guild';
+
+// Dotenv config
+config();
+
+export default class DongClient extends AkairoClient {
+  commandHandler: CommandHandler;
+  listenerHandler: ListenerHandler;
+  // Db
+  getGuild: Function;
+  updateGuild: Function;
+  createGuild: Function;
+  getProfile: Function;
+  updateProfile: Function;
+  createProfile: Function;
+  models: Object;
+
+  // Random util
+
+  color;
+
+  constructor() {
+    super(
+      {
+        ownerID: process.env.ownerID
+      },
+      {
+        disableEveryone: true
+      }
+    );
+
+    this.color = require('../util/color');
+    this.models = require('../db/index');
+
+    this.commandHandler = new CommandHandler(this, {
+      directory: join(__dirname, '..', 'commands'),
+      prefix: async msg => {
+        const settings = await Guild.findOne({ guildID: msg.guild.id });
+        if (settings) return settings.prefix;
+        else return '?';
+      },
+      blockBots: true,
+      blockClient: true,
+      allowMention: true,
+      defaultCooldown: 4000,
+      ignoreCooldown: [],
+      commandUtil: true,
+      argumentDefaults: {
+        prompt: {
+          modifyStart: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
+          modifyRetry: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
+          timeout: 'Guess you took too long, the command has been cancelled.',
+          ended:
+            "More than 3 tries and you still didn't couldn't do it... The command has been cancelled.",
+          cancel: 'The command has been cancelled.',
+          retries: 3,
+          time: 30000
+        },
+        otherwise: ''
+      }
+    });
+
+    this.listenerHandler = new ListenerHandler(this, {
+      directory: join(__dirname, '..', 'events')
+    });
+    this.listenerHandler.setEmitters({
+      commandHandler: this.commandHandler,
+      listenerHandler: this.listenerHandler
+    });
+    this.commandHandler!.useListenerHandler(this.listenerHandler);
+    this.listenerHandler.loadAll();
+    this.commandHandler.loadAll();
+  }
+}
