@@ -16,12 +16,10 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
     "common-tags": "^1.8.0",
     "discord-akairo": "^8.0.0-beta.8",
     "discord.js": "discordjs/discord.js",
     "dotenv": "^8.0.0",
-    "express": "^4.17.1",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.6.9",
@@ -31,13 +29,13 @@
     "restify": "^8.4.0",
     "restify-cors-middleware": "^1.1.1",
     "restify-errors": "^8.0.1",
-    "serve-static-restify": "^3.0.0",
     "turndown": "^5.0.3"
   },
   "eslintConfig": {
     "extends": "marine/node"
   },
   "scripts": {
-    "ts-compile": "tsc -p tsconfig.json --watch"
+    "ts-compile": "tsc -p tsconfig.json --watch",
+    "api": "nodemon dist/api/app.js"
   }
 }

@@ -33,7 +33,7 @@ export default class DongClient extends AkairoClient {
     );
 
     this.color = require('../util/color');
-    this.models = require('../db/index');
+    this.models = require('../../db/index');
 
     this.commandHandler = new CommandHandler(this, {
       directory: join(__dirname, '..', 'commands'),

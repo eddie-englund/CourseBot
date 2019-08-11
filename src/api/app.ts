@@ -2,16 +2,12 @@ import { config } from './config';
 import { init } from '../db/init';
 import * as restify from 'restify';
 import * as mongoose from 'mongoose';
-import * as serveStatic from 'serve-static-restify';
 const corsMiddleware = require('restify-cors-middleware');
+
 const server = restify.createServer();
 
 // Middleware
 
-const handlers = [serveStatic(__dirname + '/public')];
-
-server.get('*', handlers);
-server.head('*', handlers);
 const cors = corsMiddleware({
   preflightMaxAge: 5, //Optional
   origins: ['http://localhost:3001']
