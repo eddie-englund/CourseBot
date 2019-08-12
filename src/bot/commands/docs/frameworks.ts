@@ -1,5 +1,5 @@
 import { Command, Argument } from 'discord-akairo';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
@@ -48,7 +48,7 @@ export default class Frameworks extends Command {
         break;
       default:
         message.util!.send(
-          stripIndents`Avalible frameworks:
+          stripIndents`${message.author}, These are the avalible frameworks:
             • vue
             • react
             • angular

@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as qs from 'querystring';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 const Turndown = require('turndown'); // eslint-disable-line
 
 /**
@@ -60,7 +60,7 @@ export default class MDNCommand extends Command {
       '<strong><code>$1</code></strong>'
     );
     const embed = new MessageEmbed()
-      .setColor(this.client.color.red)
+      .setColor(this.client.color.main)
       .setAuthor('MDN', 'https://i.imgur.com/DFGXabG.png', 'https://developer.mozilla.org/')
       .setURL(`https://developer.mozilla.org${body.URL}`)
       .setTitle(body.Title)

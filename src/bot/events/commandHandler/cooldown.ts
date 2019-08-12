@@ -1,5 +1,5 @@
 import { Listener, Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 const ms = require('ms');
 

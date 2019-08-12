@@ -1,4 +1,4 @@
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import Profile from '../models/Profile';
 import * as mongoose from 'mongoose';
 

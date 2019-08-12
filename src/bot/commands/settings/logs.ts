@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 

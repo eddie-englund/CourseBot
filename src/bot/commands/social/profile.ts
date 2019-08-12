@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
 export default class Profile extends Command {
@@ -29,7 +29,7 @@ export default class Profile extends Command {
   public async exec(message: Message, { member }) {
     const userEmbed = this.client.util
       .embed()
-      .setColor('#e60b5f')
+      .setColor(this.client.color.main)
       .setAuthor(member.user.tag, member.user.displayAvatarURL())
       .setThumbnail(member.user.displayAvatarURL())
       .addField('❯ User: ', member.user.tag, true)

@@ -12,6 +12,35 @@ const GuildSchema: Schema = new Schema({
     active: {
       type: Boolean,
       default: true
+    },
+    guildBans: [
+      {
+        userID: String,
+        user: String,
+        reason: {
+          type: String,
+          default: 'No reason provided'
+        },
+        bannedBy: {
+          user: String,
+          userID: String
+        },
+        date: String
+      }
+    ],
+    commands: {
+      started: {
+        type: Number,
+        default: 0
+      },
+      finished: {
+        type: Number,
+        default: 0
+      },
+      canceled: {
+        type: Number,
+        default: 0
+      }
     }
   },
   commands: {

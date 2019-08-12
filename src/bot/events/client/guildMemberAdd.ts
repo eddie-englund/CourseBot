@@ -1,5 +1,5 @@
 import { Listener } from 'discord-akairo';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import { GuildMember } from 'discord.js';
 
 export default class GuildMemberAdd extends Listener {

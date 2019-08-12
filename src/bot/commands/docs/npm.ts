@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as moment from 'moment';
 import 'moment-duration-format';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 
 /**
  * I was too lazy to make this command. Credits to Icrawl and the bot yukikaze: https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/npm.ts
@@ -56,7 +56,7 @@ export default class NPMCommand extends Command {
       ? this._trimArray(Object.keys(version.dependencies))
       : null;
     const embed = new MessageEmbed()
-      .setColor(this.client.color.red)
+      .setColor(this.client.color.main)
       .setAuthor('NPM', 'https://i.imgur.com/ErKf5Y0.png', 'https://www.npmjs.com/')
       .setTitle(body.name)
       .setURL(`https://www.npmjs.com/package/${pkg}`)

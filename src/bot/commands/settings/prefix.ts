@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import { stripIndents } from 'common-tags';
 
 export default class Prefix extends Command {

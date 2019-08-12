@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/DongClient';
+import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 const ms = require('ms');
 
@@ -73,7 +73,7 @@ export default class Pay extends Command {
 
     const embed = this.client.util
       .embed()
-      .setColor(this.client.color.red)
+      .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setDescription(`${message.author.tag} has payed ${payUser.user.tag} ${amount}💵`)
       .setFooter('Guild taxes apply. Read more about taxes with the taxes command');

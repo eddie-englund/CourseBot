@@ -1,12 +1,10 @@
 import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
-import { config } from 'dotenv';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
 
-// Dotenv config
-config();
 
-export default class DongClient extends AkairoClient {
+
+export default class CourseClient extends AkairoClient {
   commandHandler: CommandHandler;
   listenerHandler: ListenerHandler;
   // Db
@@ -17,6 +15,7 @@ export default class DongClient extends AkairoClient {
   updateProfile: Function;
   createProfile: Function;
   models: Object;
+  log: Function;
 
   // Random util
 
@@ -45,7 +44,7 @@ export default class DongClient extends AkairoClient {
       blockBots: true,
       blockClient: true,
       allowMention: true,
-      defaultCooldown: 4000,
+      defaultCooldown: 5000,
       ignoreCooldown: [],
       commandUtil: true,
       argumentDefaults: {

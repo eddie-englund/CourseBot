@@ -1,8 +1,10 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
+import CourseClient from 'src/bot/client/CourseClient';
 
 export default class HelpCommand extends Command {
+  client: CourseClient;
   public constructor() {
     super('help', {
       aliases: ['help'],
@@ -32,7 +34,7 @@ export default class HelpCommand extends Command {
     if (!command) {
       const embed = this.client.util
         .embed()
-        .setColor('#e60b5f')
+        .setColor(this.client.color.main)
         .addField(
           '❯ Commands',
           stripIndents`A list of available commands.
