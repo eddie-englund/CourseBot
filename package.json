@@ -27,6 +27,7 @@
     "mongoose-timestamp": "^0.6.0",
     "ms": "^2.1.2",
     "node-gyp": "^5.0.3",
+    "pluralize": "^8.0.0",
     "restify": "^8.4.0",
     "restify-cors-middleware": "^1.1.1",
     "restify-errors": "^8.0.1",

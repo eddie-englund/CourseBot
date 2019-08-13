@@ -3,17 +3,18 @@ import { google } from 'googleapis';
 const auth = process.env.YOUTUBETOKEN;
 import { stripIndents } from 'common-tags';
 const service = google.youtube('v3');
+import { Message } from 'discord.js';
 
 export default class YoutubeChannel extends Command {
   constructor() {
     super('yt', {
-      aliases: ['channel', 'yt', 'gary'],
+      aliases: ['gary', 'channel'],
       clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
       userPermissions: ['SEND_MESSAGES']
     });
   }
 
-  async exec(message) {
+  public async exec(message: Message) {
     const response = await service.channels
       .list({
         auth,
