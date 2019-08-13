@@ -8,7 +8,7 @@ export default class Format extends Command {
 
   constructor() {
     super('format', {
-      aliases: ['format', 'question', 'help'],
+      aliases: ['format', 'question'],
       channel: 'guild',
       category: 'info',
       clientPermissions: ['EMBED_LINKS', 'SEND_MESSAGES'],
