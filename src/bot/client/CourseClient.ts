@@ -1,8 +1,6 @@
-import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
-import { join } from 'path';
-import Guild from '../../db/models/Guild';
-
-
+import { AkairoClient, CommandHandler, ListenerHandler } from "discord-akairo";
+import { join } from "path";
+import Guild from "../../db/models/Guild";
 
 export default class CourseClient extends AkairoClient {
   commandHandler: CommandHandler;
@@ -14,6 +12,9 @@ export default class CourseClient extends AkairoClient {
   getProfile: Function;
   updateProfile: Function;
   createProfile: Function;
+  getTag: Function;
+  updateTag: Function;
+  createTag: Function;
   models: Object;
   log: Function;
 
@@ -31,15 +32,15 @@ export default class CourseClient extends AkairoClient {
       }
     );
 
-    this.color = require('../util/color');
-    this.models = require('../../db/index');
+    this.color = require("../util/color");
+    this.models = require("../../db/index");
 
     this.commandHandler = new CommandHandler(this, {
-      directory: join(__dirname, '..', 'commands'),
+      directory: join(__dirname, "..", "commands"),
       prefix: async msg => {
         const settings = await Guild.findOne({ guildID: msg.guild.id });
         if (settings) return settings.prefix;
-        else return '?';
+        else return "?";
       },
       blockBots: true,
       blockClient: true,
@@ -49,21 +50,23 @@ export default class CourseClient extends AkairoClient {
       commandUtil: true,
       argumentDefaults: {
         prompt: {
-          modifyStart: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
-          modifyRetry: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
-          timeout: 'Guess you took too long, the command has been cancelled.',
+          modifyStart: (_, str): string =>
+            `${str}\n\nType \`cancel\` to cancel the command.`,
+          modifyRetry: (_, str): string =>
+            `${str}\n\nType \`cancel\` to cancel the command.`,
+          timeout: "Guess you took too long, the command has been cancelled.",
           ended:
             "More than 3 tries and you still didn't couldn't do it... The command has been cancelled.",
-          cancel: 'The command has been cancelled.',
+          cancel: "The command has been cancelled.",
           retries: 3,
           time: 30000
         },
-        otherwise: ''
+        otherwise: ""
       }
     });
 
     this.listenerHandler = new ListenerHandler(this, {
-      directory: join(__dirname, '..', 'events')
+      directory: join(__dirname, "..", "events")
     });
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,

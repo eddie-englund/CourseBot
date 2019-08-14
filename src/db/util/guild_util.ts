@@ -1,6 +1,6 @@
-import DongClient from 'src/bot/client/CourseClient';
-import Guild from '../models/Guild';
-import * as mongoose from 'mongoose';
+import DongClient from "src/bot/client/CourseClient";
+import Guild from "../models/Guild";
+import * as mongoose from "mongoose";
 
 export = (client: DongClient) => {
   client.createGuild = async (settings: Object) => {
@@ -27,14 +27,11 @@ export = (client: DongClient) => {
   client.updateGuild = async (guild, settings: Object) => {
     let data = await client.getGuild(guild);
 
-    if (typeof data !== 'object') data = {};
+    if (typeof data !== "object") data = {};
     for (const key in settings) {
       if (data[key] !== settings[key]) data[key] = settings[key];
       else return;
     }
-    console.log(
-      `Guild "${data.guild}" (${data.guildID}) updated settings: ${Object.keys(settings)}`
-    );
     // eslint-disable-next-line consistent-return, no-return-await
     return await data.updateOne(settings);
   };
