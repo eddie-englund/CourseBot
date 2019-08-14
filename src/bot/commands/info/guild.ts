@@ -1,17 +1,17 @@
-import { Command } from 'discord-akairo';
-import { Message, Guild, MessageEmbed } from 'discord.js';
-import CourseClient from 'src/bot/client/CourseClient';
+import { Command } from "discord-akairo";
+import { Message, Guild, MessageEmbed } from "discord.js";
+import CourseClient from "src/bot/client/CourseClient";
 
 export default class GuildProfile extends Command {
   client: CourseClient;
 
   constructor() {
-    super('guildProfile', {
-      aliases: ['guild', 'server', 'guildinfo'],
-      clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
-      userPermissions: ['SEND_MESSAGES'],
-      category: 'guild',
-      channel: 'guild'
+    super("serverProfile", {
+      aliases: ["guild", "server", "guildinfo"],
+      clientPermissions: ["SEND_MESSAGES", "EMBED_LINKS"],
+      userPermissions: ["SEND_MESSAGES"],
+      category: "guild",
+      channel: "guild"
     });
   }
 
@@ -24,12 +24,13 @@ export default class GuildProfile extends Command {
       .setTitle(`${guild.name} guild info`)
       .setAuthor(guild.owner.user.tag, guild.owner.user.displayAvatarURL())
       .setThumbnail(guild.iconURL())
-      .setDescription(guild.description)
-      .addField('Guild size:', guild.memberCount, true)
+      .addField("Guild size:", guild.memberCount, true)
       .addField('Regarded "large":', guild.large, true)
-      .addField('Is verified: ', guild.verified, true)
-      .addField('Content filter level: ', guild.explicitContentFilter, true)
-      .setFooter(`Guild created at ${guild.createdAt}`);
+      .addField("Is verified: ", guild.verified, true)
+      .addField("Content filter level: ", guild.explicitContentFilter, true)
+      .setFooter(`Guild created at ${guild.createdAt} `);
+
+    if (guild.description) guildEmbed.setDescription(guild.description);
 
     return message.util!.send(guildEmbed);
   }

@@ -788,10 +788,9 @@ diff@^4.0.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.1.tgz#0c667cb467ebbb5cea7f14f135cc2dba7780a8ff"
   integrity sha512-s2+XdvhPCOF01LRQBC8hf4vhbVmI2CGS5aZnxLJlT5FtdhPCDFq80q++zK2KlrVorVDdL5BOGZ/VfLrVtYNF+Q==
 
-discord-akairo@^8.0.0-beta.8:
+discord-akairo@discord-akairo/discord-akairo:
   version "8.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/discord-akairo/-/discord-akairo-8.0.0-beta.8.tgz#664c1f4fb819ec1d057ed7a36d2e38a68f53367b"
-  integrity sha512-aT64C1vvntCoSV/i/yAVAHrYyz1Y+5IAWagUaDsrv8M2zKmakcOvT62Iqhz5oK89k8UgVU23aIsLiq01U1bJDQ==
+  resolved "https://codeload.github.com/discord-akairo/discord-akairo/tar.gz/817327e64546062353ac595d64b52924896d032a"
 
 discord.js@discordjs/discord.js:
   version "12.0.0-dev"
