@@ -7,7 +7,6 @@ export default class TagShow extends Command {
 
   public constructor() {
     super('tag-show', {
-      aliases: ['tag-show'],
       category: 'tags',
       channel: 'guild',
       userPermissions: ['SEND_MESSAGES'],

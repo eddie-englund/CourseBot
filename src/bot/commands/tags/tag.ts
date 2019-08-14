@@ -15,7 +15,7 @@ export default class Tag extends Command {
     });
   }
 
-  public async *args(): object {
+  public async *args(message: Message): object {
     const method = yield {
       type: [
         ['tag-show', 'show'],
@@ -24,12 +24,12 @@ export default class Tag extends Command {
         ['tag-edit', 'edit'],
         ['tag-list', 'list']
       ],
-      otherwise: async (msg: Message) => {
+      otherwise: async (message: Message) => {
         // @ts-ignore
-        const prefix = await this.handler.prefix(msg);
-        return stripIndents`
-				Please check how to use this command with ${prefix}help tag
-				`;
+        const prefix = await this.handler.prefix(message);
+        return message.util!.reply(
+          `I don't think you quite understand how this command works... To get more info do ${prefix}help tag`
+        );
       }
     };
 

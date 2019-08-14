@@ -1,6 +1,9 @@
-import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
+import { AkairoClient, CommandHandler, ListenerHandler, Flag } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
+import { Raw } from 'typeorm';
+import { Util } from 'discord.js';
+import Tag from '../../db/models/Tag';
 
 export default class CourseClient extends AkairoClient {
   commandHandler: CommandHandler;
@@ -30,7 +33,9 @@ export default class CourseClient extends AkairoClient {
         ownerID: process.env.ownerID
       },
       {
-        disableEveryone: true
+        disableEveryone: true,
+        messageCacheMaxSize: 1000,
+        disabledEvents: ['TYPING_START']
       }
     );
 
@@ -64,7 +69,8 @@ export default class CourseClient extends AkairoClient {
           time: 30000
         },
         otherwise: ''
-      }
+      },
+      aliasReplacement: /-/g
     });
 
     this.listenerHandler = new ListenerHandler(this, {
