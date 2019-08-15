@@ -32,6 +32,9 @@ export default class Ban extends Command {
   }
 
   public async exec(message: Message, { member, reason }) {
+    if (member.id === message.author!.id)
+      return message.util!.send('Why in gods name would you even try to ban yourself?!');
+
     const guildData = await this.client.getGuild(message.guild);
 
     const channelEmbed = this.client.util

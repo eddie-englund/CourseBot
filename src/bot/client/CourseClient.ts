@@ -1,31 +1,35 @@
-import { AkairoClient, CommandHandler, ListenerHandler, Flag } from 'discord-akairo';
+import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
-import { Raw } from 'typeorm';
-import { Util } from 'discord.js';
-import Tag from '../../db/models/Tag';
 
 export default class CourseClient extends AkairoClient {
   commandHandler: CommandHandler;
   listenerHandler: ListenerHandler;
-  // Db
+
+  // Db functions
+  // Guild functions
   getGuild: Function;
   updateGuild: Function;
   createGuild: Function;
+
+  // Profile/User functions
   getProfile: Function;
   updateProfile: Function;
   createProfile: Function;
+
+  // Tags functions
   getTag: Function;
   updateTag: Function;
   createTag: Function;
   deleteTag: Function;
   getTagAliases: Function;
+
+  // Db models
   models: Object;
-  log: Function;
 
   // Random util
-
-  color;
+  log: Function;
+  color: any;
 
   constructor() {
     super(
@@ -39,9 +43,11 @@ export default class CourseClient extends AkairoClient {
       }
     );
 
+    // Importing colors and the db models to this.client.color and this.client.models
     this.color = require('../util/color');
     this.models = require('../../db/index');
 
+    // Handlers. Declaring: Directory, Guild specifc prefixes, taking mention as a prefix ,bot blocking, block self, set default settings for arguments and allow usage of the command util
     this.commandHandler = new CommandHandler(this, {
       directory: join(__dirname, '..', 'commands'),
       prefix: async msg => {
@@ -72,14 +78,18 @@ export default class CourseClient extends AkairoClient {
       },
       aliasReplacement: /-/g
     });
-
+    // Declaring the listener handler and it's directory
     this.listenerHandler = new ListenerHandler(this, {
       directory: join(__dirname, '..', 'events')
     });
+    // Allowing the handler ot use the events emitted by the commandHandler and the ListenerHandler
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,
       listenerHandler: this.listenerHandler
     });
+
+    // Loading handlers
+
     this.commandHandler!.useListenerHandler(this.listenerHandler);
     this.listenerHandler.loadAll();
     this.commandHandler.loadAll();

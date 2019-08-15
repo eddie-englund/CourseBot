@@ -1,10 +1,10 @@
 import { Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
+import CourseClient from '../../client/CourseClient';
 const ms = require('ms');
 
 export default class Pay extends Command {
-  client: DongClient;
+  client: CourseClient;
 
   constructor() {
     super('pay', {
@@ -30,7 +30,8 @@ export default class Pay extends Command {
           type: 'number',
           prompt: {
             optional: false,
-            start: message => `${message.author}, How many credits would you like to pay?`,
+            start: message =>
+              `${message.author}, How many credits would you like to pay?`,
             retry: message => `${message.author}, Please try again.`
           }
         }
@@ -45,13 +46,18 @@ export default class Pay extends Command {
     if (!User) return message.reply('Something went wrong, please try again!');
     else if (!Payee) return message.reply(`You don't seem to have any money 🤔`);
 
-    if (Payee.wallet.credits < amount) return message.reply(`💳 **|** You don't have ${amount} 💵`);
+    if (Payee.wallet.credits < amount)
+      return message.reply(`💳 **|** You don't have ${amount} 💵`);
     const newPayeeCredits: Number = Payee.wallet.credits - amount;
     const tax = (10 / 100) * (User.wallet.credits + amount);
     const newUserCredits: Number = User.wallet.credits + amount - tax;
 
-    await this.client.updateProfile(message.author, { wallet: { credits: newPayeeCredits } });
-    await this.client.updateProfile(payUser.user, { wallet: { credits: newUserCredits } });
+    await this.client.updateProfile(message.author, {
+      wallet: { credits: newPayeeCredits }
+    });
+    await this.client.updateProfile(payUser.user, {
+      wallet: { credits: newUserCredits }
+    });
     await this.client.updateGuild(message.guild, {
       guildBank: {
         transactions: [

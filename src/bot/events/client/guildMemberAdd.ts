@@ -1,9 +1,9 @@
 import { Listener } from 'discord-akairo';
-import DongClient from 'src/bot/client/CourseClient';
 import { GuildMember } from 'discord.js';
+import CourseClient from '../../client/CourseClient';
 
 export default class GuildMemberAdd extends Listener {
-  client: DongClient;
+  client: CourseClient;
   constructor() {
     super('guildMemberAdd', {
       event: 'guildMemberAdd',

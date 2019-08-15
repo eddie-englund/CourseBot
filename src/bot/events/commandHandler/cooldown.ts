@@ -1,10 +1,10 @@
 import { Listener, Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
+import CourseClient from '../../client/CourseClient';
 const ms = require('ms');
 
 export default class Cooldown extends Listener {
-  client: DongClient;
+  client: CourseClient;
   constructor() {
     super('cooldown', {
       event: 'cooldown',
@@ -14,6 +14,8 @@ export default class Cooldown extends Listener {
   }
 
   exec(message: Message, command: Command, remaning) {
-    return message!.reply(`Please wait \`\`${ms(remaning)}\`\` before using \`\`${command}\`\``);
+    return message!.reply(
+      `Please wait \`\`${ms(remaning)}\`\` before using \`\`${command}\`\``
+    );
   }
 }

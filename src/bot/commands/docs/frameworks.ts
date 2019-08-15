@@ -15,7 +15,8 @@ export default class Frameworks extends Command {
           id: 'framework',
           prompt: {
             optional: false,
-            start: message => `${message.author}, what framework would you like the docs for?`,
+            start: message =>
+              `${message.author}, what framework would you like the docs for?`,
             retry: message => `${message.author}, comon now! I know you can do it!`
           }
         }
@@ -24,6 +25,8 @@ export default class Frameworks extends Command {
   }
 
   public async exec(message: Message, { framework }) {
+    // vue, react, electron, angular, svelete, discord.js, discord.js
+
     switch (framework) {
       case 'vue':
         message.util!.send('https://vuejs.org/v2/guide/');

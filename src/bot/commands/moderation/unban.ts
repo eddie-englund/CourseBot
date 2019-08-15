@@ -20,8 +20,9 @@ export default class Unban extends Command {
           },
           prompt: {
             start: (message: Message): string =>
-              `${message.author}, what member do you want to unban?`,
-            retry: (message: Message): string => `${message.author}, please mention a member.`
+              `${message.author}, who would you like to unban?`,
+            retry: (message: Message): string =>
+              `${message.author}, please provide a valid user reslovable.`
           }
         },
         {
@@ -39,7 +40,9 @@ export default class Unban extends Command {
     try {
       await message.guild!.members.unban(user, `Unbanned by ${message.author!.tag}`);
     } catch (error) {
-      return message.reply(`there was an error unbanning this user: \`${error.message}\``);
+      return message.reply(
+        `there was an error unbanning this user: \`${error.message}\``
+      );
     }
 
     const unbanEmbed: MessageEmbed = this.client.util
@@ -51,7 +54,7 @@ export default class Unban extends Command {
       )
       .setTimestamp(Date.now());
 
-    this.client.log(message, unbanEmbed);
+    await this.client.log(message, unbanEmbed);
     return message.util!.send(unbanEmbed);
   }
 }

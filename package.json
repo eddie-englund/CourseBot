@@ -39,6 +39,7 @@
   },
   "scripts": {
     "ts-compile": "tsc -p tsconfig.json --watch",
-    "api": "nodemon dist/api/app.js"
+    "api": "nodemon dist/api/app.js",
+    "bot": "nodemon dist/bot/bot.js"
   }
 }

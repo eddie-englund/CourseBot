@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as qs from 'querystring';
-import DongClient from 'src/bot/client/CourseClient';
+import CourseClient from '../../client/CourseClient';
 const Turndown = require('turndown'); // eslint-disable-line
 
 /**
@@ -10,7 +10,7 @@ const Turndown = require('turndown'); // eslint-disable-line
  */
 
 export default class MDNCommand extends Command {
-  client: DongClient;
+  client: CourseClient;
   public constructor() {
     super('mdn', {
       aliases: ['mdn', 'mozilla-developer-network'],
@@ -30,7 +30,8 @@ export default class MDNCommand extends Command {
               `${message.author}, what would you like to search for?`
           },
           match: 'content',
-          type: (_, query): string | null => (query ? query.replace(/#/g, '.prototype.') : null)
+          type: (_, query): string | null =>
+            query ? query.replace(/#/g, '.prototype.') : null
         }
       ]
     });
@@ -45,9 +46,7 @@ export default class MDNCommand extends Command {
     const res = await fetch(`https://mdn.pleb.xyz/search?${queryString}`);
     const body = await res.json();
     if (!body.URL || !body.Title || !body.Summary) {
-      return message.util!.reply(
-        "Yukikaze couldn't find the requested information. Maybe look for something that actually exists the next time!"
-      );
+      return message.util!.reply("Couldn't find the requested information.");
     }
     const turndown = new Turndown();
     turndown.addRule('hyperlink', {
@@ -61,7 +60,11 @@ export default class MDNCommand extends Command {
     );
     const embed = new MessageEmbed()
       .setColor(this.client.color.main)
-      .setAuthor('MDN', 'https://i.imgur.com/DFGXabG.png', 'https://developer.mozilla.org/')
+      .setAuthor(
+        'MDN',
+        'https://i.imgur.com/DFGXabG.png',
+        'https://developer.mozilla.org/'
+      )
       .setURL(`https://developer.mozilla.org${body.URL}`)
       .setTitle(body.Title)
       .setDescription(turndown.turndown(summary));
