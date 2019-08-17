@@ -29,11 +29,6 @@ export default class TagAdd extends Command {
             start: (message: Message) =>
               `${message.author}, what would you like the tag to say?`
           }
-        },
-        {
-          id: 'hoist',
-          match: 'flag',
-          flag: ['--hoist', '--pin']
         }
       ]
     });
@@ -41,27 +36,19 @@ export default class TagAdd extends Command {
 
   public async exec(
     message: Message,
-    {
-      tagName,
-      tagContent,
-      hoist
-    }: { tagName: any; tagContent: string; hoist: boolean }
+    { tagName, tagContent }: { tagName: any; tagContent: string }
   ) {
     if (tagName && tagName.length >= 1900) {
       return message.util!.reply('messages have a limit of 2000 characters!');
     }
 
     if (tagContent && tagContent.length >= 1950) {
-      return message.util!.reply(
-        'messages has a maximun length of 2000 characters!'
-      );
+      return message.util!.reply('messages has a maximun length of 2000 characters!');
     }
 
     const tagData = await this.client.getTag(tagName, message.guild);
     if (tagData)
-      return message.reply(
-        'This tag name already exists! Please pick another name!'
-      );
+      return message.reply('This tag name already exists! Please pick another name!');
 
     const newTag = {
       id: tagName,

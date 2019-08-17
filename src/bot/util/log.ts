@@ -1,15 +1,21 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed, Channel } from 'discord.js';
 import CourseClient from '../client/CourseClient';
 
 export = (client: CourseClient) => {
   client.log = async (message: Message, embed: MessageEmbed) => {
     const data = await client.getGuild(message.guild);
-    if (!data || data.guildLog.active === false) return;
-    const logChannel = message.guild.channels
-      .filter(x => x.type === 'text')
-      .find(c => c.name === data.guildLog.channel);
-    if (!logChannel) return;
+    if (!data) return;
+    let channel;
+    if (data.guildLog.channel === 'modlogs') {
+      channel = message.guild.channels
+        .filter(c => c.type === 'text')
+        .find(x => x.name === 'modlogs');
+    } else {
+      channel = message.guild.channels
+        .filter(c => c.type === 'text')
+        .find(x => x.id === data.guildLog.channel);
+    }
     // @ts-ignore
-    return logChannel.send(embed);
+    return channel.send(embed);
   };
 };

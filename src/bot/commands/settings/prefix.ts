@@ -1,15 +1,15 @@
 import { Command } from 'discord-akairo';
 import DongClient from 'src/bot/client/CourseClient';
 import { stripIndents } from 'common-tags';
+import { Message } from 'discord.js';
 
 export default class Prefix extends Command {
   client: DongClient;
 
   constructor() {
-    super('prefix', {
-      aliases: ['prefix', 'setprefix', 'newprefix'],
+    super('setting-prefix', {
       clientPermissions: ['SEND_MESSAGES'],
-      userPermissions: ['MANAGE_CHANNELS', 'MANAGE_GUILD'],
+      userPermissions: ['MANAGE_GUILD'],
       ratelimit: 2,
       category: 'settings',
       description: {
@@ -24,8 +24,10 @@ export default class Prefix extends Command {
           id: 'newPrefix',
           type: 'string',
           prompt: {
-            start: message => `${message.author}, please include a valid prefix!`,
-            retry: message => `${message.author}, comon, now! I know you can do it.`
+            optional: false,
+            start: (message: Message) =>
+              `${message.author}, what would you like the set the prefix to?`,
+            retry: (message: Message) => `${message.author}, please try again.`
           }
         }
       ]
