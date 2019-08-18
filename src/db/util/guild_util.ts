@@ -16,7 +16,7 @@ export = (client: CourseClient) => {
     else return res;
   };
 
-  client.updateGuild = async (guild, settings: Object) => {
+  client.updateGuild = async (guild, settings: {}) => {
     let data = await client.getGuild(guild);
 
     if (typeof data !== 'object') data = {};

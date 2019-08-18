@@ -5,7 +5,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 
 export class Logs extends Command {
   public client: CourseClient;
-  constructor() {
+  public constructor() {
     super('setting-log', {
       userPermissions: ['MANAGE_CHANNELS', 'MANAGE_GUILD'],
       channel: 'guild',
@@ -36,7 +36,7 @@ export class Logs extends Command {
     });
   }
 
-  async exec(message: Message, { value }: { value: string }) {
+  public async exec(message: Message, { value }: { value: string }) {
     switch (value) {
       case 'on' || 'true':
         try {

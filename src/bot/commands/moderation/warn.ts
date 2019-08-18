@@ -2,10 +2,10 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
 
-export default class Warn extends Command {
+export class Warn extends Command {
   public client: CourseClient;
 
-  constructor() {
+  public constructor() {
     super('warn', {
       aliases: ['warn'],
       userPermissions: ['BAN_MEMBERS'],
@@ -52,9 +52,7 @@ export default class Warn extends Command {
         .embed()
         .setColor(this.client.color.main)
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-        .setDescription(
-          `**${message.author.tag}** has warned **${member.user.tag}**. Reason: ${reason}`
-        );
+        .setDescription(`**${message.author.tag}** has warned **${member.user.tag}**. Reason: ${reason}`);
 
       message.util!.send(warnEmbed);
       return this.client.log(message, warnEmbed);

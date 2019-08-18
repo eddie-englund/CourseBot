@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as qs from 'querystring';
 import { CourseClient } from 'src/bot/client/CourseClient';
-const Turndown = require('turndown'); // eslint-disable-line
+import Turndown = require('turndown'); // eslint-disable-line
 
 /**
  * I was to lazy to make this commands credits to Icrawl and his bot Yukikaze https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/mdn.ts
@@ -26,8 +26,7 @@ export class MDNCommand extends Command {
         {
           id: 'query',
           prompt: {
-            start: (message: Message): string =>
-              `${message.author}, what would you like to search for?`,
+            start: (message: Message): string => `${message.author}, what would you like to search for?`,
           },
           match: 'content',
           type: (_, query): string | null => (query ? query.replace(/#/g, '.prototype.') : null),

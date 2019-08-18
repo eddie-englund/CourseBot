@@ -2,10 +2,10 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, User, MessageEmbed } from 'discord.js';
 
-export default class Unban extends Command {
+export class Unban extends Command {
   public client: CourseClient;
 
-  constructor() {
+  public constructor() {
     super('unban', {
       aliases: ['unban', 'deban'],
       clientPermissions: ['BAN_MEMBERS', 'SEND_MESSAGES'],
@@ -20,8 +20,7 @@ export default class Unban extends Command {
           },
           prompt: {
             start: (message: Message): string => `${message.author}, who would you like to unban?`,
-            retry: (message: Message): string =>
-              `${message.author}, please provide a valid user reslovable.`,
+            retry: (message: Message): string => `${message.author}, please provide a valid user reslovable.`,
           },
         },
         {
@@ -46,9 +45,7 @@ export default class Unban extends Command {
       .embed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
-      .setDescription(
-        `User ${message.author.tag} has unbanned user ${user}. The reason was: ${reason}`
-      )
+      .setDescription(`User ${message.author.tag} has unbanned user ${user}. The reason was: ${reason}`)
       .setTimestamp(Date.now());
 
     await this.client.log(message, unbanEmbed);
