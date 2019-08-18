@@ -2,7 +2,7 @@ import { Command, Flag } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export default class Tag extends Command {
+export class Tag extends Command {
   public client: CourseClient;
   public constructor() {
     super('tag', {

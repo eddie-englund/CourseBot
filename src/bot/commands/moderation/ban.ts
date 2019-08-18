@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
 
-export default class Ban extends Command {
+export class Ban extends Command {
   public client: CourseClient;
 
   constructor() {

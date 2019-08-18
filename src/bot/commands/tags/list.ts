@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, MessageEmbed } from 'discord.js';
 import tag from '../../../db/models/Tag';
 
-export default class TagList extends Command {
+export class TagList extends Command {
   public client: CourseClient;
 
   public constructor() {

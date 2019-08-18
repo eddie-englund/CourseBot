@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
-export default class TagDelete extends Command {
+export class TagDelete extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -17,8 +17,7 @@ export default class TagDelete extends Command {
           type: 'tag',
           match: 'content',
           prompt: {
-            start: (message: Message): string =>
-              `${message.author}, what tag would you like to delete?`,
+            start: (message: Message): string => `${message.author}, what tag would you like to delete?`,
           },
         },
       ],
@@ -28,9 +27,7 @@ export default class TagDelete extends Command {
   public async exec(message: Message, { tagName }: { tagName: string }) {
     const checkData = await this.client.getTag(tagName, message.guild);
     if (!checkData)
-      return message.util!.reply(
-        "Why are you trying to delete a tag that does't exist in the first place?!"
-      );
+      return message.util!.reply("Why are you trying to delete a tag that does't exist in the first place?!");
     await this.client.deleteTag(tagName, message.guild);
     return message.util!.reply(`Alrighty then! Tag **${tagName}** has been deleted.`);
   }

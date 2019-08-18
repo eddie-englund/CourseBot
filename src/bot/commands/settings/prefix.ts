@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { stripIndents } from 'common-tags';
 import { Message } from 'discord.js';
 
-export default class Prefix extends Command {
+export class Prefix extends Command {
   public client: CourseClient;
 
   constructor() {
@@ -25,8 +25,7 @@ export default class Prefix extends Command {
           type: 'string',
           prompt: {
             optional: false,
-            start: (message: Message) =>
-              `${message.author}, what would you like the set the prefix to?`,
+            start: (message: Message) => `${message.author}, what would you like the set the prefix to?`,
             retry: (message: Message) => `${message.author}, please try again.`,
           },
         },
@@ -34,7 +33,7 @@ export default class Prefix extends Command {
     });
   }
 
-  async exec(message, { newPrefix }) {
+  public async exec(message, { newPrefix }) {
     try {
       await this.client.updateGuild(message.guild, { prefix: newPrefix });
       return message.reply(`Prefix has no been set to: ${newPrefix}`);

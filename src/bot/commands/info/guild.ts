@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, Guild, MessageEmbed } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export default class GuildProfile extends Command {
+export class GuildProfile extends Command {
   public client: CourseClient;
 
   constructor() {

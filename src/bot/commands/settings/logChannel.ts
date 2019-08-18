@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, Channel } from 'discord.js';
 
-export default class logChannel extends Command {
+export class logChannel extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -19,8 +19,7 @@ export default class logChannel extends Command {
             optional: false,
             start: (message: Message): string =>
               `${message.author}, what channel would you like to me to logg to?`,
-            retry: (message: Message): string =>
-              `${message.author}, please provide a valid channel.`,
+            retry: (message: Message): string => `${message.author}, please provide a valid channel.`,
           },
         },
       ],
@@ -28,8 +27,7 @@ export default class logChannel extends Command {
   }
 
   public async exec(message: Message, { channel }: { channel: Channel }) {
-    if (channel.type !== 'text')
-      return message.util!.reply(`The channel provided is not a text channel!`);
+    if (channel.type !== 'text') return message.util!.reply(`The channel provided is not a text channel!`);
 
     try {
       await this.client.updateGuild(message.guild, { guildLog: { channel: channel.id } });

@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
-export default class TagAdd extends Command {
+export class TagAdd extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -32,10 +32,7 @@ export default class TagAdd extends Command {
     });
   }
 
-  public async exec(
-    message: Message,
-    { tagName, tagContent }: { tagName: any; tagContent: string }
-  ) {
+  public async exec(message: Message, { tagName, tagContent }: { tagName: any; tagContent: string }) {
     if (tagName && tagName.length >= 1900) {
       return message.util!.reply('messages have a limit of 2000 characters!');
     }
@@ -54,8 +51,6 @@ export default class TagAdd extends Command {
     };
     await this.client.createTag(newTag);
 
-    return message.util!.reply(
-      `Nice! your tag **${tagName.substring(0, 1900)}** has been created!`
-    );
+    return message.util!.reply(`Nice! your tag **${tagName.substring(0, 1900)}** has been created!`);
   }
 }

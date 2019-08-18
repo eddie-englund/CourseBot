@@ -1,6 +1,6 @@
 import Tag from '../models/Tag';
 import * as mongoose from 'mongoose';
-import CourseClient from '../../bot/client/CourseClient';
+import { CourseClient } from '../../bot/client/CourseClient';
 import { Guild } from 'discord.js';
 
 export = (client: CourseClient) => {
@@ -18,7 +18,7 @@ export = (client: CourseClient) => {
   };
 
   client.updateTag = async (id: string, guild: Guild, settings) => {
-    let data = await client.getTag(id, guild); 
+    let data = await client.getTag(id, guild);
 
     if (typeof data !== 'object') data = {};
     for (const key in settings) {

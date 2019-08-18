@@ -1,5 +1,5 @@
 // @ts-ignore
-const errors = require('restify-errors');
+import errors = require('restify-errors');
 import Profile from '../../db/models/Profile';
 
 export = server => {
@@ -20,15 +20,11 @@ export = server => {
     try {
       const User = await Profile.findOne({ userID: req.params.id });
       if (!User)
-        return next(
-          new errors.ResourceNotFoundError(`Could not find a user with the id: ${req.params.id}`)
-        );
+        return next(new errors.ResourceNotFoundError(`Could not find a user with the id: ${req.params.id}`));
       res.send(User);
       next();
     } catch (error) {
-      return next(
-        new errors.ResourceNotFoundError(`Could not find a user with the id: ${req.params.id}`)
-      );
+      return next(new errors.ResourceNotFoundError(`Could not find a user with the id: ${req.params.id}`));
     }
   });
 };
