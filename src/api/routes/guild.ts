@@ -21,17 +21,13 @@ export = server => {
       const data = await Guild.findOne({ guildID: req.params.id });
       if (!data)
         return next(
-          new errors.ResourceNotFoundError(
-            `Could not find a guild with the id: ${req.params.id}`
-          )
+          new errors.ResourceNotFoundError(`Could not find a guild with the id: ${req.params.id}`)
         );
       res.send(data);
       next();
     } catch (error) {
       return next(
-        new errors.ResourceNotFoundError(
-          `Could not find a guild with the id: ${req.params.id}`
-        )
+        new errors.ResourceNotFoundError(`Could not find a guild with the id: ${req.params.id}`)
       );
     }
   });
