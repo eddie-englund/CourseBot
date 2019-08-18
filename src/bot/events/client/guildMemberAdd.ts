@@ -1,14 +1,14 @@
 import { Listener } from 'discord-akairo';
 import { GuildMember } from 'discord.js';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 
-export default class GuildMemberAdd extends Listener {
+export class GuildMemberAdd extends Listener {
   client: CourseClient;
   constructor() {
     super('guildMemberAdd', {
       event: 'guildMemberAdd',
       emitter: 'client',
-      category: 'client'
+      category: 'client',
     });
   }
 
@@ -17,7 +17,7 @@ export default class GuildMemberAdd extends Listener {
     try {
       const newProfile: Object = {
         user: user.tag,
-        userID: user.id
+        userID: user.id,
       };
       return this.client.createProfile(newProfile);
     } catch (error) {

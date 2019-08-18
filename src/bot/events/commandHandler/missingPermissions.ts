@@ -1,15 +1,15 @@
 import { Listener, Command } from 'discord-akairo';
-import CourseClient from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 import { Message } from 'discord.js';
 
-export default class MissingPermissions extends Listener {
+export class MissingPermissions extends Listener {
   client: CourseClient;
 
   constructor() {
     super('missingPermissions', {
       emitter: 'commandHandler',
       category: 'commandHandler',
-      event: 'missingPermissions'
+      event: 'missingPermissions',
     });
   }
 

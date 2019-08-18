@@ -1,14 +1,14 @@
 import { Listener } from 'discord-akairo';
 import { Guild } from 'discord.js';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 
-export default class GuildCreate extends Listener {
+export class GuildCreate extends Listener {
   client: CourseClient;
   constructor() {
     super('guildCreate', {
       event: 'guildCreate',
       emitter: 'client',
-      category: 'client'
+      category: 'client',
     });
   }
 
@@ -17,7 +17,7 @@ export default class GuildCreate extends Listener {
     if (data) return;
     const newGuild: Object = {
       guild: guild.name,
-      guildID: guild.id
+      guildID: guild.id,
     };
 
     return this.client.createGuild(newGuild);

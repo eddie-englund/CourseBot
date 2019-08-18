@@ -1,15 +1,15 @@
 import { Listener } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 import { Schema } from 'mongoose';
 import { Guild } from 'discord.js';
 
-class Ready extends Listener {
+export class Ready extends Listener {
   client: CourseClient;
   constructor() {
     super('ready', {
       event: 'ready',
       emitter: 'client',
-      category: 'client'
+      category: 'client',
     });
   }
 
@@ -19,7 +19,7 @@ class Ready extends Listener {
       if (!data) {
         const newGuild: Schema = {
           guildID: guild.id,
-          guild: guild.name
+          guild: guild.name,
         };
         return this.client
           .createGuild(newGuild)
