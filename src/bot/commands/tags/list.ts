@@ -4,7 +4,7 @@ import { Message, MessageEmbed } from 'discord.js';
 import tag from '../../../db/models/Tag';
 
 export default class TagList extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   public constructor() {
     super('tag-list', {

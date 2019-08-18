@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
 
 export default class Warn extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   constructor() {
     super('warn', {

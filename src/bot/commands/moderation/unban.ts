@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, User, MessageEmbed } from 'discord.js';
 
 export default class Unban extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   constructor() {
     super('unban', {

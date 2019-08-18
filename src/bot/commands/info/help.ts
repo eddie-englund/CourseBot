@@ -4,7 +4,7 @@ import { stripIndents } from 'common-tags';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
 export default class HelpCommand extends Command {
-  client: CourseClient;
+  public client: CourseClient;
   public constructor() {
     super('help', {
       aliases: ['help'],

@@ -4,7 +4,7 @@ import { Message } from 'discord.js';
 import { Schema } from 'mongoose';
 
 export default class InitGuild extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   public constructor() {
     super('setting-init', {

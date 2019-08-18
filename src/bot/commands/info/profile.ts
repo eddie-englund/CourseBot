@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
 export default class Profile extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   constructor() {
     super('profile', {

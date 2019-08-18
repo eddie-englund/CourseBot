@@ -7,7 +7,7 @@ const auth = process.env.YOUTUBETOKEN;
 const service = google.youtube('v3');
 
 export class YoutubeChannel extends Command {
-  client: CourseClient;
+  public client: CourseClient;
   constructor() {
     super('yt', {
       aliases: ['gary', 'channel'],

@@ -4,7 +4,7 @@ import { Message, GuildMember, MessageEmbed } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
 export default class Kick extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   public constructor() {
     super('kick', {

@@ -10,7 +10,7 @@ const Turndown = require('turndown'); // eslint-disable-line
  */
 
 export class MDNCommand extends Command {
-  client: CourseClient;
+  public client: CourseClient;
   public constructor() {
     super('mdn', {
       aliases: ['mdn', 'mozilla-developer-network'],

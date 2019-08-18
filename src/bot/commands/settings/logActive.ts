@@ -4,7 +4,7 @@ import { stripIndents } from 'common-tags';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
 export default class Logs extends Command {
-  client: CourseClient;
+  public client: CourseClient;
   constructor() {
     super('setting-log', {
       userPermissions: ['MANAGE_CHANNELS', 'MANAGE_GUILD'],

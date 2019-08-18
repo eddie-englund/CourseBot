@@ -3,7 +3,7 @@ import { Message, Guild, MessageEmbed } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
 export default class GuildProfile extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   constructor() {
     super('serverProfile', {

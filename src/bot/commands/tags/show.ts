@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
 export default class TagShow extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   public constructor() {
     super('tag-show', {

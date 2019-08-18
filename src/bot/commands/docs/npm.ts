@@ -10,7 +10,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
  */
 
 export class NPMCommand extends Command {
-  client: CourseClient;
+  public client: CourseClient;
   public constructor() {
     super('npm', {
       aliases: ['npm', 'npm-package'],

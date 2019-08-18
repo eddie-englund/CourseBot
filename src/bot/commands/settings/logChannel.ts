@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, Channel } from 'discord.js';
 
 export default class logChannel extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   public constructor() {
     super('setting-logchannel', {

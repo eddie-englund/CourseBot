@@ -4,7 +4,7 @@ import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
 export class Frameworks extends Command {
-  client: CourseClient;
+  public client: CourseClient;
   constructor() {
     super('frameworks', {
       aliases: ['frameworks', 'docs'],

@@ -1,11 +1,11 @@
-import DongClient from './client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import * as db from '../db/init';
 const dotenv = require('dotenv').config();
 // Dotenv
 dotenv;
 
 // Declare client
-const client: DongClient = new DongClient();
+const client: CourseClient = new CourseClient();
 
 // Utility
 require('../db/util/guild_util')(client);

@@ -4,7 +4,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 const ms = require('ms');
 
 export class Pay extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   constructor() {
     super('pay', {

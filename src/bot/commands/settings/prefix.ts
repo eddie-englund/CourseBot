@@ -4,7 +4,7 @@ import { stripIndents } from 'common-tags';
 import { Message } from 'discord.js';
 
 export default class Prefix extends Command {
-  client: CourseClient;
+  public client: CourseClient;
 
   constructor() {
     super('setting-prefix', {
