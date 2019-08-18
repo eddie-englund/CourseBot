@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember, MessageEmbed } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
-export default class Kick extends Command {
+export class Kick extends Command {
   public client: CourseClient;
 
   public constructor() {

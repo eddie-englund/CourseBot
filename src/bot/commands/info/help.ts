@@ -3,14 +3,13 @@ import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export default class HelpCommand extends Command {
+export class HelpCommand extends Command {
   public client: CourseClient;
   public constructor() {
     super('help', {
       aliases: ['help'],
       description: {
-        content:
-          'Displays a list of available commands, or detailed information for a specified command.',
+        content: 'Displays a list of available commands, or detailed information for a specified command.',
         usage: '[command]',
       },
       category: 'info',
@@ -25,10 +24,7 @@ export default class HelpCommand extends Command {
     });
   }
 
-  public async exec(
-    message: Message,
-    { command }: { command: Command }
-  ): Promise<Message | Message[]> {
+  public async exec(message: Message, { command }: { command: Command }): Promise<Message | Message[]> {
     // @ts-ignore
     const prefix = await this.handler.prefix(message);
     if (!command) {
@@ -58,19 +54,14 @@ export default class HelpCommand extends Command {
     const embed = this.client.util
       .embed()
       .setColor('#e60b5f')
-      .setTitle(
-        `\`${command.aliases[0]} ${command.description.usage ? command.description.usage : ''}\``
-      )
+      .setTitle(`\`${command.aliases[0]} ${command.description.usage ? command.description.usage : ''}\``)
       .addField('❯ Description', command.description.content || '\u200b');
 
-    if (command.aliases.length > 1)
-      embed.addField('❯ Aliases', `\`${command.aliases.join('` `')}\``, true);
+    if (command.aliases.length > 1) embed.addField('❯ Aliases', `\`${command.aliases.join('` `')}\``, true);
     if (command.description.examples && command.description.examples.length)
       embed.addField(
         '❯ Examples',
-        `\`${command.aliases[0]} ${command.description.examples.join(
-          `\`\n\`${command.aliases[0]} `
-        )}\``,
+        `\`${command.aliases[0]} ${command.description.examples.join(`\`\n\`${command.aliases[0]} `)}\``,
         true
       );
 

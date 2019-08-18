@@ -1,4 +1,4 @@
-import CourseClient from 'src/bot/client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import Guild from '../models/Guild';
 import * as mongoose from 'mongoose';
 

@@ -1,15 +1,15 @@
-import DongClient from 'src/bot/client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import Profile from '../models/Profile';
 import * as mongoose from 'mongoose';
 
-export = (client: DongClient) => {
+export = (client: CourseClient) => {
   client.getProfile = async user => {
     const res = await Profile.findOne({ userID: user.id });
     if (res) return res;
     else {
-      const newProfile: Object = {
+      const newProfile: { user; userID } = {
         user: user.tag,
-        userID: user.id
+        userID: user.id,
       };
       await client.createProfile(newProfile);
       const newRes = await Profile.findOne({ userID: user.id });

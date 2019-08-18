@@ -12,10 +12,10 @@ export class GuildCreate extends Listener {
     });
   }
 
-  async exec(guild: Guild) {
+  public async exec(guild: Guild) {
     const data = await this.client.getGuild(guild);
     if (data) return;
-    const newGuild: Object = {
+    const newGuild: { guild; guildID } = {
       guild: guild.name,
       guildID: guild.id,
     };
