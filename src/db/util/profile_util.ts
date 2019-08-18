@@ -25,7 +25,7 @@ export = (client: CourseClient) => {
     return newProfile.save();
   };
 
-  client.updateProfile = async (user, settings: Object) => {
+  client.updateProfile = async (user, settings: {}) => {
     /**
      * Takes a user and a object of settings
      * @param {user} @type user

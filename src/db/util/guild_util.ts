@@ -3,7 +3,7 @@ import Guild from '../models/Guild';
 import * as mongoose from 'mongoose';
 
 export = (client: CourseClient) => {
-  client.createGuild = async (settings: Object) => {
+  client.createGuild = async (settings: {}) => {
     const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, settings);
 
     const newGuild = await new Guild(merged);
