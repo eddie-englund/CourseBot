@@ -8,10 +8,15 @@ dotenv;
 const client: CourseClient = new CourseClient();
 
 // Utility
-require('../db/util/guild_util')(client);
-require('../db/util/profile_util')(client);
-require('../db/util/tag_util')(client);
-require('./util/log')(client);
+import guild_util = require('../db/util/guild_util');
+import profile_util = require('../db/util/profile_util');
+import tag_util = require('../db/util/tag_util');
+import log = require('./util/log');
+
+guild_util(client);
+profile_util(client);
+tag_util(client);
+log(client);
 
 // Initialazation
 
