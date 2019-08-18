@@ -9,7 +9,7 @@ const Turndown = require('turndown'); // eslint-disable-line
  * I was to lazy to make this commands credits to Icrawl and his bot Yukikaze https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/mdn.ts
  */
 
-export default class MDNCommand extends Command {
+export class MDNCommand extends Command {
   client: CourseClient;
   public constructor() {
     super('mdn', {

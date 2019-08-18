@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 import CourseClient from '../../client/CourseClient';
 const ms = require('ms');
 
-export default class Pay extends Command {
+export class Pay extends Command {
   client: CourseClient;
 
   constructor() {

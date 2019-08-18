@@ -8,28 +8,28 @@ export default class CourseClient extends AkairoClient {
 
   // Db functions
   // Guild functions
-  getGuild: Function;
-  updateGuild: Function;
-  createGuild: Function;
+  public getGuild: Function;
+  public updateGuild: Function;
+  public createGuild: Function;
 
   // Profile/User functions
-  getProfile: Function;
-  updateProfile: Function;
-  createProfile: Function;
+  public getProfile: Function;
+  public updateProfile: Function;
+  public createProfile: Function;
 
   // Tags functions
-  getTag: Function;
-  updateTag: Function;
-  createTag: Function;
-  deleteTag: Function;
-  getTagAliases: Function;
+  public getTag: Function;
+  public updateTag: Function;
+  public createTag: Function;
+  public deleteTag: Function;
+  public getTagAliases: Function;
 
   // Db models
-  models: Object;
+  public models: Object;
 
   // Random util
-  log: Function;
-  color: any;
+  public log: Function;
+  public color: any;
 
   constructor() {
     super(

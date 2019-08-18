@@ -1,17 +1,17 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import CourseClient from '../../client/CourseClient';
-const ms = require('ms');
+import ms = require('ms');
 
-export default class Daily extends Command {
+export class Daily extends Command {
   client: CourseClient;
 
   constructor() {
     super('daily', {
       aliases: ['daily'],
+      channel: 'guild',
       clientPermissions: ['SEND_MESSAGES'],
       userPermissions: ['SEND_MESSAGES'],
-      channel: 'guild',
       category: 'economy',
       cooldown: ms('1d')
     });

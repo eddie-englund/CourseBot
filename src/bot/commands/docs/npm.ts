@@ -9,7 +9,7 @@ import CourseClient from '../../client/CourseClient';
  * I was too lazy to make this command. Credits to Icrawl and the bot yukikaze: https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/npm.ts
  */
 
-export default class NPMCommand extends Command {
+export class NPMCommand extends Command {
   client: CourseClient;
   public constructor() {
     super('npm', {

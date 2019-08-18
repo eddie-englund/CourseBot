@@ -3,7 +3,7 @@ import DongClient from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
-export default class Frameworks extends Command {
+export class Frameworks extends Command {
   client: DongClient;
   constructor() {
     super('frameworks', {

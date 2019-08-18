@@ -2,7 +2,7 @@ import { config } from './config';
 import { init } from '../db/init';
 import * as restify from 'restify';
 import * as mongoose from 'mongoose';
-const corsMiddleware = require('restify-cors-middleware');
+import corsMiddleware = require('restify-cors-middleware');
 
 const server = restify.createServer();
 
