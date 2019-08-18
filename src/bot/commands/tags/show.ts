@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
 export default class TagShow extends Command {
@@ -18,10 +18,10 @@ export default class TagShow extends Command {
           type: 'lowercase',
           prompt: {
             start: (message: Message): string =>
-              `${message.author}, what tag would you like to see?`
-          }
-        }
-      ]
+              `${message.author}, what tag would you like to see?`,
+          },
+        },
+      ],
     });
   }
 

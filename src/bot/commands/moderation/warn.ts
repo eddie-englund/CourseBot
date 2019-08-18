@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from 'src/bot/client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
 
 export default class Warn extends Command {
@@ -19,15 +19,15 @@ export default class Warn extends Command {
           prompt: {
             optional: false,
             start: message => `${message.author}, who would you like to warn?`,
-            retry: message => `${message.author}, you need to @ the user to warn them!`
-          }
+            retry: message => `${message.author}, you need to @ the user to warn them!`,
+          },
         },
         {
           id: 'reason',
           match: 'rest',
-          default: 'No reason specified'
-        }
-      ]
+          default: 'No reason specified',
+        },
+      ],
     });
   }
 
@@ -42,10 +42,10 @@ export default class Warn extends Command {
               user: message.author.tag,
               userID: message.author.id,
               reason: reason,
-              date: Date.now()
-            }
-          ]
-        }
+              date: Date.now(),
+            },
+          ],
+        },
       });
 
       const warnEmbed = this.client.util

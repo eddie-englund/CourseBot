@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
-import CourseClient from 'src/bot/client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 
 export default class HelpCommand extends Command {
   client: CourseClient;
@@ -11,7 +11,7 @@ export default class HelpCommand extends Command {
       description: {
         content:
           'Displays a list of available commands, or detailed information for a specified command.',
-        usage: '[command]'
+        usage: '[command]',
       },
       category: 'info',
       clientPermissions: ['EMBED_LINKS'],
@@ -19,9 +19,9 @@ export default class HelpCommand extends Command {
       args: [
         {
           id: 'command',
-          type: 'commandAlias'
-        }
-      ]
+          type: 'commandAlias',
+        },
+      ],
     });
   }
 

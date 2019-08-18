@@ -1,10 +1,10 @@
 import { Command } from 'discord-akairo';
-import DongClient from 'src/bot/client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { stripIndents } from 'common-tags';
 import { Message } from 'discord.js';
 
 export default class Prefix extends Command {
-  client: DongClient;
+  client: CourseClient;
 
   constructor() {
     super('setting-prefix', {
@@ -17,7 +17,7 @@ export default class Prefix extends Command {
 					 • <new prefix>
 					 `,
         usage: '<argument>',
-        examples: ['?']
+        examples: ['?'],
       },
       args: [
         {
@@ -27,10 +27,10 @@ export default class Prefix extends Command {
             optional: false,
             start: (message: Message) =>
               `${message.author}, what would you like the set the prefix to?`,
-            retry: (message: Message) => `${message.author}, please try again.`
-          }
-        }
-      ]
+            retry: (message: Message) => `${message.author}, please try again.`,
+          },
+        },
+      ],
     });
   }
 

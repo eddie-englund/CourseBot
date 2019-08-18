@@ -2,7 +2,7 @@ import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
 
-export default class CourseClient extends AkairoClient {
+export class CourseClient extends AkairoClient {
   commandHandler: CommandHandler;
   listenerHandler: ListenerHandler;
 
@@ -34,12 +34,12 @@ export default class CourseClient extends AkairoClient {
   constructor() {
     super(
       {
-        ownerID: process.env.ownerID
+        ownerID: process.env.ownerID,
       },
       {
         disableEveryone: true,
         messageCacheMaxSize: 1000,
-        disabledEvents: ['TYPING_START']
+        disabledEvents: ['TYPING_START'],
       }
     );
 
@@ -63,29 +63,27 @@ export default class CourseClient extends AkairoClient {
       commandUtil: true,
       argumentDefaults: {
         prompt: {
-          modifyStart: (_, str): string =>
-            `${str}\n\nType \`cancel\` to cancel the command.`,
-          modifyRetry: (_, str): string =>
-            `${str}\n\nType \`cancel\` to cancel the command.`,
+          modifyStart: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
+          modifyRetry: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
           timeout: 'Guess you took too long, the command has been cancelled.',
           ended:
             "More than 3 tries and you still didn't couldn't do it... The command has been cancelled.",
           cancel: 'The command has been cancelled.',
           retries: 3,
-          time: 30000
+          time: 30000,
         },
-        otherwise: ''
+        otherwise: '',
       },
-      aliasReplacement: /-/g
+      aliasReplacement: /-/g,
     });
     // Declaring the listener handler and it's directory
     this.listenerHandler = new ListenerHandler(this, {
-      directory: join(__dirname, '..', 'events')
+      directory: join(__dirname, '..', 'events'),
     });
     // Allowing the handler ot use the events emitted by the commandHandler and the ListenerHandler
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,
-      listenerHandler: this.listenerHandler
+      listenerHandler: this.listenerHandler,
     });
 
     // Loading handlers

@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, Channel } from 'discord.js';
 
 export default class logChannel extends Command {
@@ -20,10 +20,10 @@ export default class logChannel extends Command {
             start: (message: Message): string =>
               `${message.author}, what channel would you like to me to logg to?`,
             retry: (message: Message): string =>
-              `${message.author}, please provide a valid channel.`
-          }
-        }
-      ]
+              `${message.author}, please provide a valid channel.`,
+          },
+        },
+      ],
     });
   }
 

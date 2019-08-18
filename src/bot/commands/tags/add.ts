@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
 export default class TagAdd extends Command {
@@ -16,21 +16,19 @@ export default class TagAdd extends Command {
           id: 'tagName',
           type: 'existingTag',
           prompt: {
-            start: (message: Message) =>
-              `${message.author}, what do you want to name the tag?`,
-            retry: (message: Message) => `${message.author}, please try again.`
-          }
+            start: (message: Message) => `${message.author}, what do you want to name the tag?`,
+            retry: (message: Message) => `${message.author}, please try again.`,
+          },
         },
         {
           id: 'tagContent',
           match: 'rest',
           type: 'tagContent',
           prompt: {
-            start: (message: Message) =>
-              `${message.author}, what would you like the tag to say?`
-          }
-        }
-      ]
+            start: (message: Message) => `${message.author}, what would you like the tag to say?`,
+          },
+        },
+      ],
     });
   }
 
@@ -47,13 +45,12 @@ export default class TagAdd extends Command {
     }
 
     const tagData = await this.client.getTag(tagName, message.guild);
-    if (tagData)
-      return message.reply('This tag name already exists! Please pick another name!');
+    if (tagData) return message.reply('This tag name already exists! Please pick another name!');
 
     const newTag = {
       id: tagName,
       guildID: message.guild.id,
-      tag: tagContent
+      tag: tagContent,
     };
     await this.client.createTag(newTag);
 

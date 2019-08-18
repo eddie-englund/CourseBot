@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, MessageEmbed } from 'discord.js';
 import tag from '../../../db/models/Tag';
 
@@ -10,14 +10,13 @@ export default class TagList extends Command {
     super('tag-list', {
       category: 'tag',
       ratelimit: 2,
-      channel: 'guild'
+      channel: 'guild',
     });
   }
 
   public async exec(message: Message) {
     const data = await tag.find({ guildID: message.guild.id });
-    if (!data)
-      return message.reply(`It seems like I don't have any tags saved for this guild!`);
+    if (!data) return message.reply(`It seems like I don't have any tags saved for this guild!`);
     const list = [];
     await data.forEach(Object => {
       list.push(Object.id);

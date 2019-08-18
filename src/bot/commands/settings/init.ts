@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { Schema } from 'mongoose';
 
@@ -10,7 +10,7 @@ export default class InitGuild extends Command {
     super('setting-init', {
       ratelimit: 2,
       userPermissions: ['MANAGE_MESSAGES'],
-      channel: 'guild'
+      channel: 'guild',
     });
   }
 
@@ -18,7 +18,7 @@ export default class InitGuild extends Command {
     const data = await this.client.getGuild(message.guild);
     const guild: Schema = {
       guildID: message.guild.id,
-      guild: message.guild.name
+      guild: message.guild.name,
     };
     if (data) {
       return message.util!.reply(

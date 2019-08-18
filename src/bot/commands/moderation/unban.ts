@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from 'src/bot/client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, User, MessageEmbed } from 'discord.js';
 
 export default class Unban extends Command {
@@ -19,17 +19,16 @@ export default class Unban extends Command {
             return user;
           },
           prompt: {
-            start: (message: Message): string =>
-              `${message.author}, who would you like to unban?`,
+            start: (message: Message): string => `${message.author}, who would you like to unban?`,
             retry: (message: Message): string =>
-              `${message.author}, please provide a valid user reslovable.`
-          }
+              `${message.author}, please provide a valid user reslovable.`,
+          },
         },
         {
           id: 'reason',
-          match: 'rest'
-        }
-      ]
+          match: 'rest',
+        },
+      ],
     });
   }
 
@@ -40,9 +39,7 @@ export default class Unban extends Command {
     try {
       await message.guild!.members.unban(user, `Unbanned by ${message.author!.tag}`);
     } catch (error) {
-      return message.reply(
-        `there was an error unbanning this user: \`${error.message}\``
-      );
+      return message.reply(`there was an error unbanning this user: \`${error.message}\``);
     }
 
     const unbanEmbed: MessageEmbed = this.client.util

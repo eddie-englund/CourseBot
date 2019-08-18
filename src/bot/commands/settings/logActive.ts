@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 
 export default class Logs extends Command {
   client: CourseClient;
@@ -18,7 +18,7 @@ export default class Logs extends Command {
 					 • off \`<no argument required>\`
 					 `,
         usage: '<method> <...arguments>',
-        examples: ['channel modlogs', 'on', 'off']
+        examples: ['channel modlogs', 'on', 'off'],
       },
       args: [
         {
@@ -31,10 +31,10 @@ export default class Logs extends Command {
             retry: (message: Message): string =>
               `${
                 message.author
-              }, comon now don't be shy! Provide me with either; true, false, on or off`
-          }
-        }
-      ]
+              }, comon now don't be shy! Provide me with either; true, false, on or off`,
+          },
+        },
+      ],
     });
   }
 
@@ -43,8 +43,7 @@ export default class Logs extends Command {
       case 'on' || 'true':
         try {
           const data = await this.client.getGuild(message.guild);
-          if (!data)
-            return message.reply('Error: Database does not exist for this guild');
+          if (!data) return message.reply('Error: Database does not exist for this guild');
           await this.client.updateGuild(message.guild, { guildLog: { active: true } });
           message.util!.reply('Logging has been activated');
         } catch (e) {

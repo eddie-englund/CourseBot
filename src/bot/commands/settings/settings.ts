@@ -1,6 +1,6 @@
 import { Command, Flag } from 'discord-akairo';
 import { Message } from 'discord.js';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 
 export default class Settings extends Command {
   client: CourseClient;
@@ -11,7 +11,7 @@ export default class Settings extends Command {
       category: 'settings',
       channel: 'guild',
       userPermissions: ['MANAGE_GUILD'],
-      ratelimit: 2
+      ratelimit: 2,
     });
   }
 
@@ -21,7 +21,7 @@ export default class Settings extends Command {
         ['setting-init', 'init'],
         ['setting-prefix', 'prefix'],
         ['setting-channel', 'channel'],
-        ['setting-log', 'log']
+        ['setting-log', 'log'],
       ],
       otherwise: async (message: Message) => {
         // @ts-ignore
@@ -29,7 +29,7 @@ export default class Settings extends Command {
         return message.util!.reply(
           `I don't think you quite understand how this command works... To get more info do ${prefix}help settings`
         );
-      }
+      },
     };
     return Flag.continue(method);
   }

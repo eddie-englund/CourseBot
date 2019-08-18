@@ -1,6 +1,6 @@
 import { Command, Flag } from 'discord-akairo';
 import { Message } from 'discord.js';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 
 export default class Tag extends Command {
   client: CourseClient;
@@ -10,7 +10,7 @@ export default class Tag extends Command {
       category: 'tag',
       channel: 'guild',
       userPermissions: ['MANAGE_MESSAGES'],
-      ratelimit: 2
+      ratelimit: 2,
     });
   }
 
@@ -21,7 +21,7 @@ export default class Tag extends Command {
         ['tag-add', 'add'],
         ['tag-delete', 'del', 'delete', 'remove', 'rm'],
         ['tag-edit', 'edit'],
-        ['tag-list', 'list']
+        ['tag-list', 'list'],
       ],
       otherwise: async (message: Message) => {
         // @ts-ignore
@@ -29,7 +29,7 @@ export default class Tag extends Command {
         return message.util!.reply(
           `I don't think you quite understand how this command works... To get more info do ${prefix}help tag`
         );
-      }
+      },
     };
 
     return Flag.continue(method);

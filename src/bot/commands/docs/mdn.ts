@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as qs from 'querystring';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 const Turndown = require('turndown'); // eslint-disable-line
 
 /**
@@ -18,7 +18,7 @@ export class MDNCommand extends Command {
       description: {
         content: 'Searches MDN for your query.',
         usage: '<query>',
-        examples: ['Map', 'Map#get', 'Map.set']
+        examples: ['Map', 'Map#get', 'Map.set'],
       },
       regex: /^(?:mdn,) (.+)/i,
       clientPermissions: ['EMBED_LINKS'],
@@ -27,13 +27,12 @@ export class MDNCommand extends Command {
           id: 'query',
           prompt: {
             start: (message: Message): string =>
-              `${message.author}, what would you like to search for?`
+              `${message.author}, what would you like to search for?`,
           },
           match: 'content',
-          type: (_, query): string | null =>
-            query ? query.replace(/#/g, '.prototype.') : null
-        }
-      ]
+          type: (_, query): string | null => (query ? query.replace(/#/g, '.prototype.') : null),
+        },
+      ],
     });
   }
 
@@ -52,7 +51,7 @@ export class MDNCommand extends Command {
     turndown.addRule('hyperlink', {
       filter: 'a',
       replacement: (text: string, node: { href: string }): string =>
-        `[${text}](https://developer.mozilla.org${node.href})`
+        `[${text}](https://developer.mozilla.org${node.href})`,
     });
     const summary = body.Summary.replace(
       /<code><strong>(.+)<\/strong><\/code>/g,
@@ -60,11 +59,7 @@ export class MDNCommand extends Command {
     );
     const embed = new MessageEmbed()
       .setColor(this.client.color.main)
-      .setAuthor(
-        'MDN',
-        'https://i.imgur.com/DFGXabG.png',
-        'https://developer.mozilla.org/'
-      )
+      .setAuthor('MDN', 'https://i.imgur.com/DFGXabG.png', 'https://developer.mozilla.org/')
       .setURL(`https://developer.mozilla.org${body.URL}`)
       .setTitle(body.Title)
       .setDescription(turndown.turndown(summary));

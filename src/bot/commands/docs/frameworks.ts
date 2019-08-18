@@ -1,10 +1,10 @@
-import { Command, Argument } from 'discord-akairo';
-import DongClient from 'src/bot/client/CourseClient';
+import { Command } from 'discord-akairo';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
 export class Frameworks extends Command {
-  client: DongClient;
+  client: CourseClient;
   constructor() {
     super('frameworks', {
       aliases: ['frameworks', 'docs'],
@@ -15,12 +15,11 @@ export class Frameworks extends Command {
           id: 'framework',
           prompt: {
             optional: false,
-            start: message =>
-              `${message.author}, what framework would you like the docs for?`,
-            retry: message => `${message.author}, comon now! I know you can do it!`
-          }
-        }
-      ]
+            start: message => `${message.author}, what framework would you like the docs for?`,
+            retry: message => `${message.author}, comon now! I know you can do it!`,
+          },
+        },
+      ],
     });
   }
 

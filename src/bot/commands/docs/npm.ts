@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as moment from 'moment';
 import 'moment-duration-format';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 
 /**
  * I was too lazy to make this command. Credits to Icrawl and the bot yukikaze: https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/npm.ts
@@ -18,7 +18,7 @@ export class NPMCommand extends Command {
       description: {
         content: 'Responds with information on an NPM package.',
         usage: '<query>',
-        examples: ['discord.js', 'discord-akairo', 'node-fetch']
+        examples: ['discord.js', 'discord-akairo', 'node-fetch'],
       },
       clientPermissions: ['EMBED_LINKS'],
       args: [
@@ -26,20 +26,17 @@ export class NPMCommand extends Command {
           id: 'pkg',
           prompt: {
             start: (message: Message): string =>
-              `${message.author}, what would you like to search for?`
+              `${message.author}, what would you like to search for?`,
           },
           match: 'content',
           type: (_, pkg): string | null =>
-            pkg ? encodeURIComponent(pkg.replace(/ /g, '-')) : null
-        }
-      ]
+            pkg ? encodeURIComponent(pkg.replace(/ /g, '-')) : null,
+        },
+      ],
     });
   }
 
-  public async exec(
-    message: Message,
-    { pkg }: { pkg: string }
-  ): Promise<Message | Message[]> {
+  public async exec(message: Message, { pkg }: { pkg: string }): Promise<Message | Message[]> {
     const res = await fetch(`https://registry.npmjs.com/${pkg}`);
     if (res.status === 404) {
       return message.util!.reply(

@@ -1,6 +1,6 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import ms = require('ms');
 
 export class Daily extends Command {
@@ -13,7 +13,7 @@ export class Daily extends Command {
       clientPermissions: ['SEND_MESSAGES'],
       userPermissions: ['SEND_MESSAGES'],
       category: 'economy',
-      cooldown: ms('1d')
+      cooldown: ms('1d'),
     });
   }
 
@@ -24,10 +24,10 @@ export class Daily extends Command {
       const newCredits = Profile.wallet.credits + 20;
       const newTax = 5;
       await this.client.updateProfile(message.author, {
-        wallet: { credits: newCredits }
+        wallet: { credits: newCredits },
       });
       await this.client.updateGuild(message.guild, {
-        guildBank: { acounts: { tax: { credits: newTax } } }
+        guildBank: { acounts: { tax: { credits: newTax } } },
       });
 
       const embed = this.client.util

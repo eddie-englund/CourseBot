@@ -1,11 +1,13 @@
-const { Command } = require('discord-akairo');
+import { Command } from 'discord-akairo';
 import { google } from 'googleapis';
-const auth = process.env.YOUTUBETOKEN;
 import { stripIndents } from 'common-tags';
-const service = google.youtube('v3');
 import { Message } from 'discord.js';
+import { CourseClient } from 'src/bot/client/CourseClient';
+const auth = process.env.YOUTUBETOKEN;
+const service = google.youtube('v3');
 
-export default class YoutubeChannel extends Command {
+export class YoutubeChannel extends Command {
+  client: CourseClient;
   constructor() {
     super('yt', {
       aliases: ['gary', 'channel'],
@@ -13,7 +15,7 @@ export default class YoutubeChannel extends Command {
       userPermissions: ['SEND_MESSAGES'],
       ratelimit: 2,
       category: 'info',
-      channel: 'guild'
+      channel: 'guild',
     });
   }
 
@@ -22,7 +24,7 @@ export default class YoutubeChannel extends Command {
       .list({
         auth,
         id: 'UCVyRiMvfUNMA1UPlDPzG5Ow',
-        part: 'snippet,contentDetails,statistics'
+        part: 'snippet,contentDetails,statistics',
       })
       .catch(console.error);
     if (!response) return;
@@ -31,13 +33,11 @@ export default class YoutubeChannel extends Command {
       .list({
         auth,
         part: 'snippet, contentDetails',
-        playlistId: channels[0].contentDetails.relatedPlaylists.uploads
+        playlistId: channels[0].contentDetails.relatedPlaylists.uploads,
       })
       .catch(console.error);
     if (!uploads) return;
-    const latest = uploads.data.items.sort(
-      (a, b) => a.snippet.position - b.snippet.position
-    )[0];
+    const latest = uploads.data.items.sort((a, b) => a.snippet.position - b.snippet.position)[0];
     const channel = channels[0];
     const embed = this.client.util
       .embed()
@@ -48,16 +48,15 @@ export default class YoutubeChannel extends Command {
       )
       .setDescription(
         stripIndents`
-                Designcourse currently has ${
-                  channel.statistics.subscriberCount
-                } subscribers with ${channel.statistics.videoCount} videos.
-                [Newest Video](https://www.youtube.com/watch?v=${
-                  latest.contentDetails.videoId
-                })
+                Designcourse currently has ${channel.statistics.subscriberCount} subscribers with ${
+          channel.statistics.videoCount
+        } videos.
+                [Newest Video](https://www.youtube.com/watch?v=${latest.contentDetails.videoId})
             
             `
       )
       .setFooter('Last video uploaded')
+      // @ts-ignore
       .setTimestamp(latest.contentDetails.videoPublishedAt);
     message.util.send(embed);
   }

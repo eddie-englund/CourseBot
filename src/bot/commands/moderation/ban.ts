@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from 'src/bot/client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
 
 export default class Ban extends Command {
@@ -19,19 +19,19 @@ export default class Ban extends Command {
           prompt: {
             optional: false,
             start: message => `${message.author}, who would you like to ban?`,
-            retry: message => `${message.author}, are you sure you should be a moderator?`
-          }
+            retry: message => `${message.author}, are you sure you should be a moderator?`,
+          },
         },
         {
           id: 'reason',
           match: 'rest',
-          default: 'No reason provided'
-        }
-      ]
+          default: 'No reason provided',
+        },
+      ],
     });
   }
 
-  public async exec(message: Message, { member, reason }) {
+  public async exec(message: Message, { member, reason }: { member: GuildMember; reason: string }) {
     if (member.id === message.author!.id)
       return message.util!.send('Why in gods name would you even try to ban yourself?!');
 
@@ -41,7 +41,7 @@ export default class Ban extends Command {
       .embed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
-      .setDescription(`User: ${member.tag} has been banned. Reason: ${reason}`)
+      .setDescription(`User: ${member.user.tag} has been banned. Reason: ${reason}`)
       .setTimestamp(Date.now());
 
     const banEmbed = this.client.util
@@ -70,10 +70,10 @@ export default class Ban extends Command {
               reason: reason,
               bannedBy: {
                 user: message.author.tag,
-                userID: message.author.id
-              }
-            }
-          ]
+                userID: message.author.id,
+              },
+            },
+          ],
         });
         await this.client.log(message, banEmbed);
         return message.util!.send(channelEmbed);

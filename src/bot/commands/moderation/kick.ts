@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember, MessageEmbed } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
@@ -16,19 +16,18 @@ export default class Kick extends Command {
           id: 'member',
           type: 'member',
           prompt: {
-            start: (message: Message): string =>
-              `${message.author}, who would you like to kick?`,
+            start: (message: Message): string => `${message.author}, who would you like to kick?`,
             retry: (message: Message): string =>
-              `${message.author}, are you sure you should be a moderator? Try agian...`
-          }
+              `${message.author}, are you sure you should be a moderator? Try agian...`,
+          },
         },
         {
           id: 'kickReason',
           type: 'string',
           match: 'rest',
-          default: 'no reason provided'
-        }
-      ]
+          default: 'no reason provided',
+        },
+      ],
     });
   }
 

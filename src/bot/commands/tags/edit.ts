@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import CourseClient from '../../client/CourseClient';
+import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
 export default class TagEdit extends Command {
@@ -17,8 +17,8 @@ export default class TagEdit extends Command {
           prompt: {
             start: (message: Message): string =>
               `${message.author}, what tag would you like to edit?`,
-            retry: (message: Message): string => `${message.author}, please try again.`
-          }
+            retry: (message: Message): string => `${message.author}, please try again.`,
+          },
         },
         {
           id: 'newTagContent',
@@ -28,10 +28,10 @@ export default class TagEdit extends Command {
             start: (message: Message): string =>
               `${message.author}, what do you want the tag to say?`,
             retry: (message: Message): string =>
-              `${message.author}, please provide the new content for the tag!`
-          }
-        }
-      ]
+              `${message.author}, please provide the new content for the tag!`,
+          },
+        },
+      ],
     });
   }
 
@@ -40,8 +40,7 @@ export default class TagEdit extends Command {
     { tagName, newTagContent }: { tagName: string; newTagContent: string }
   ) {
     const tagData = await this.client.getTag(tagName, message.guild);
-    if (!tagData)
-      return message.util!.reply(`There is no tag with the name \`\`${tagName}\`\``);
+    if (!tagData) return message.util!.reply(`There is no tag with the name \`\`${tagName}\`\``);
     try {
       await this.client.updateTag(tagName, message.guild, { tag: newTagContent });
     } catch (error) {
