@@ -31,18 +31,13 @@ export default class Kick extends Command {
     });
   }
 
-  public async exec(
-    message: Message,
-    { member, kickReason }: { member: GuildMember; kickReason: string }
-  ) {
+  public async exec(message: Message, { member, kickReason }: { member: GuildMember; kickReason: string }) {
     if (member.id === message.author!.id) return;
     try {
       await member.kick(kickReason);
     } catch (error) {
       console.error(error);
-      return message.util!.reply(
-        `Failed to kick user **${member.user}**. Error message: ${error.message}`
-      );
+      return message.util!.reply(`Failed to kick user **${member.user}**. Error message: ${error.message}`);
     }
 
     const kickEmbed: MessageEmbed = this.client.util

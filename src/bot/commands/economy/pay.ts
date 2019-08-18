@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
-const ms = require('ms');
+import ms = require('ms');
 
 export class Pay extends Command {
   public client: CourseClient;
