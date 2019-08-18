@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export default class Logs extends Command {
+export class Logs extends Command {
   public client: CourseClient;
   constructor() {
     super('setting-log', {
@@ -29,9 +29,7 @@ export default class Logs extends Command {
             start: (message: Message): string =>
               `${message.author}, would you like to turn off or on loggin?`,
             retry: (message: Message): string =>
-              `${
-                message.author
-              }, comon now don't be shy! Provide me with either; true, false, on or off`,
+              `${message.author}, comon now don't be shy! Provide me with either; true, false, on or off`,
           },
         },
       ],

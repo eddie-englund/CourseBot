@@ -1,23 +1,23 @@
 import { Schema, model } from 'mongoose';
-const timestamp = require('mongoose-timestamp');
+import timestamp = require('mongoose-timestamp');
 
 const GuildSchema: Schema = new Schema({
   guild: String,
   guildID: String,
   prefix: {
     type: String,
-    default: '?'
+    default: '?',
   },
   guildLog: {
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     channel: {
       type: String,
-      default: 'modlogs'
-    }
-  }
+      default: 'modlogs',
+    },
+  },
 });
 
 GuildSchema.plugin(timestamp);

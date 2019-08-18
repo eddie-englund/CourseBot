@@ -1,11 +1,11 @@
-import { Schema, model } from "mongoose";
-const timestamp = require("mongoose-timestamp");
+import { Schema, model } from 'mongoose';
+import timestamp = require('mongoose-timestamp');
 
 const tagSchema: Schema = new Schema({
   id: String,
   guildID: String,
-  tag: String
+  tag: String,
 });
 
 tagSchema.plugin(timestamp);
-export default model("Tag", tagSchema);
+export default model('Tag', tagSchema);

@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-const timestamp = require('mongoose-timestamp');
+import timestamp = require('mongoose-timestamp');
 
 const ProfileSchema: Schema = new Schema({
   user: String,
@@ -12,26 +12,26 @@ const ProfileSchema: Schema = new Schema({
         userID: String,
         reason: {
           type: String,
-          default: 'no reason given'
+          default: 'no reason given',
         },
-        date: String
-      }
-    ]
+        date: String,
+      },
+    ],
   },
 
   wallet: {
     credits: {
       type: Number,
-      default: 0
+      default: 0,
     },
     loan: {
       credits: {
         type: Number,
-        default: 0
+        default: 0,
       },
-      loans: [String]
-    }
-  }
+      loans: [String],
+    },
+  },
 });
 
 ProfileSchema.plugin(timestamp);
