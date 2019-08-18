@@ -3,7 +3,7 @@ import { Guild } from 'discord.js';
 import { CourseClient } from '../../client/CourseClient';
 
 export class GuildCreate extends Listener {
-  client: CourseClient;
+  public client: CourseClient;
   constructor() {
     super('guildCreate', {
       event: 'guildCreate',

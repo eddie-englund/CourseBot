@@ -3,7 +3,7 @@ import { CourseClient } from '../../client/CourseClient';
 import { Message } from 'discord.js';
 
 export class MissingPermissions extends Listener {
-  client: CourseClient;
+  public client: CourseClient;
 
   constructor() {
     super('missingPermissions', {

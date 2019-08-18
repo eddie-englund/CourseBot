@@ -1,10 +1,10 @@
 import { Listener, Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { CourseClient } from '../../client/CourseClient';
-const ms = require('ms');
+import ms = require('ms');
 
 export class Cooldown extends Listener {
-  client: CourseClient;
+  public client: CourseClient;
   constructor() {
     super('cooldown', {
       event: 'cooldown',

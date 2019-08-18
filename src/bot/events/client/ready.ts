@@ -4,7 +4,7 @@ import { Schema } from 'mongoose';
 import { Guild } from 'discord.js';
 
 export class Ready extends Listener {
-  client: CourseClient;
+  public client: CourseClient;
   constructor() {
     super('ready', {
       event: 'ready',
