@@ -4,7 +4,7 @@ import { CourseClient } from '../../client/CourseClient';
 
 export class GuildMemberAdd extends Listener {
   public client: CourseClient;
-  constructor() {
+  public constructor() {
     super('guildMemberAdd', {
       event: 'guildMemberAdd',
       emitter: 'client',
@@ -12,12 +12,11 @@ export class GuildMemberAdd extends Listener {
     });
   }
 
-  async exec(member: GuildMember) {
-    const user = member.user;
+  public async exec(member: GuildMember) {
     try {
-      const newProfile: Object = {
-        user: user.tag,
-        userID: user.id,
+      const newProfile: { user; userID } = {
+        user: member.user.tag,
+        userID: member.user.id,
       };
       return this.client.createProfile(newProfile);
     } catch (error) {
