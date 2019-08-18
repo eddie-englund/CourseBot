@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { Schema } from 'mongoose';
 
-export default class InitGuild extends Command {
+export class InitGuild extends Command {
   public client: CourseClient;
 
   public constructor() {
