@@ -1,4 +1,4 @@
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from './client/CourseClient';
 import * as db from '../db/init';
 const dotenv = require('dotenv').config();
 // Dotenv

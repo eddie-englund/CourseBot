@@ -4,13 +4,18 @@ import * as restify from 'restify';
 import * as mongoose from 'mongoose';
 import corsMiddleware = require('restify-cors-middleware');
 
-const server = restify.createServer();
+// Routes
+
+import userRoute = require('./routes/user');
+import guildRoute = require('./routes/guild');
+
+export const server = restify.createServer();
 
 // Middleware
 
 const cors = corsMiddleware({
   preflightMaxAge: 5, //Optional
-  origins: ['http://localhost:3001']
+  origins: ['http://localhost:3001'],
 });
 
 server.pre(cors.preflight);
@@ -25,15 +30,7 @@ server.listen(config.PORT, () => {
 const db: mongoose.connection = mongoose.connection;
 
 db.once('open', () => {
-  require('./routes/user')(server);
-  require('./routes/guild')(server);
-
-  server.get(
-    '/public/*',
-    restify.plugins.serveStatic({
-      directory: '.',
-      default: 'index.html'
-    })
-  );
+  guildRoute(server);
+  userRoute(server);
   console.log(`Server started on port ${config.PORT}`);
 });
