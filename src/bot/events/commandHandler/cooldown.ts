@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 import { CourseClient } from '../../client/CourseClient';
 import ms = require('ms');
 
-export class Cooldown extends Listener {
+export default class Cooldown extends Listener {
   public client: CourseClient;
   constructor() {
     super('cooldown', {

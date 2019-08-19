@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, Guild, MessageEmbed } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export class GuildProfile extends Command {
+export default class GuildProfile extends Command {
   public client: CourseClient;
 
   constructor() {
@@ -10,8 +10,11 @@ export class GuildProfile extends Command {
       aliases: ['guild', 'server', 'guildinfo'],
       clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
       userPermissions: ['SEND_MESSAGES'],
-      category: 'guild',
+      category: 'info',
       channel: 'guild',
+      description: {
+        content: 'Sends information about the current guild.',
+      },
     });
   }
 

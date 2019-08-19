@@ -3,13 +3,18 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
-export class Frameworks extends Command {
+export default class Frameworks extends Command {
   public client: CourseClient;
   constructor() {
     super('frameworks', {
       aliases: ['frameworks', 'docs'],
       category: 'docs',
       clientPermissions: ['SEND_MESSAGES'],
+      description: {
+        content: 'Sends links to framework docs.',
+        usage: '<framework>',
+        examples: ['vue', 'react', 'svelte', 'electron', 'angular', 'discord.js', 'discordjs'],
+      },
       args: [
         {
           id: 'framework',

@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember, MessageEmbed } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
-export class Kick extends Command {
+export default class Kick extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -11,6 +11,12 @@ export class Kick extends Command {
       aliases: ['kick'],
       userPermissions: ['KICK_MEMBERS'],
       clientPermissions: ['KICK_MEMBERS'],
+      category: 'moderation',
+      description: {
+        content: 'Kicks a user.',
+        usage: '<@user> <reason>',
+        examples: ['@Titus hes trolling users.'],
+      },
       args: [
         {
           id: 'member',

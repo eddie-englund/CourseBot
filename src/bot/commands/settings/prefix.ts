@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { stripIndents } from 'common-tags';
 import { Message } from 'discord.js';
 
-export class Prefix extends Command {
+export default class Prefix extends Command {
   public client: CourseClient;
 
   constructor() {

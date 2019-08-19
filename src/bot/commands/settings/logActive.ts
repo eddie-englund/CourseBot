@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export class Logs extends Command {
+export default class Logs extends Command {
   public client: CourseClient;
   public constructor() {
     super('setting-log', {

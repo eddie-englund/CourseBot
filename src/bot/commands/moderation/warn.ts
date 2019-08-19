@@ -1,8 +1,9 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
-import { Message, GuildMember } from 'discord.js';
+import { Message, GuildMember, MessageEmbed } from 'discord.js';
+import { stripIndents } from 'common-tags';
 
-export class Warn extends Command {
+export default class Warn extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -12,6 +13,11 @@ export class Warn extends Command {
       clientPermissions: ['BAN_MEMBERS', 'KICK_MEMBERS'],
       channel: 'guild',
       category: 'moderation',
+      description: {
+        content: 'Warns a user.',
+        usage: '<@user> <reason>',
+        examples: ['@Titus broke the rules'],
+      },
       args: [
         {
           id: 'member',
@@ -33,8 +39,30 @@ export class Warn extends Command {
 
   public async exec(message: Message, { member, reason }: { member: GuildMember; reason: string }) {
     const userData = await this.client.getProfile(member.user);
-    if (!userData) return message.reply('Something went wrong! Please try again');
-    else {
+
+    const warnEmbed = this.client.util
+      .embed()
+      .setColor(this.client.color.main)
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setDescription(`**${message.author.tag}** has warned **${member.user.tag}**. Reason: ${reason}`)
+      .setTimestamp(Date.now());
+    if (!userData) {
+      const newUser: { userID; user; record } = {
+        userID: member.id,
+        user: member.user.tag,
+        record: {
+          warns: {
+            user: message.author.tag,
+            userID: message.author.id,
+            reason: reason,
+            date: Date.now(),
+          },
+        },
+      };
+      await this.client.createProfile(newUser);
+      await this.client.log(message, warnEmbed);
+      return message.util!.send(warnEmbed);
+    } else {
       await this.client.updateProfile(member.user, {
         record: {
           warns: [
@@ -48,14 +76,47 @@ export class Warn extends Command {
         },
       });
 
-      const warnEmbed = this.client.util
-        .embed()
-        .setColor(this.client.color.main)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
-        .setDescription(`**${message.author.tag}** has warned **${member.user.tag}**. Reason: ${reason}`);
-
-      message.util!.send(warnEmbed);
-      return this.client.log(message, warnEmbed);
+      switch (userData.record.warns.length) {
+        case 2:
+          message.util!.send(
+            `<@${
+              member.id
+            }>, you now have two warnings. If you exceed two warnings you will be banned from this guild.`
+          );
+          break;
+        case 3:
+          try {
+            member.ban({ days: 2, reason: reason });
+          } catch (error) {
+            console.error(error);
+            const failed: MessageEmbed = this.client.util
+              .embed()
+              .setColor('#ff0008')
+              .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
+              .setDescription(
+                `Failed to ban user: ${member.user.tag} (${member.id}). Error: ${error.message}`
+              )
+              .setTimestamp(Date.now());
+            this.client.log(message, failed);
+          }
+          const bannedEmbed: MessageEmbed = this.client.util
+            .embed()
+            .setColor(this.client.color.main)
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setDescription(
+              stripIndents`Banned user: **${member.user.tag}**
+                user id: ${member.id}
+                reason: This person has exceeded two warnings.
+                banned by: ${this.client.user.username}
+            `
+            )
+            .setTimestamp(Date.now());
+          await this.client.log(message, bannedEmbed);
+          break;
+        default:
+          await this.client.log(message, warnEmbed);
+          return message.util!.send(warnEmbed);
+      }
     }
   }
 }

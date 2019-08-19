@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import ms = require('ms');
 
-export class Daily extends Command {
+export default class Daily extends Command {
   public client: CourseClient;
 
   constructor() {
@@ -14,6 +14,9 @@ export class Daily extends Command {
       userPermissions: ['SEND_MESSAGES'],
       category: 'economy',
       cooldown: ms('1d'),
+      description: {
+        content: 'Gives user x amount of credits (can only be used once a day).',
+      },
     });
   }
 

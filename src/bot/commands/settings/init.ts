@@ -3,7 +3,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { Schema } from 'mongoose';
 
-export class InitGuild extends Command {
+export default class InitGuild extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -11,6 +11,7 @@ export class InitGuild extends Command {
       ratelimit: 2,
       userPermissions: ['MANAGE_MESSAGES'],
       channel: 'guild',
+      category: 'settings',
     });
   }
 

@@ -1,16 +1,28 @@
 import { Command, Flag } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
+import { stripIndents } from 'common-tags';
 
-export class Tag extends Command {
+export default class Tag extends Command {
   public client: CourseClient;
   public constructor() {
     super('tag', {
       aliases: ['tag'],
-      category: 'tag',
+      category: 'tags',
       channel: 'guild',
       userPermissions: ['MANAGE_MESSAGES'],
       ratelimit: 2,
+      description: {
+        content: 'Adds a tag.',
+        usage: stripIndents`
+          tag add <tag name> <tag content>
+          tag show <tag name>
+          tag delete <tag name>
+          tag edit <tag name> <new tag content>,
+          tag list
+        `,
+        examples: ['tag add <my tag> <This is the content of my tag>', 'tag delete <my tag>'],
+      },
     });
   }
 

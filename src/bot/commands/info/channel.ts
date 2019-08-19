@@ -6,7 +6,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 const auth = process.env.YOUTUBETOKEN;
 const service = google.youtube('v3');
 
-export class YoutubeChannel extends Command {
+export default class YoutubeChannel extends Command {
   public client: CourseClient;
   constructor() {
     super('yt', {
@@ -16,6 +16,9 @@ export class YoutubeChannel extends Command {
       ratelimit: 2,
       category: 'info',
       channel: 'guild',
+      description: {
+        content: 'Sends information about Gary Simons youtube channel DesignCourse(courestro).',
+      },
     });
   }
 

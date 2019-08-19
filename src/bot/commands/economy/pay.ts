@@ -3,14 +3,19 @@ import { Message } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import ms = require('ms');
 
-export class Pay extends Command {
+export default class Pay extends Command {
   public client: CourseClient;
 
   constructor() {
     super('pay', {
       aliases: ['pay'],
       ratelimit: 2,
-      cooldown: ms('15 min'),
+      description: {
+        content: 'Pays a specified user.',
+        usage: '<user> <amount>',
+        examples: ['@Titus 50'],
+      },
+      cooldown: ms('5 min'),
       category: 'economy',
       clientPermissions: ['SEND_MESSAGES'],
       userPermissions: ['SEND_MESSAGES'],

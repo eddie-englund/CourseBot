@@ -3,14 +3,17 @@ import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, MessageEmbed } from 'discord.js';
 import tag from '../../../db/models/Tag';
 
-export class TagList extends Command {
+export default class TagList extends Command {
   public client: CourseClient;
 
   public constructor() {
     super('tag-list', {
-      category: 'tag',
+      category: 'tags',
       ratelimit: 2,
       channel: 'guild',
+      description: {
+        content: 'Sends a list of all tags.',
+      },
     });
   }
 

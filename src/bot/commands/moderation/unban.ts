@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, User, MessageEmbed } from 'discord.js';
 
-export class Unban extends Command {
+export default class Unban extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -10,6 +10,12 @@ export class Unban extends Command {
       aliases: ['unban', 'deban'],
       clientPermissions: ['BAN_MEMBERS', 'SEND_MESSAGES'],
       userPermissions: ['BAN_MEMBERS'],
+      category: 'moderation',
+      description: {
+        content: 'Unbans a user. Note: you need to provide a valid userID for this command to work!',
+        usage: '<USERID> <reason>',
+        examples: ['<userid> <reason>'],
+      },
       channel: 'guild',
       args: [
         {
@@ -26,6 +32,7 @@ export class Unban extends Command {
         {
           id: 'reason',
           match: 'rest',
+          default: 'no reason provided',
         },
       ],
     });

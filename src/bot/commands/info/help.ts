@@ -3,7 +3,7 @@ import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export class HelpCommand extends Command {
+export default class HelpCommand extends Command {
   public client: CourseClient;
   public constructor() {
     super('help', {
@@ -31,11 +31,9 @@ export class HelpCommand extends Command {
       const embed = this.client.util
         .embed()
         .setColor(this.client.color.main)
-        .addField(
-          '❯ Commands',
-          stripIndents`A list of available commands.
-					For additional info on a command, type \`${prefix}help <command>\`
-				`
+        .setDescription(
+          stripIndents`❯ Commands
+					For additional info on a command, type \`${prefix}help <command>\``
         );
 
       for (const category of this.handler.categories.values()) {
@@ -44,7 +42,7 @@ export class HelpCommand extends Command {
           `${category
             .filter((cmd): boolean => cmd.aliases.length > 0)
             .map((cmd): string => `\`${cmd.aliases[0]}\``)
-            .join(' ')}`
+            .join(' ')} `
         );
       }
 

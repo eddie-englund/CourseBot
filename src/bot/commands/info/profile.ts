@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
-export class Profile extends Command {
+export default class Profile extends Command {
   public client: CourseClient;
 
   constructor() {
@@ -13,8 +13,8 @@ export class Profile extends Command {
       category: 'info',
       ratelimit: 2,
       description: {
-        content: `<@ user> (argument not required)`,
-        usage: '<argument>',
+        content: `<@user> (argument not required)`,
+        usage: '<optional argument>',
         examples: ['@Course'],
       },
       args: [

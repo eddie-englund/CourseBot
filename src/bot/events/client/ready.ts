@@ -3,7 +3,7 @@ import { CourseClient } from '../../client/CourseClient';
 import { Schema } from 'mongoose';
 import { Guild } from 'discord.js';
 
-export class Ready extends Listener {
+export default class Ready extends Listener {
   public client: CourseClient;
   constructor() {
     super('ready', {
@@ -24,9 +24,7 @@ export class Ready extends Listener {
         return this.client
           .createGuild(newGuild)
           .then(g =>
-            console.log(
-              `Created db instance at ready event for guild: ${g.guild}, id: ${g.guildID}`
-            )
+            console.log(`Created db instance at ready event for guild: ${g.guild}, id: ${g.guildID}`)
           );
       }
     });

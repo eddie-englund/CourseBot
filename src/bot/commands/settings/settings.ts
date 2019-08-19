@@ -2,7 +2,7 @@ import { Command, Flag } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { CourseClient } from 'src/bot/client/CourseClient';
 
-export class Settings extends Command {
+export default class Settings extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -12,6 +12,9 @@ export class Settings extends Command {
       channel: 'guild',
       userPermissions: ['MANAGE_GUILD'],
       ratelimit: 2,
+      description: {
+        content: 'settings for the guild',
+      },
     });
   }
 

@@ -2,14 +2,19 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
-export class TagEdit extends Command {
+export default class TagEdit extends Command {
   public client: CourseClient;
 
   public constructor() {
     super('tag-edit', {
-      category: 'tag',
+      category: 'tags',
       ratelimit: 2,
       channel: 'guild',
+      description: {
+        content: 'Edits a tag.',
+        usage: '<tagname> <tag content>',
+        examples: ['<course> <new content here>'],
+      },
       args: [
         {
           id: 'tagName',
