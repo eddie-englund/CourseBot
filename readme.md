@@ -1,7 +1,8 @@
+<img src="https://yt3.ggpht.com/a/AGF-l7-o7kerdDSATMKwSTOyOznS6OM5-2JCcvDt1g=s288-c-k-c0xffffffff-no-rj-mo" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0; border-radius: 10%;" alt="Runa" >
+
+> This bot is currently not invitable
+
 # Course bot
-
-
-<img src="https://yt3.ggpht.com/a/AGF-l7-o7kerdDSATMKwSTOyOznS6OM5-2JCcvDt1g=s288-c-k-c0xffffffff-no-rj-mo" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0;" alt="Runa" >
 
 <div align="center">
 
