@@ -1,5 +1,8 @@
 # Course bot
 
+
+<img src="https://yt3.ggpht.com/a/AGF-l7-o7kerdDSATMKwSTOyOznS6OM5-2JCcvDt1g=s288-c-k-c0xffffffff-no-rj-mo" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0;" alt="Runa" >
+
 <div align="center">
 
 <a href="https://discord.gg/AtzDNFB">
@@ -52,7 +55,7 @@ Course is the inhouse Discord bot developed specificly for the needs that we as 
 
 **Warn:** warns a specified user and allows moderator to specify a reason.
 
-### Settings
+### SettingsRuna
 
 **Init:** creates a database instance for that guild. `note that this command is just a fail safe in case something went wrong in the process`.
 
@@ -90,7 +93,7 @@ Course is the inhouse Discord bot developed specificly for the needs that we as 
 
 ## Author
 
-<img src="https://i.imgur.com/rAvP1k0.jpg" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0;" alt="Runa" >
+<img src="https://i.imgur.com/rAvP1k0.jpg" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0;" alt="Titus avatar" >
 
 **Runa** © [Titus](https://github.com/TitusEntertainment).  
 Authored and maintained by Titus.
