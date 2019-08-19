@@ -2,7 +2,7 @@ import { Listener } from 'discord-akairo';
 import { GuildMember } from 'discord.js';
 import { CourseClient } from '../../client/CourseClient';
 
-export class GuildMemberAdd extends Listener {
+export default class GuildMemberAdd extends Listener {
   public client: CourseClient;
   public constructor() {
     super('guildMemberAdd', {

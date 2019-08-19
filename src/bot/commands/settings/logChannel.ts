@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, Channel } from 'discord.js';
 
-export class logChannel extends Command {
+export default class logChannel extends Command {
   public client: CourseClient;
 
   public constructor() {

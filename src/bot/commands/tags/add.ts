@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
-export class TagAdd extends Command {
+export default class TagAdd extends Command {
   public client: CourseClient;
 
   public constructor() {
@@ -10,6 +10,11 @@ export class TagAdd extends Command {
       category: 'tags',
       channel: 'guild',
       userPermissions: ['MANAGE_MESSAGES'],
+      description: {
+        content: 'Adds a tag.',
+        usage: '<tagname> <tag content>',
+        examples: ['<course> <DesignCourse(courestro)>'],
+      },
       ratelimit: 2,
       args: [
         {

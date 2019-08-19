@@ -2,14 +2,19 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 
-export class TagDelete extends Command {
+export default class TagDelete extends Command {
   public client: CourseClient;
 
   public constructor() {
     super('tag-delete', {
-      category: 'tag',
+      category: 'tags',
       ratelimit: 2,
       userPermissions: ['MANAGE_MESSAGES'],
+      description: {
+        content: 'Deletes a tag.',
+        usage: '<tagname>',
+        examples: ['<my tagname>'],
+      },
       channel: 'guild',
       args: [
         {

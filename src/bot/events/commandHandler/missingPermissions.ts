@@ -2,7 +2,7 @@ import { Listener, Command } from 'discord-akairo';
 import { CourseClient } from '../../client/CourseClient';
 import { Message } from 'discord.js';
 
-export class MissingPermissions extends Listener {
+export default class MissingPermissions extends Listener {
   public client: CourseClient;
 
   constructor() {
@@ -21,9 +21,7 @@ export class MissingPermissions extends Listener {
         );
         break;
       case 'user':
-        message.reply(
-          `Sorry can't let you do that. You're missing the permission \`\`${missing}\`\`.`
-        );
+        message.reply(`Sorry can't let you do that. You're missing the permission \`\`${missing}\`\`.`);
         break;
       default:
         console.error(`Something went wrong with the missingPermissions Listener`);

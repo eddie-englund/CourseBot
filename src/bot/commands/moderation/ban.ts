@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
 
-export class Ban extends Command {
+export default class Ban extends Command {
   public client: CourseClient;
 
   constructor() {
@@ -12,6 +12,11 @@ export class Ban extends Command {
       clientPermissions: ['BAN_MEMBERS'],
       category: 'moderation',
       channel: 'guild',
+      description: {
+        content: 'Bans a user.',
+        usage: '<user> <reason>',
+        examples: ['@Titus he broke the rules several times'],
+      },
       args: [
         {
           id: 'member',

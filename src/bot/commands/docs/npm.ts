@@ -9,7 +9,7 @@ import { CourseClient } from 'src/bot/client/CourseClient';
  * I was too lazy to make this command. Credits to Icrawl and the bot yukikaze: https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/npm.ts
  */
 
-export class NPMCommand extends Command {
+export default class NPMCommand extends Command {
   public client: CourseClient;
   public constructor() {
     super('npm', {
@@ -25,12 +25,10 @@ export class NPMCommand extends Command {
         {
           id: 'pkg',
           prompt: {
-            start: (message: Message): string =>
-              `${message.author}, what would you like to search for?`,
+            start: (message: Message): string => `${message.author}, what would you like to search for?`,
           },
           match: 'content',
-          type: (_, pkg): string | null =>
-            pkg ? encodeURIComponent(pkg.replace(/ /g, '-')) : null,
+          type: (_, pkg): string | null => (pkg ? encodeURIComponent(pkg.replace(/ /g, '-')) : null),
         },
       ],
     });
@@ -50,12 +48,8 @@ export class NPMCommand extends Command {
       );
     }
     const version = body.versions[body['dist-tags'].latest];
-    const maintainers = this._trimArray(
-      body.maintainers.map((user: { name: string }): string => user.name)
-    );
-    const dependencies = version.dependencies
-      ? this._trimArray(Object.keys(version.dependencies))
-      : null;
+    const maintainers = this._trimArray(body.maintainers.map((user: { name: string }): string => user.name));
+    const dependencies = version.dependencies ? this._trimArray(Object.keys(version.dependencies)) : null;
     const embed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setAuthor('NPM', 'https://i.imgur.com/ErKf5Y0.png', 'https://www.npmjs.com/')
@@ -65,21 +59,10 @@ export class NPMCommand extends Command {
       .addField('❯ Version', body['dist-tags'].latest, true)
       .addField('❯ License', body.license || 'None', true)
       .addField('❯ Author', body.author ? body.author.name : '???', true)
-      .addField(
-        '❯ Creation Date',
-        moment.utc(body.time.created).format('YYYY/MM/DD hh:mm:ss'),
-        true
-      )
-      .addField(
-        '❯ Modification Date',
-        moment.utc(body.time.modified).format('YYYY/MM/DD hh:mm:ss'),
-        true
-      )
+      .addField('❯ Creation Date', moment.utc(body.time.created).format('YYYY/MM/DD hh:mm:ss'), true)
+      .addField('❯ Modification Date', moment.utc(body.time.modified).format('YYYY/MM/DD hh:mm:ss'), true)
       .addField('❯ Main File', version.main || 'index.js', true)
-      .addField(
-        '❯ Dependencies',
-        dependencies && dependencies.length ? dependencies.join(', ') : 'None'
-      )
+      .addField('❯ Dependencies', dependencies && dependencies.length ? dependencies.join(', ') : 'None')
       .addField('❯ Maintainers', maintainers.join(', '));
 
     return message.util!.send(embed);
