@@ -4,7 +4,7 @@ import { CourseClient } from '../../bot/client/CourseClient';
 import { User, Guild } from 'discord.js';
 
 export = (client: CourseClient) => {
-  client.getTag = async (id: any, guild: Guild) => {
+  client.getTag = async (id: string, guild: Guild) => {
     const data = await Tag.findOne({ id: id, guildID: guild.id });
     if (!data) return;
     return data;
@@ -17,7 +17,7 @@ export = (client: CourseClient) => {
     return newTag.save();
   };
 
-  client.updateTag = async (id: string, guild: Guild, user: User, settings: {}) => {
+  client.updateTag = async (id: string, guild: Guild, settings: {}) => {
     let data = await client.getTag(id, guild.id);
 
     if (typeof data !== 'object') data = {};
