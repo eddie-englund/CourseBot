@@ -1,12 +1,13 @@
-import { Command } from 'discord-akairo';
+import { Command, Flag } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
+import { REPL_MODE_SLOPPY } from 'repl';
 
 export default class Frameworks extends Command {
   public client: CourseClient;
   constructor() {
-    super('frameworks', {
+    super('documentation', {
       aliases: ['frameworks', 'docs'],
       category: 'docs',
       clientPermissions: ['SEND_MESSAGES'],
@@ -15,56 +16,23 @@ export default class Frameworks extends Command {
         usage: '<framework>',
         examples: ['vue', 'react', 'svelte', 'electron', 'angular', 'discord.js', 'discordjs'],
       },
-      args: [
-        {
-          id: 'framework',
-          prompt: {
-            optional: false,
-            start: message => `${message.author}, what framework would you like the docs for?`,
-            retry: message => `${message.author}, comon now! I know you can do it!`,
-          },
-        },
-      ],
     });
   }
 
-  public async exec(message: Message, { framework }) {
-    // vue, react, electron, angular, svelete, discord.js, discord.js
+  public *args(): object {
+    const method = yield {
+      type: [['djs-docs', 'djs'], ['akairo-docs', 'akairo'], ['mdn'], ['npm']],
+      otherwise: (msg: Message): string => {
+        // @ts-ignore
+        const prefix = this.handler.prefix(msg);
+        return stripIndents`
+					When you beg me so much I just can't not help you~
+					Check \`${prefix}help tag\` for more information.
+					Hmph, you probably wanted to use \`${prefix}tag show\` or something!
+				`;
+      },
+    };
 
-    switch (framework) {
-      case 'vue':
-        message.util!.send('https://vuejs.org/v2/guide/');
-        break;
-      case 'react':
-        message.util!.send('https://reactjs.org/docs/getting-started.html');
-        break;
-      case 'electron':
-        message.util!.send('https://electronjs.org/docs');
-        break;
-      case 'angular':
-        message.util!.send('https://angular.io/docs');
-        break;
-      case 'svelte':
-        message.util!.send('https://svelte.dev/docs');
-        break;
-      case 'discord.js':
-        message.util!.send('https://discord.js.org/#/docs/');
-        break;
-      case 'discord-akairo':
-        message.util!.send('https://discord-akairo.github.io/#/docs/');
-        break;
-      default:
-        message.util!.send(
-          stripIndents`${message.author}, These are the avalible frameworks:
-            • vue
-            • react
-            • angular
-            • electron
-            • svelte
-            • discord.js
-            • discord-akairo
-            `
-        );
-    }
+    return Flag.continue(method);
   }
 }

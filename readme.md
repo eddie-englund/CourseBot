@@ -1,14 +1,13 @@
+<img src="https://yt3.ggpht.com/a/AGF-l7-o7kerdDSATMKwSTOyOznS6OM5-2JCcvDt1g=s288-c-k-c0xffffffff-no-rj-mo" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0; border-radius: 10%;" alt="Runa" >
+
 # Course bot
 
-
-<img src="https://yt3.ggpht.com/a/AGF-l7-o7kerdDSATMKwSTOyOznS6OM5-2JCcvDt1g=s288-c-k-c0xffffffff-no-rj-mo" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0;" alt="Runa" >
+> This bot is currently not invitable
 
 <div align="center">
-
 <a href="https://discord.gg/AtzDNFB">
     <img src="https://img.shields.io/discord/446312668823814145.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge">
 </a>
-
 <a href="https://app.codacy.com/app/TitusEntertainment/CourseBot?utm_source=github.com&utm_medium=referral&utm_content=TitusEntertainment/CourseBot&utm_campaign=Badge_Grade_Dashboard">
 <img src="https://img.shields.io/codacy/grade/183d13ed5a064312b0bc7748f772755b.svg?style=for-the-badge">
 </a>
@@ -18,6 +17,80 @@
 </div>
 
 Course is the inhouse Discord bot developed specificly for the needs that we as moderators have found while moderating our Discord server called DesignCourse(courestro)
+
+## Self hosting
+
+To selfhost you will need the following:
+
+- [nodejs](https://nodejs.org)
+- [git](https://git-scm.com/)
+
+**Step 1**
+
+open a terminal and execute this command:
+
+        git clone https://github.com/Titusentertainment/CourseBot.git
+
+**Step 2**
+
+cd into that directory
+
+    cd CourseBot
+
+create a file called .env in the root foder this can be done with the command bellow (if your terminal allows it), if that does not work do it manually.
+
+        touch .env
+
+**Step 3**
+
+Open that file and paste in your token and your discord user id. Your file should look like this:
+
+        TOKEN = WHATEVERMYTOKENIS
+        ownerID = MYDISCORID
+
+**Step 4**
+
+install all the dependencies.
+
+        npm i
+
+or if you use yarn
+
+        yarn install
+
+**Step 5**
+
+run the command:
+
+        npm run compile
+
+or of if you use yarn
+
+        yarn run compile
+
+This will compile the code for you.
+
+**Step 6**
+
+install pm2
+
+        npm i -G pm2
+
+or if you use yarn
+
+         yarn global add pm2 --prefix /usr/local
+
+**FINAL STEP**
+
+run the command:
+
+        cd dist/bot/
+
+and then run
+
+        pm2 bot.js
+
+if the bot does not start now make sure to double check all the previous steps.
 
 ## Commands
 

@@ -43,7 +43,6 @@ export default class Tag extends Command {
         );
       },
     };
-
     return Flag.continue(method);
   }
 }

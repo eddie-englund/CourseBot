@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, User, MessageEmbed } from 'discord.js';
+import { TOPICS, EVENTS } from '../../util/logger';
 
 export default class Unban extends Command {
   public client: CourseClient;
@@ -44,7 +45,9 @@ export default class Unban extends Command {
 
     try {
       await message.guild!.members.unban(user, `Unbanned by ${message.author!.tag}`);
+      await this.client.newCase(message, 'unban', user, reason);
     } catch (error) {
+      this.client.logger.error(error, { topic: TOPICS.DISCORD, event: EVENTS.ERROR });
       return message.reply(`there was an error unbanning this user: \`${error.message}\``);
     }
 
@@ -55,7 +58,7 @@ export default class Unban extends Command {
       .setDescription(`User ${message.author.tag} has unbanned user ${user}. The reason was: ${reason}`)
       .setTimestamp(Date.now());
 
-    await this.client.log(message, unbanEmbed);
+    await this.client.guildLog(message, unbanEmbed);
     return message.util!.send(unbanEmbed);
   }
 }

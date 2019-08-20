@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
+import Case from '../../../db/models/Case';
 
 export default class Ban extends Command {
   public client: CourseClient;
@@ -40,8 +41,6 @@ export default class Ban extends Command {
     if (member.id === message.author!.id)
       return message.util!.send('Why in gods name would you even try to ban yourself?!');
 
-    const guildData = await this.client.getGuild(message.guild);
-
     const channelEmbed = this.client.util
       .embed()
       .setColor(this.client.color.main)
@@ -61,31 +60,15 @@ export default class Ban extends Command {
       .addField('**Banned by id:**', message.author.id, true)
       .setTimestamp(Date.now());
 
-    if (!guildData) {
-      return message.reply(`Something went wrong please try again`);
-    } else {
-      try {
-        await member.ban({ days: 2, reason: reason });
-        await this.client.updateGuild({
-          guildBans: [
-            {
-              user: member.user.tag,
-              userID: member.id,
-              date: Date.now(),
-              reason: reason,
-              bannedBy: {
-                user: message.author.tag,
-                userID: message.author.id,
-              },
-            },
-          ],
-        });
-        await this.client.log(message, banEmbed);
-        return message.util!.send(channelEmbed);
-      } catch (error) {
-        console.error(error);
-        return message.reply(`Error: ${error.message}`);
-      }
+    await this.client.newCase(message, 'ban', member.user, reason);
+    try {
+      await member.ban({ days: 2, reason: reason });
+
+      await this.client.guildLog(message, banEmbed);
+      return message.util!.send(channelEmbed);
+    } catch (error) {
+      console.error(error);
+      return message.reply(`Error: ${error.message}`);
     }
   }
 }

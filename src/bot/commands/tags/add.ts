@@ -52,6 +52,7 @@ export default class TagAdd extends Command {
     const newTag = {
       id: tagName,
       guildID: message.guild.id,
+      userID: message.author.id,
       tag: tagContent,
     };
     await this.client.createTag(newTag);

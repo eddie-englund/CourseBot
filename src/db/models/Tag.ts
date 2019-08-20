@@ -4,6 +4,7 @@ import timestamp = require('mongoose-timestamp');
 const tagSchema: Schema = new Schema({
   id: String,
   guildID: String,
+  userID: String,
   tag: String,
 });
 

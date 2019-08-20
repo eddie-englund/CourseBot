@@ -20,10 +20,7 @@ export default class TagList extends Command {
   public async exec(message: Message) {
     const data = await tag.find({ guildID: message.guild.id });
     if (!data) return message.reply(`It seems like I don't have any tags saved for this guild!`);
-    const list = [];
-    await data.forEach(Object => {
-      list.push(Object.id);
-    });
+    if (data.length < 1 || data === undefined) return message.util.reply('There are no tags in this guild, consider creating one!');
     const tagEmbed: MessageEmbed = this.client.util
       .embed()
       .setColor(this.client.color.main)

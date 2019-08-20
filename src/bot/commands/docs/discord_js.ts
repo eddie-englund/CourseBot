@@ -1,0 +1,74 @@
+import { Command } from 'discord-akairo';
+import { Message, TextChannel } from 'discord.js';
+import fetch from 'node-fetch';
+import * as qs from 'querystring';
+
+const SOURCES = ['stable', 'master', 'rpc', 'commando', '11.5-dev'];
+
+export default class DiscordCommand extends Command {
+  public constructor() {
+    super('djs-docs', {
+      aliases: ['djs', 'd.js', 'discordjs'],
+      description: {
+        content: 'Searches discord.js documentation.',
+        usage: '<query> <branch>',
+        examples: ['Guild', 'Client', 'Guild#Members master'],
+      },
+      category: 'docs',
+      clientPermissions: ['EMBED_LINKS'],
+      ratelimit: 2,
+      flags: ['--force', '-f'],
+      optionFlags: ['--default='],
+    });
+  }
+
+  public *args(): object {
+    const defaultDocs = yield {
+      match: 'option',
+      flag: '--default=',
+    };
+
+    const force = yield {
+      match: 'flag',
+      flag: ['--force', '-f'],
+    };
+
+    const query = yield {
+      match: 'rest',
+      type: 'lowercase',
+      prompt: {
+        start: (message: Message): string => `${message.author}, what would you like to search?`,
+        optional: defaultDocs ? true : false,
+      },
+    };
+
+    return { defaultDocs, force, query };
+  }
+
+  public async exec(
+    message: Message,
+    { query, force }: { defaultDocs: string; query: string; force: boolean }
+  ): Promise<Message | Message[]> {
+    const q = query.split(' ');
+    const docs = 'stable';
+    let source = SOURCES.includes(q.slice(-1)[0]) ? q.pop() : docs;
+    if (source === '11.5-dev') {
+      source = `https://raw.githubusercontent.com/discordjs/discord.js/docs/${source}.json`;
+    }
+    const queryString = qs.stringify({ src: source, q: q.join(' '), force });
+    const res = await fetch(`https://djsdocs.sorta.moe/v2/embed?${queryString}`);
+    const embed = await res.json();
+    if (!embed) {
+      return message.util!.reply("Couldn't find that!");
+    }
+    if (
+      message.channel.type === 'dm' ||
+      !(message.channel as TextChannel)
+        .permissionsFor(message.guild!.me!)!
+        .has(['ADD_REACTIONS', 'MANAGE_MESSAGES'], false)
+    ) {
+      return message.util!.send({ embed });
+    }
+    return message.util!.send({ embed });
+  }
+}

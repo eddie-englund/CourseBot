@@ -44,6 +44,10 @@ export default class TagEdit extends Command {
   ) {
     const tagData = await this.client.getTag(tagName, message.guild);
     if (!tagData) return message.util!.reply(`There is no tag with the name \`\`${tagName}\`\``);
+    if (tagData.userID !== message.author.id)
+      return message.util!.reply(
+        `Sorry, cannot edit the tag **${tagName}** because you're not owner of this tag`
+      );
     try {
       await this.client.updateTag(tagName, message.guild, { tag: newTagContent });
     } catch (error) {

@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
+import Tag from '../../../db/models/Tag';
 
 export default class TagShow extends Command {
   public client: CourseClient;
@@ -23,6 +24,7 @@ export default class TagShow extends Command {
           type: 'lowercase',
           prompt: {
             start: (message: Message): string => `${message.author}, what tag would you like to see?`,
+            retry: (message: Message): string => `${message.author}, please provide a valid tag`,
           },
         },
       ],
@@ -30,7 +32,7 @@ export default class TagShow extends Command {
   }
 
   public async exec(message: Message, { tagName }: { tagName: string }): Promise<Message | Message[] | void> {
-    const tagData = await this.client.getTag(tagName, message.guild);
+    const tagData = await Tag.findOne({ id: tagName });
     if (!tagData) return message.reply(`The tag \`\`${tagName}\`\` does not exist!`);
 
     return message.util!.send(tagData.tag);

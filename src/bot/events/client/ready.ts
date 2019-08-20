@@ -2,6 +2,7 @@ import { Listener } from 'discord-akairo';
 import { CourseClient } from '../../client/CourseClient';
 import { Schema } from 'mongoose';
 import { Guild } from 'discord.js';
+import { TOPICS, EVENTS } from '../../util/logger';
 
 export default class Ready extends Listener {
   public client: CourseClient;
@@ -30,7 +31,10 @@ export default class Ready extends Listener {
     });
 
     this.client.user.setActivity('you', { type: 'WATCHING' });
-    console.log(`${this.client.user.username} has connected to the discord api`);
+    return this.client.logger.info(`Client connected to the discord API`, {
+      topic: TOPICS.DISCORD,
+      event: EVENTS.READY,
+    });
   }
 }
 
