@@ -30,7 +30,7 @@ export = (client: CourseClient) => {
   };
 
   client.deleteTag = async (id: string, user: User) => {
-    let data = await client.getTag(id, user);
+    const data = await client.getTag(id, user);
     if (!data) throw new Error(`There is no tag called ${id} in the database`);
     return Tag.deleteOne({ id: id, userID: user.id });
   };
