@@ -38,7 +38,7 @@ export default class Daily extends Command {
         .setColor(this.client.color.main)
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setDescription(['💳 **|** You have gained 20 💵'])
-        .setFooter('Taxes applied. Read more about taxes with the tax commadn');
+        .setFooter('Taxes applied. Read more about taxes with the tax command');
       return message.util!.send(embed);
     }
   }
