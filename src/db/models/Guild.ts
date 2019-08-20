@@ -4,6 +4,10 @@ import timestamp = require('mongoose-timestamp');
 const GuildSchema: Schema = new Schema({
   guild: String,
   guildID: String,
+  cases: {
+    type: Number,
+    default: 0,
+  },
   prefix: {
     type: String,
     default: '?',

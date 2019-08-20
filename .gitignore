@@ -7,3 +7,5 @@ package-lock.json
 tests
 config.json
 test
+error.log
+warn.log

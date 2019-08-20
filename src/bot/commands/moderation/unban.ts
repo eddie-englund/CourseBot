@@ -55,7 +55,7 @@ export default class Unban extends Command {
       .setDescription(`User ${message.author.tag} has unbanned user ${user}. The reason was: ${reason}`)
       .setTimestamp(Date.now());
 
-    await this.client.log(message, unbanEmbed);
+    await this.client.guildLog(message, unbanEmbed);
     return message.util!.send(unbanEmbed);
   }
 }

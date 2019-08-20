@@ -2,6 +2,8 @@
   "name": "course-bot",
   "version": "1.0.0",
   "main": "bot.ts",
+  "private": true,
+  "author": "Titus Entertainment <properllerbucher@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/ms": "^0.7.30",
@@ -33,7 +35,8 @@
     "restify-cors-middleware": "^1.1.1",
     "restify-errors": "^8.0.1",
     "turndown": "^5.0.3",
-    "typeorm": "^0.2.18"
+    "typeorm": "^0.2.18",
+    "winston": "^3.2.1"
   },
   "eslintConfig": {
     "extends": "marine/node"

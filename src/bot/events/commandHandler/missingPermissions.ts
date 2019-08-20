@@ -5,7 +5,7 @@ import { Message } from 'discord.js';
 export default class MissingPermissions extends Listener {
   public client: CourseClient;
 
-  constructor() {
+  public constructor() {
     super('missingPermissions', {
       emitter: 'commandHandler',
       category: 'commandHandler',
@@ -16,15 +16,18 @@ export default class MissingPermissions extends Listener {
   public async exec(message: Message, command: Command, type: String, missing) {
     switch (type) {
       case 'client':
+        this.client.logger.info(
+          `Missing the permission: ${missing}, in guild "${message.guild.name}" id: ${message.guild.id}`
+        );
         message.util!.send(
           `It seems like I am missing the permission \`\`${missing}\`\` and because of that I can execute the command \`\`${command}\`\``
         );
         break;
       case 'user':
-        message.reply(`Sorry can't let you do that. You're missing the permission \`\`${missing}\`\`.`);
+        message.reply(
+          `Sorry can't let you use the command \`\`${command}\`\`. You're missing the permission \`\`${missing}\`\`.`
+        );
         break;
-      default:
-        console.error(`Something went wrong with the missingPermissions Listener`);
     }
   }
 }

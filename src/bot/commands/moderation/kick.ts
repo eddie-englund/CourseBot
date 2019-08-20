@@ -69,7 +69,7 @@ export default class Kick extends Command {
       )
       .setThumbnail(member.user.displayAvatarURL());
 
-    await this.client.log(message, logEmbed);
+    await this.client.guildLog(message, logEmbed);
     return message.util!.send(kickEmbed);
   }
 }

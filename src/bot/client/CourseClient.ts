@@ -1,12 +1,15 @@
 import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
+import { Logger } from 'winston';
+import { logger, TOPICS, EVENTS } from '../util/logger';
+import { Message, MessageEmbed, Channel } from 'discord.js';
 
 export class CourseClient extends AkairoClient {
   public commandHandler: CommandHandler;
   public listenerHandler: ListenerHandler;
-
-  // Db functions
+  public logger: Logger = logger;
+  // **Db functions**
   // Guild functions
   public getGuild: Function;
   public updateGuild: Function;
@@ -24,8 +27,15 @@ export class CourseClient extends AkairoClient {
   public deleteTag: Function;
   public getTagAliases: Function;
 
+  // Case functions
+
+  public newCase: Function;
+  public updateCase: Function;
+  public editCase: Function;
+  public getCase: Function;
+
   // Random util
-  public log: Function;
+  public guildLog: Function;
   public color: { main };
 
   constructor() {
@@ -42,6 +52,22 @@ export class CourseClient extends AkairoClient {
 
     // Importing colors and the db models to this.client.color and this.client.models
     this.color = require('../util/color');
+    this.guildLog = async (message: Message, embed: MessageEmbed) => {
+      let channel: Channel = message.guild.channels
+        .filter(c => c.type === 'text')
+        .find(x => x.name === 'modlogs');
+
+      const data = await this.getGuild(message.guild);
+      if (!data || data.guildLog.channel === 'modlogs') {
+        channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'modlogs');
+      } else {
+        channel = message.guild.channels
+          .filter(c => c.type === 'text')
+          .find(x => x.id === data.guildLog.channel);
+      }
+      // @ts-ignore
+      return channel.send(embed);
+    };
 
     // Handlers. Declaring: Directory, Guild specifc prefixes, taking mention as a prefix ,bot blocking, block self, set default settings for arguments and allow usage of the command util
     this.commandHandler = new CommandHandler(this, {
@@ -85,6 +111,8 @@ export class CourseClient extends AkairoClient {
 
     this.commandHandler!.useListenerHandler(this.listenerHandler);
     this.listenerHandler.loadAll();
+    this.logger.info('Listener handler loaded', { topic: TOPICS.DISCORD_AKAIRO, event: EVENTS.INIT });
     this.commandHandler.loadAll();
+    this.logger.info('Command Handler Loaded', { topic: TOPICS.DISCORD_AKAIRO, event: EVENTS.INIT });
   }
 }

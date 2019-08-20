@@ -60,7 +60,7 @@ export default class Warn extends Command {
         },
       };
       await this.client.createProfile(newUser);
-      await this.client.log(message, warnEmbed);
+      await this.client.guildLog(message, warnEmbed);
       return message.util!.send(warnEmbed);
     } else {
       await this.client.updateProfile(member.user, {
@@ -97,7 +97,7 @@ export default class Warn extends Command {
                 `Failed to ban user: ${member.user.tag} (${member.id}). Error: ${error.message}`
               )
               .setTimestamp(Date.now());
-            this.client.log(message, failed);
+            this.client.guildLog(message, failed);
           }
           const bannedEmbed: MessageEmbed = this.client.util
             .embed()
@@ -111,10 +111,10 @@ export default class Warn extends Command {
             `
             )
             .setTimestamp(Date.now());
-          await this.client.log(message, bannedEmbed);
+          await this.client.guildLog(message, bannedEmbed);
           break;
         default:
-          await this.client.log(message, warnEmbed);
+          await this.client.guildLog(message, warnEmbed);
           return message.util!.send(warnEmbed);
       }
     }
