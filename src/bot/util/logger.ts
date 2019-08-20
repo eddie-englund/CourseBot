@@ -1,4 +1,4 @@
-import { createLogger, transports, format } from 'winston';
+import { createLogger, transports, format, addColors } from 'winston';
 
 export enum TOPICS {
   UNHANDELED_REJECTION = 'UNHANDELED_REJECTION',
@@ -28,11 +28,19 @@ export enum EVENTS {
   MESSAGE_BLOCKED = 'MESSAGE_BLOCKED',
 }
 
+const colors = {
+  error: 'red',
+  warn: 'yellow',
+  info: 'green',
+};
+addColors(colors);
 export const logger = createLogger({
   format: format.combine(
+    format.splat(),
+    format.timestamp({ format: 'YYYY/MM/DD HH:mm:ss' }),
+    format.prettyPrint(),
     format.errors({ stack: true }),
     format.label({ label: 'BOT' }),
-    format.timestamp({ format: 'YYYY/MM/DD HH:mm:ss' }),
     format.printf(
       (info: any): string => {
         const { timestamp, label, level, message, topic, event, ...rest } = info;
@@ -44,9 +52,10 @@ export const logger = createLogger({
   ),
   transports: [
     new transports.Console({
-      format: format.colorize({ level: true }),
+      format: format.combine(format.align()),
       level: 'info',
     }),
-    new transports.File({ filename: 'error.log', level: 'error' }),
+    new transports.File({ filename: 'error.json', level: 'error', dirname: 'logs', format: format.json() }),
+    new transports.File({ filename: 'warn.json', level: 'warn', dirname: 'logs', format: format.json() }),
   ],
 });

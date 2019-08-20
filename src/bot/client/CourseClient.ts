@@ -1,14 +1,15 @@
-import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
+import { AkairoClient, CommandHandler, ListenerHandler, Flag } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
 import { Logger } from 'winston';
 import { logger, TOPICS, EVENTS } from '../util/logger';
-import { Message, MessageEmbed, Channel } from 'discord.js';
+import { Message, MessageEmbed, Channel, Util } from 'discord.js';
 
 export class CourseClient extends AkairoClient {
   public commandHandler: CommandHandler;
   public listenerHandler: ListenerHandler;
   public logger: Logger = logger;
+
   // **Db functions**
   // Guild functions
   public getGuild: Function;

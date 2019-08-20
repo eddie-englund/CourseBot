@@ -14,7 +14,7 @@ export default class GuildMemberAdd extends Listener {
 
   public async exec(member: GuildMember) {
     try {
-      const newProfile: { user; userID } = {
+      const newProfile: { user: string; userID: string } = {
         user: member.user.tag,
         userID: member.user.id,
       };
