@@ -1,17 +1,18 @@
 import { CourseClient } from 'src/bot/client/CourseClient';
-import Guild from '../models/Guild';
+import { Guild } from 'discord.js';
+import guildSchema from '../../db/models/Guild';
 import * as mongoose from 'mongoose';
 
 export = (client: CourseClient) => {
   client.createGuild = async (settings: {}) => {
     const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, settings);
 
-    const newGuild = await new Guild(merged);
+    const newGuild = await new guildSchema(merged);
     return newGuild.save();
   };
 
-  client.getGuild = async guild => {
-    const res = await Guild.findOne({ guildID: guild.id });
+  client.getGuild = async (guild: Guild) => {
+    const res = await guildSchema.findOne({ guildID: guild.id });
     if (!res) return;
     else return res;
   };

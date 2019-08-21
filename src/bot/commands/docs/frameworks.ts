@@ -26,9 +26,8 @@ export default class Frameworks extends Command {
         // @ts-ignore
         const prefix = this.handler.prefix(msg);
         return stripIndents`
-					When you beg me so much I just can't not help you~
-					Check \`${prefix}help tag\` for more information.
-					Hmph, you probably wanted to use \`${prefix}tag show\` or something!
+        No can do!
+        use ${prefix}help docs to get more info
 				`;
       },
     };
