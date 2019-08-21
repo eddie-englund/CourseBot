@@ -10,7 +10,7 @@ export default class Tag extends Command {
       aliases: ['tag'],
       category: 'tags',
       channel: 'guild',
-      userPermissions: ['MANAGE_MESSAGES'],
+      clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
       ratelimit: 2,
       description: {
         content: 'Adds a tag.',

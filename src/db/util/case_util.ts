@@ -6,7 +6,7 @@ import { Message, User } from 'discord.js';
 export = (client: CourseClient) => {
   client.newCase = async (message: Message, type: string, offender: User, reason: string) => {
     let caseID: number;
-    const cases = await this.client.getGuild(message.guild);
+    const cases = await client.getGuild(message.guild);
     if (!cases) caseID = 1;
     else caseID = cases.cases + 1;
     const newcase: {} = {

@@ -47,7 +47,7 @@ export const logger = createLogger({
       format: format.combine(format.align()),
       level: 'info',
     }),
-    new transports.File({ filename: 'error.json', level: 'error', dirname: 'logs', format: format.json() }),
-    new transports.File({ filename: 'warn.json', level: 'warn', dirname: 'logs', format: format.json() }),
+    new transports.File({ filename: 'error.log', level: 'error', dirname: 'logs' }),
+    new transports.File({ filename: 'warn.log', level: 'warn', dirname: 'logs' }),
   ],
 });

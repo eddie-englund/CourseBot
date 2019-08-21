@@ -11,6 +11,11 @@ export default class CaseEdit extends Command {
       aliases: ['case', 'editcase'],
       userPermissions: ['MANAGE_MESSAGES'],
       clientPermissions: ['SEND_MESSAGES'],
+      category: 'moderation',
+      description: {
+        content: 'edits a case',
+        usage: '<case> <new reason>',
+      },
       args: [
         {
           id: 'case',

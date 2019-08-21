@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
+import { timingSafeEqual } from 'crypto';
 
 export default class TagEdit extends Command {
   public client: CourseClient;
@@ -10,6 +11,7 @@ export default class TagEdit extends Command {
       category: 'tags',
       ratelimit: 2,
       channel: 'guild',
+      userPermissions: ['MANAGE_CHANNELS'],
       description: {
         content: 'Edits a tag.',
         usage: '<tagname> <tag content>',

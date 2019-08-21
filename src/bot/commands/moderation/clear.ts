@@ -8,7 +8,6 @@ export default class Clear extends Command {
   public constructor() {
     super('clear', {
       aliases: ['clear', 'prune'],
-      clientPermissions: ['MANAGE_MESSAGES'],
       userPermissions: ['MANAGE_MESSAGES'],
       category: 'moderation',
       description: {
@@ -19,14 +18,7 @@ export default class Clear extends Command {
       args: [
         {
           id: 'amount',
-          type: (msg: Message) => {
-            if (!msg) return null;
-            // @ts-ignore
-            const num = parseInt(msg);
-            if (isNaN(num)) return null;
-            if (num < 1 || num > 100) return null;
-            return num;
-          },
+          type: 'number',
           prompt: {
             optional: false,
             start: (message: Message): string =>
