@@ -60,7 +60,7 @@ export default class Ban extends Command {
       .addField('**Banned by id:**', message.author.id, true)
       .setTimestamp(Date.now());
 
-    await this.client.newCase(message, 'ban', member, reason);
+    await this.client.newCase(message, 'ban', member.user, reason);
     try {
       await member.ban({ days: 2, reason: reason });
 

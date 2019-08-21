@@ -1,4 +1,4 @@
-import { createLogger, transports, format, addColors } from 'winston';
+import { createLogger, transports, format } from 'winston';
 
 export enum TOPICS {
   UNHANDELED_REJECTION = 'UNHANDELED_REJECTION',
@@ -16,8 +16,6 @@ export enum EVENTS {
   WARN = 'WARN',
   GUILD = 'DB INSTANCE CREATED FOR GUILD',
   READY = 'READY',
-  IDENTIFY = 'IDENTIFY',
-  DESTROY = 'DESTROY',
   CONNECT = 'CONNECT',
   DISCONNECT = 'DISCONNECT',
   COMMAND_ERROR = 'COMMAND_ERROR',
@@ -28,12 +26,6 @@ export enum EVENTS {
   MESSAGE_BLOCKED = 'MESSAGE_BLOCKED',
 }
 
-const colors = {
-  error: 'red',
-  warn: 'yellow',
-  info: 'green',
-};
-addColors(colors);
 export const logger = createLogger({
   format: format.combine(
     format.splat(),

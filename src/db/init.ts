@@ -16,7 +16,7 @@ export const init = () => {
   mongoose.Promise = global.Promise;
 
   mongoose.connection.on('connected', () => {
-    logger.info('Client has connected to database', { topic: TOPICS.DATABASE, event: EVENTS.INIT });
+    logger.info('Client has connected to database', { topic: TOPICS.DATABASE, event: EVENTS.CONNECT });
   });
 
   mongoose.connection.on('err', err => {

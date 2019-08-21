@@ -61,6 +61,7 @@ export default class Warn extends Command {
       };
       await this.client.createProfile(newUser);
       await this.client.guildLog(message, warnEmbed);
+      await this.client.newCase(message, 'warn', member.user, reason);
       return message.util!.send(warnEmbed);
     } else {
       await this.client.updateProfile(member.user, {

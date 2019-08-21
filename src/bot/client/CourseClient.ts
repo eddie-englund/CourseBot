@@ -3,7 +3,7 @@ import { join } from 'path';
 import Guild from '../../db/models/Guild';
 import { Logger } from 'winston';
 import { logger, TOPICS, EVENTS } from '../util/logger';
-import { Message, MessageEmbed, Channel, Util } from 'discord.js';
+import { Message, MessageEmbed, Channel, ShardingManager } from 'discord.js';
 
 export class CourseClient extends AkairoClient {
   public commandHandler: CommandHandler;

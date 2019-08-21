@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
+import { TOPICS, EVENTS } from '../../util/logger';
 
 export default class CaseEdit extends Command {
   public client: CourseClient;
@@ -37,5 +38,11 @@ export default class CaseEdit extends Command {
   public async exec(message: Message, args) {
     const data = await this.client.getCase(args.case);
     if (!data) return message.util.reply(`There is no case with the id **${args.case}**`);
+    try {
+      await this.client.updateCase(args.case, { reason: args.reason });
+    } catch (error) {
+      this.client.logger.error(error, { topic: TOPICS.DATABASE, event: EVENTS.ERROR });
+    }
+    return message.util!.send(`Updated case **${args.case}**`);
   }
 }

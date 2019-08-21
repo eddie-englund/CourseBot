@@ -2,6 +2,7 @@ import Tag from '../models/Tag';
 import * as mongoose from 'mongoose';
 import { CourseClient } from '../../bot/client/CourseClient';
 import { User, Guild } from 'discord.js';
+import { link } from 'fs';
 
 export = (client: CourseClient) => {
   client.getTag = async (id: string, guild: Guild) => {

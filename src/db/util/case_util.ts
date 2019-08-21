@@ -1,10 +1,10 @@
 import { CourseClient } from 'src/bot/client/CourseClient';
 import Case from '../models/Case';
 import * as mongoose from 'mongoose';
-import { Message, GuildMember } from 'discord.js';
+import { Message, User } from 'discord.js';
 
 export = (client: CourseClient) => {
-  client.newCase = async (message: Message, type: string, offender: GuildMember, reason: string) => {
+  client.newCase = async (message: Message, type: string, offender: User, reason: string) => {
     let caseID: number;
     const cases = await this.client.getGuild(message.guild);
     if (!cases) caseID = 1;
@@ -19,7 +19,7 @@ export = (client: CourseClient) => {
       },
       offender: {
         id: offender.id,
-        name: offender.user.tag,
+        name: offender.tag,
       },
       timestamp: Date.now(),
     };
