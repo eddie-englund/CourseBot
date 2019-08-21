@@ -21,7 +21,7 @@ export default class Frameworks extends Command {
 
   public *args(): object {
     const method = yield {
-      type: [['djs-docs', 'djs'], ['akairo-docs', 'akairo']],
+      type: [['djs-docs', 'djs'], ['akairo-docs', 'akairo'], ['mdn'], ['npm']],
       otherwise: (msg: Message): string => {
         // @ts-ignore
         const prefix = this.handler.prefix(msg);
