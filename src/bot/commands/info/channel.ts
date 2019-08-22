@@ -10,7 +10,7 @@ export default class YoutubeChannel extends Command {
   public client: CourseClient;
   constructor() {
     super('yt', {
-      aliases: ['gary', 'channel'],
+      aliases: ['channel', 'youtube', 'subs'],
       clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
       userPermissions: ['SEND_MESSAGES'],
       ratelimit: 2,

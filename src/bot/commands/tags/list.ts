@@ -5,7 +5,6 @@ import tag from '../../../db/models/Tag';
 
 export default class TagList extends Command {
   public client: CourseClient;
-
   public constructor() {
     super('tag-list', {
       aliases: ['tags'],
@@ -19,6 +18,7 @@ export default class TagList extends Command {
   }
 
   public async exec(message: Message) {
+    console.log(this.aliases);
     const data = await tag.find({ guildID: message.guild.id });
     if (!data) return message.reply(`It seems like I don't have any tags saved for this guild!`);
     if (data.length < 1 || data === undefined)

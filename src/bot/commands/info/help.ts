@@ -30,6 +30,7 @@ export default class HelpCommand extends Command {
     if (!command) {
       const embed = this.client.util
         .embed()
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setColor(this.client.color.main)
         .setDescription(
           stripIndents`❯ Commands
@@ -51,6 +52,7 @@ export default class HelpCommand extends Command {
 
     const embed = this.client.util
       .embed()
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setColor(this.client.color.main)
       .setTitle(`\`${command.aliases[0]} ${command.description.usage ? command.description.usage : ''}\``)
       .addField('❯ Description', command.description.content || '\u200b');
