@@ -4,6 +4,7 @@ import Guild from '../../db/models/Guild';
 import { Logger } from 'winston';
 import { logger, TOPICS, EVENTS } from '../util/logger';
 import { Message, MessageEmbed, Channel, ShardingManager } from 'discord.js';
+import { redis } from 'googleapis/build/src/apis/redis';
 
 export class CourseClient extends AkairoClient {
   public commandHandler: CommandHandler;
@@ -37,7 +38,7 @@ export class CourseClient extends AkairoClient {
 
   // Random util
   public guildLog: Function;
-  public color: { main };
+  public color: { main: string; red: string; ban: string; kick: string };
 
   constructor() {
     super(

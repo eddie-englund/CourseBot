@@ -1,7 +1,8 @@
 import { CourseClient } from 'src/bot/client/CourseClient';
 import Case from '../models/Case';
 import * as mongoose from 'mongoose';
-import { Message, User } from 'discord.js';
+import { Message, User, MessageEmbed } from 'discord.js';
+import { stripIndents } from 'common-tags';
 
 export = (client: CourseClient) => {
   client.newCase = async (message: Message, type: string, offender: User, reason: string) => {
@@ -25,6 +26,30 @@ export = (client: CourseClient) => {
     };
     const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, newcase);
     const newCase = await new Case(merged);
+
+    const caseEmbed: MessageEmbed = client.util
+      .embed()
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setDescription(
+        stripIndents`New case: ${type}
+        offender: ${offender.tag} (${offender.id})
+        moderator: ${message.author.tag} (${message.author.id})
+        reason: ${reason}
+      `
+      )
+      .setTimestamp(Date.now());
+
+    switch (type) {
+      case 'ban':
+        caseEmbed.setColor(client.color.ban);
+        break;
+      case 'kick':
+        caseEmbed.setColor(client.color.kick);
+      default:
+        caseEmbed.setColor(client.color.main);
+    }
+
+    await client.guildLog(message, caseEmbed);
     return newCase.save();
   };
 
