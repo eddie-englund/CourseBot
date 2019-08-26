@@ -1,36 +1,30 @@
 import { config } from './config';
-import { init } from '../db/init';
-import * as restify from 'restify';
-import * as mongoose from 'mongoose';
-import corsMiddleware = require('restify-cors-middleware');
+import * as db from '../db/init';
+import express, { Application } from 'express';
+import helmet from 'helmet';
+import { logger, TOPICS, EVENTS } from '../bot/util/logger';
+import cors from 'cors';
+import graphqlHTTP from 'express-graphql';
+import schema from './graphql/schema';
 
-// Routes
+require('dotenv').config();
 
-import userRoute = require('./routes/user');
-import guildRoute = require('./routes/guild');
+const app: Application = express();
+app.use(helmet());
+app.use(cors());
 
-export const server = restify.createServer();
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
-// Middleware
-
-const cors = corsMiddleware({
-  preflightMaxAge: 5, //Optional
-  origins: ['http://localhost:3001'],
-});
-
-server.pre(cors.preflight);
-server.use(cors.actual);
-
-server.use(restify.plugins.bodyParser());
-
-server.listen(config.PORT, () => {
-  init();
-});
-
-const db: mongoose.connection = mongoose.connection;
-
-db.once('open', () => {
-  guildRoute(server);
-  userRoute(server);
-  console.log(`Server started on port ${config.PORT}`);
+db.init();
+app.listen(config.PORT, () => {
+  logger.info(`Server is now running on port: ${config.PORT}`, {
+    topic: TOPICS.EXPRESS,
+    event: EVENTS.READY,
+  });
 });

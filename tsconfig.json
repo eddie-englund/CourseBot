@@ -7,6 +7,7 @@
     "lib": ["es7"],
     "moduleResolution": "node",
     "baseUrl": ".",
+    "esModuleInterop": true,
     "sourceMap": false,
     "removeComments": false,
     "experimentalDecorators": true,

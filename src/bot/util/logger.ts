@@ -7,6 +7,7 @@ export enum TOPICS {
   RPC = 'RPC',
   METRICS = 'METRICS',
   DATABASE = 'DATABASE',
+  EXPRESS = 'EXPRESS'
 }
 
 export enum EVENTS {
