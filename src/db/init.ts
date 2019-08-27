@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import { logger, TOPICS, EVENTS } from '../bot/util/logger';
 
 export const init = () => {
