@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import { logger, TOPICS, EVENTS } from '../bot/util/logger';
 
 export const init = () => {
-  const dbOptions = {
+  mongoose.connect('mongodb://localhost:27017/Course', {
     useNewUrlParser: true,
     autoIndex: true,
     reconnectTries: Number.MAX_VALUE,
@@ -10,8 +10,7 @@ export const init = () => {
     poolSize: 5,
     connectTimeoutMS: 10000,
     family: 4,
-  };
-  mongoose.connect('mongodb://localhost:27017/Course', dbOptions);
+  });
   mongoose.set('useFindAndModify', false);
   mongoose.Promise = global.Promise;
 

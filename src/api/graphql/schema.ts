@@ -7,18 +7,8 @@ import {
   GraphQLList,
   GraphQLNonNull,
 } from 'graphql';
-import _ from 'lodash';
 import TagModel from '../../db/models/Tag';
-
-const TagType: GraphQLObjectType = new GraphQLObjectType({
-  name: 'Tag',
-  fields: () => ({
-    id: { type: GraphQLID },
-    guildID: { type: GraphQLID },
-    userID: { type: GraphQLID },
-    tag: { type: GraphQLString },
-  }),
-});
+import { TagType } from './types';
 
 const RootQuery: GraphQLObjectType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -30,9 +20,39 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
         return TagModel.findOne({ id: args.id });
       },
     },
+    tags: {
+      type: new GraphQLList(TagType),
+      resolve(parent, args: { guildID }) {
+        return TagModel.find({ guildID: args.guildID });
+      },
+    },
+  },
+});
+
+const Mutation: GraphQLObjectType = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    editTag: {
+      type: TagType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        userID: { type: GraphQLID },
+        guildID: { type: new GraphQLNonNull(GraphQLID) },
+        tag: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        return TagModel.findOneAndUpdate({
+          id: args.id,
+          userID: args.userID,
+          guildID: args.guildID,
+          tag: args.tag,
+        });
+      },
+    },
   },
 });
 
 export default new GraphQLSchema({
   query: RootQuery,
+  mutation: Mutation,
 });
