@@ -16,7 +16,7 @@
 </a>
 </div>
 
-Course is the inhouse Discord bot developed specificly for the needs that we as moderators have found while moderating our Discord server called DesignCourse(courestro)
+Course is the inhouse Discord bot developed specifically for the needs that we as moderators have found while moderating our Discord server called DesignCourse(courestro)
 
 ## Self hosting
 
@@ -82,13 +82,9 @@ or if you use yarn
 
 **FINAL STEP**
 
-run the command:
+start the bot
 
-        cd dist/bot/
-
-and then run
-
-        pm2 bot.js
+        pm2 dist/bot/bot.js
 
 if the bot does not start now make sure to double check all the previous steps.
 
@@ -101,12 +97,6 @@ if the bot does not start now make sure to double check all the previous steps.
 **Mdn:** with this command you can quickly search mdn for anything!
 
 **Npm:** allows you to search for npm pacakges!
-
-### Economy
-
-**Daily:** quite explanitory but it gives a user x amount of credits and can only be used once a day by the same user.
-
-**Pay:** allows user x to pay user y a specified amount of credits
 
 ### Info
 
@@ -128,9 +118,11 @@ if the bot does not start now make sure to double check all the previous steps.
 
 **Warn:** warns a specified user and allows moderator to specify a reason.
 
-### SettingsRuna
+### Settings
 
-**Init:** creates a database instance for that guild. `note that this command is just a fail safe in case something went wrong in the process`.
+`Note that all of these commands must be prefixed with setting. example: <prefix>setting <command> <argument>`
+
+**Init:** creates a database instance for that guild. `note that this command is just a failsafe in case something went wrong in the process`.
 
 **log:** allows user to either start or stop logging. `note that logging is by default turned off`
 
