@@ -15,7 +15,7 @@ export default class InitGuild extends Command {
     });
   }
 
-  public async exec(message: Message, { clean }: { clean: string }) {
+  public async exec(message: Message) {
     const data = await this.client.getGuild(message.guild);
     const guild: Schema = {
       guildID: message.guild.id,

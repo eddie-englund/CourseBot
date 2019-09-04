@@ -1,10 +1,10 @@
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Guild } from 'discord.js';
 import guildSchema from '../../db/models/Guild';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 export = (client: CourseClient) => {
-  client.createGuild = async (settings: {}) => {
+  client.createGuild = async settings => {
     const merged = Object.assign({ _id: mongoose.Types.ObjectId() }, settings);
 
     const newGuild = await new guildSchema(merged);

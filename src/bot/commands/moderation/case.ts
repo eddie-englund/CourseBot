@@ -20,8 +20,6 @@ export default class CaseEdit extends Command {
         {
           id: 'case',
           type: 'integer',
-          match: 'option',
-          flag: ['--ref', '-r='],
           prompt: {
             start: (message: Message): string => `${message.author}, which case would you like to update?`,
             retry: (message: Message): string => `${message.author}, please provide a valid case number`,

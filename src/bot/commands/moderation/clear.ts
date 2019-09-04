@@ -24,9 +24,7 @@ export default class Clear extends Command {
             start: (message: Message): string =>
               `${message.author}, how many messages would you like to clear?`,
             retry: (message: Message): string =>
-              `${
-                message.author
-              }, ehm.. You know what a number is right? Oh, and you can only clear 1-100 messages`,
+              `${message.author}, ehm.. You know what a number is right? Oh, and you can only clear 1-100 messages`,
           },
         },
       ],
@@ -35,8 +33,8 @@ export default class Clear extends Command {
 
   public async exec(message: Message, { amount }: { amount: number }) {
     if (amount > 100) return message.util!.reply('You can only clear a maximum of 100 messages!');
-    await message.delete();
     try {
+      await message.delete();
       await message.channel.bulkDelete(amount);
     } catch (error) {
       message.util!.reply('You can only clear a maximum of 100 messages!');

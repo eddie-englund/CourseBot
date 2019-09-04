@@ -1,5 +1,5 @@
 import Tag from '../models/Tag';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import { CourseClient } from '../../bot/client/CourseClient';
 import { User, Guild } from 'discord.js';
 

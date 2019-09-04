@@ -1,6 +1,6 @@
 import { CourseClient } from 'src/bot/client/CourseClient';
 import Case from '../models/Case';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import { Message, User, MessageEmbed } from 'discord.js';
 import { stripIndents } from 'common-tags';
 

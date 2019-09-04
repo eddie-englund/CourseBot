@@ -1,6 +1,6 @@
 import { CourseClient } from 'src/bot/client/CourseClient';
 import Profile from '../models/Profile';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 export = (client: CourseClient) => {
   client.getProfile = async user => {
