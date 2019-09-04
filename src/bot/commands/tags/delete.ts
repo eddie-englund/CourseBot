@@ -21,8 +21,7 @@ export default class TagDelete extends Command {
       args: [
         {
           id: 'tagName',
-          match: 'content',
-          type: 'tag',
+          type: 'lowercase',
           prompt: {
             start: (message: Message): string => `${message.author}, what tag would you like to delete?`,
             retry: (message: Message): string => `${message.author}, please provide a valid tag.`,
@@ -33,7 +32,7 @@ export default class TagDelete extends Command {
   }
 
   public async exec(message: Message, { tagName }: { tagName: string }) {
-    const tagData = await this.client.getTag(tagName);
+    const tagData = await this.client.getTag(tagName, message.guild);
     if (!tagData)
       message.util!.reply(
         `There is no tag called ${tagName}, so why are you trying to delete a tag that dosn't exist in the first place?`
@@ -41,7 +40,7 @@ export default class TagDelete extends Command {
     if (tagData.userID !== message.author.id)
       return message.util!.reply(`You're not the creator of this command, thereby you cannot delete it.`);
     try {
-      await this.client.deleteTag(tagName, message.author);
+      await this.client.deleteTag(tagName, message.author, message.guild);
     } catch (error) {
       this.client.logger.error(`Failed to delete tag ${tagName} Error: ${error}`, {
         topic: TOPICS.DATABASE,

@@ -19,7 +19,7 @@ export default class TagAdd extends Command {
       args: [
         {
           id: 'tagName',
-          type: 'existingTag',
+          type: 'lowercase',
           prompt: {
             start: (message: Message) => `${message.author}, what do you want to name the tag?`,
             retry: (message: Message) => `${message.author}, please try again.`,
@@ -28,7 +28,7 @@ export default class TagAdd extends Command {
         {
           id: 'tagContent',
           match: 'rest',
-          type: 'tagContent',
+          type: 'lowercase',
           prompt: {
             start: (message: Message) => `${message.author}, what would you like the tag to say?`,
           },

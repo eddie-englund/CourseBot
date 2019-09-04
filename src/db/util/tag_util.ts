@@ -28,9 +28,9 @@ export = (client: CourseClient) => {
     return await data.updateOne(settings);
   };
 
-  client.deleteTag = async (id: string, user: User) => {
-    const data = await client.getTag(id, user);
+  client.deleteTag = async (id: string, user: User, guild: Guild) => {
+    const data = await Tag.findOne({ id: id, userID: user.id, guildID: guild.id });
     if (!data) throw new Error(`There is no tag called ${id} in the database`);
-    return Tag.deleteOne({ id: id, userID: user.id });
+    return Tag.deleteOne({ id: id, userID: user.id, guildID: guild.id });
   };
 };
