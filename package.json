@@ -50,6 +50,6 @@
     "ts-compile": "tsc -p tsconfig.json --watch",
     "compile": "tsc -p tsconfig.json",
     "api": "nodemon dist/api/app.js",
-    "bot": "nodemon dist/bot/bot.js"
+    "bot": "tsc -p tsconfig.json && nodemon dist/bot/bot.js"
   }
 }
