@@ -25,12 +25,12 @@ export default class Ready extends Listener {
         return this.client
           .createGuild(newGuild)
           .then(g =>
-            console.log(`Created db instance at ready event for guild: ${g.guild}, id: ${g.guildID}`)
+            this.client.logger.info(`Created db instance at ready event for guild: ${g.guild}, id: ${g.guildID}`)
           );
       }
     });
 
-    this.client.user.setActivity('you', { type: 'WATCHING' });
+    this.client.user.setActivity(`Watching ${this.client.guilds.size} guilds!`, { type: 'WATCHING' });
     return this.client.logger.info(`Client connected to the discord API`, {
       topic: TOPICS.DISCORD,
       event: EVENTS.READY,
