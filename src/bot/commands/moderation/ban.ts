@@ -6,7 +6,7 @@ import Case from '../../../db/models/Case';
 export default class Ban extends Command {
   public client: CourseClient;
 
-  constructor() {
+  public constructor() {
     super('ban', {
       aliases: ['ban', 'hammer'],
       userPermissions: ['BAN_MEMBERS'],
@@ -38,8 +38,7 @@ export default class Ban extends Command {
   }
 
   public async exec(message: Message, { member, reason }: { member: GuildMember; reason: string }) {
-    if (member.id === message.author!.id)
-      return message.util!.send('Why in gods name would you even try to ban yourself?!');
+    if (member.id === message.author!.id) return message.util!.send('Why in gods name would you even try to ban yourself?!');
 
     const channelEmbed = this.client.util
       .embed()
