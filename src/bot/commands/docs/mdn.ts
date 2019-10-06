@@ -3,11 +3,6 @@ import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as qs from 'querystring';
 import { CourseClient } from 'src/bot/client/CourseClient';
-import Turndown = require('turndown'); // eslint-disable-line
-
-/**
- * I was to lazy to make this commands credits to Icrawl and his bot Yukikaze https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/mdn.ts
- */
 
 export default class MDNCommand extends Command {
   public client: CourseClient;
@@ -41,27 +36,18 @@ export default class MDNCommand extends Command {
   ): Promise<Message | Message[]> {
     if (!query && match) query = match[1];
     const queryString = qs.stringify({ q: query });
-    const res = await fetch(`https://mdn.pleb.xyz/search?${queryString}`);
+    const res = await fetch(`https://developer.mozilla.org/en-US/search.json?locale=en-US&q=${queryString}`);
     const body = await res.json();
-    if (!body.URL || !body.Title || !body.Summary) {
+    if (body.documents.length === 0) {
       return message.util!.reply("Couldn't find the requested information.");
     }
-    const turndown = new Turndown();
-    turndown.addRule('hyperlink', {
-      filter: 'a',
-      replacement: (text: string, node: { href: string }): string =>
-        `[${text}](https://developer.mozilla.org${node.href})`,
-    });
-    const summary = body.Summary.replace(
-      /<code><strong>(.+)<\/strong><\/code>/g,
-      '<strong><code>$1</code></strong>'
-    );
+
     const embed = new MessageEmbed()
       .setColor(this.client.color.main)
-      .setAuthor('MDN', 'https://i.imgur.com/DFGXabG.png', 'https://developer.mozilla.org/')
-      .setURL(`https://developer.mozilla.org${body.URL}`)
-      .setTitle(body.Title)
-      .setDescription(turndown.turndown(summary));
+      .setAuthor('MDN', 'https://developer.mozilla.org/static/img/favicon32.7f3da72dcea1.png', 'https://developer.mozilla.org/')
+      .setURL(body.documents[0].url)
+      .setTitle(body.documents[0].title)
+      .setDescription(body.documents[0].excerpt.replace(/\<mark\>|\<\/mark\>/g, "**"));
 
     return message.util!.send(embed);
   }

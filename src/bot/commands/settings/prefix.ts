@@ -36,7 +36,7 @@ export default class Prefix extends Command {
   public async exec(message, { newPrefix }) {
     try {
       await this.client.updateGuild(message.guild, { prefix: newPrefix });
-      return message.reply(`Prefix has no been set to: ${newPrefix}`);
+      return message.reply(`Prefix has now been set to: ${newPrefix}`);
     } catch (error) {
       console.error(error);
       return message.reply('Seems like something went wrong. Try again!');
