@@ -1,6 +1,17 @@
 import { Schema, model } from 'mongoose';
 import timestamp = require('mongoose-timestamp');
 
+export interface IGuild {
+  guild: string;
+  guildID: string;
+  cases?: number;
+  prefix?: number;
+  guildLog?: {
+    active?: boolean;
+    channel?: string;
+  };
+}
+
 const GuildSchema: Schema = new Schema({
   guild: String,
   guildID: String,

@@ -1,15 +1,13 @@
 import { AkairoClient, CommandHandler, ListenerHandler, Flag } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
-import { Logger } from 'winston';
-import { logger, TOPICS, EVENTS } from '../util/logger';
+import { Logger } from '@ayana/logger';
 import { Message, MessageEmbed, Channel, ShardingManager } from 'discord.js';
-import { redis } from 'googleapis/build/src/apis/redis';
 
 export class CourseClient extends AkairoClient {
   public commandHandler: CommandHandler;
   public listenerHandler: ListenerHandler;
-  public logger: Logger = logger;
+  public logger: Logger = Logger.get('Client');
 
   // **Db functions**
   // Guild functions
@@ -55,17 +53,13 @@ export class CourseClient extends AkairoClient {
     // Importing colors and the db models to this.client.color and this.client.models
     this.color = require('../util/color');
     this.guildLog = async (message: Message, embed: MessageEmbed) => {
-      let channel: Channel = message.guild.channels
-        .filter(c => c.type === 'text')
-        .find(x => x.name === 'modlogs');
+      let channel: Channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'modlogs');
 
       const data = await this.getGuild(message.guild);
       if (!data || data.guildLog.channel === 'modlogs') {
         channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'modlogs');
       } else {
-        channel = message.guild.channels
-          .filter(c => c.type === 'text')
-          .find(x => x.id === data.guildLog.channel);
+        channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.id === data.guildLog.channel);
       }
       // @ts-ignore
       return channel.send(embed);
@@ -113,8 +107,8 @@ export class CourseClient extends AkairoClient {
 
     this.commandHandler!.useListenerHandler(this.listenerHandler);
     this.listenerHandler.loadAll();
-    this.logger.info('Listener handler loaded', { topic: TOPICS.DISCORD_AKAIRO, event: EVENTS.INIT });
+    this.logger.info('Listener handler loaded');
     this.commandHandler.loadAll();
-    this.logger.info('Command Handler Loaded', { topic: TOPICS.DISCORD_AKAIRO, event: EVENTS.INIT });
+    this.logger.info('Command Handler Loaded');
   }
 }

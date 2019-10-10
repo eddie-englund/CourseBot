@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
-import { TOPICS, EVENTS } from '../../util/logger';
+
 
 export default class CaseEdit extends Command {
   public client: CourseClient;
@@ -44,7 +44,7 @@ export default class CaseEdit extends Command {
     try {
       await this.client.updateCase(args.case, { reason: args.reason });
     } catch (error) {
-      this.client.logger.error(error, { topic: TOPICS.DATABASE, event: EVENTS.ERROR });
+      this.client.logger.error(error);
     }
     return message.util!.send(`Updated case **${args.case}**`);
   }

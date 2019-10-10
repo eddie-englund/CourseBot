@@ -1,7 +1,6 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
-import { timingSafeEqual } from 'crypto';
 
 export default class TagEdit extends Command {
   public client: CourseClient;
@@ -32,24 +31,18 @@ export default class TagEdit extends Command {
           match: 'rest',
           prompt: {
             start: (message: Message): string => `${message.author}, what do you want the tag to say?`,
-            retry: (message: Message): string =>
-              `${message.author}, please provide the new content for the tag!`,
+            retry: (message: Message): string => `${message.author}, please provide the new content for the tag!`,
           },
         },
       ],
     });
   }
 
-  public async exec(
-    message: Message,
-    { tagName, newTagContent }: { tagName: string; newTagContent: string }
-  ) {
+  public async exec(message: Message, { tagName, newTagContent }: { tagName: string; newTagContent: string }) {
     const tagData = await this.client.getTag(tagName, message.guild);
     if (!tagData) return message.util!.reply(`There is no tag with the name \`\`${tagName}\`\``);
     if (tagData.userID !== message.author.id)
-      return message.util!.reply(
-        `Sorry, cannot edit the tag **${tagName}** because you're not owner of this tag`
-      );
+      return message.util!.reply(`Sorry, cannot edit the tag **${tagName}** because you're not owner of this tag`);
     try {
       await this.client.updateTag(tagName, message.guild, { tag: newTagContent });
     } catch (error) {

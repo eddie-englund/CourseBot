@@ -1,10 +1,11 @@
 import { CourseClient } from './client/CourseClient';
-import { TOPICS, EVENTS } from './util/logger';
+import { Logger } from '@ayana/logger';
+const logger = Logger.get(null);
 import * as db from '../db/init';
-const dotenv = require('dotenv').config();
+import dotenv from 'dotenv';
 
 // Dotenv
-dotenv;
+dotenv.config();
 
 const client: CourseClient = new CourseClient();
 
@@ -23,8 +24,8 @@ case_util(client);
 
 client
   // @ts-ignore
-  .on('error', error => client.logger.error(error, { topic: TOPICS.DISCORD, event: EVENTS.ERROR }))
-  .on('warn', warn => client.logger.warn(warn, { topic: TOPICS.DISCORD, event: EVENTS.WARN }));
+  .on('error', error => client.logger.error(error))
+  .on('warn', warn => client.logger.warn(warn));
 
 // Initialazation
 db.init();

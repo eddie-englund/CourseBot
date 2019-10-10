@@ -1,7 +1,6 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, User, MessageEmbed } from 'discord.js';
-import { TOPICS, EVENTS } from '../../util/logger';
 
 export default class Unban extends Command {
   public client: CourseClient;
@@ -40,14 +39,13 @@ export default class Unban extends Command {
   }
 
   public async exec(message: Message, { user, reason }: { user: User; reason: string }) {
-    if (user.id === message.author!.id)
-      return message.reply('Why in gods name are you trying to unban yourself?');
+    if (user.id === message.author!.id) return message.reply('Why in gods name are you trying to unban yourself?');
 
     try {
       await message.guild!.members.unban(user, `Unbanned by ${message.author!.tag}`);
       await this.client.newCase(message, 'unban', user, reason);
     } catch (error) {
-      this.client.logger.error(error, { topic: TOPICS.DISCORD, event: EVENTS.ERROR });
+      this.client.logger.error(error);
       return message.reply(`there was an error unbanning this user: \`${error.message}\``);
     }
 
