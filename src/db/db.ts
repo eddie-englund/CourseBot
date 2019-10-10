@@ -1,6 +1,6 @@
 import { Logger } from '@ayana/logger';
 const logger = Logger.get('DB');
-import { Connection, connect, Types } from 'mongoose';
+import { Connection, connect, Types, connection } from 'mongoose';
 import { Message, User, MessageEmbed, Guild } from 'discord.js';
 import { stripIndents } from 'common-tags';
 import Case from './models/Case';
@@ -10,6 +10,7 @@ import Profile, { IProfile } from './models/Profile';
 
 /**
  * Course database handler
+ * @todo add Tags to the handler!
  * @example
  * const database = new DB({ URI: process.env.MONGO_URI, client:CourseClient});
  *
@@ -29,7 +30,7 @@ export class DB {
    * @param {class} CourseClient the CourseClient itself has to be passed in as well.
    */
 
-  private connection: Connection = Connection;
+  private connection: Connection = connection;
   private config: Config;
   private client: CourseClient;
   constructor(config: Config = {}) {
@@ -131,7 +132,7 @@ export class DB {
     else return Promise.resolve({ success: true, data: { res } });
   }
 
-  public async updateGuild(guild: Guild, settings: {}) {
+  public async UpdateGuild(guild: Guild, settings: {}) {
     let data = await GuildSchema.findOne({ guildID: guild.id });
 
     if (typeof data !== 'object') data = {};

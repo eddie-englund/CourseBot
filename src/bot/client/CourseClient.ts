@@ -1,13 +1,22 @@
-import { AkairoClient, CommandHandler, ListenerHandler, Flag } from 'discord-akairo';
+import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
 import { Logger } from '@ayana/logger';
-import { Message, MessageEmbed, Channel, ShardingManager } from 'discord.js';
+import { Message, MessageEmbed, Channel } from 'discord.js';
+import { DB } from '../../db/db';
+import { ClientHttp2Session } from 'http2';
+
+interface CourseConfig {
+  URI?: string;
+  TOKEN?: string;
+}
 
 export class CourseClient extends AkairoClient {
   public commandHandler: CommandHandler;
   public listenerHandler: ListenerHandler;
   public logger: Logger = Logger.get('Client');
+  public config: CourseConfig;
+  public db: DB;
 
   // **Db functions**
   // Guild functions
@@ -38,7 +47,7 @@ export class CourseClient extends AkairoClient {
   public guildLog: Function;
   public color: { main: string; red: string; ban: string; kick: string };
 
-  constructor() {
+  constructor(config: CourseConfig) {
     super(
       {
         ownerID: process.env.ownerID,
@@ -49,6 +58,10 @@ export class CourseClient extends AkairoClient {
         disabledEvents: ['TYPING_START'],
       }
     );
+
+    this.config = config;
+
+    this.db = new DB({ URI: this.config.URI });
 
     // Importing colors and the db models to this.client.color and this.client.models
     this.color = require('../util/color');
@@ -71,7 +84,7 @@ export class CourseClient extends AkairoClient {
       prefix: async msg => {
         const settings = await Guild.findOne({ guildID: msg.guild.id });
         if (settings) return settings.prefix;
-        else return '?';
+        else return 'c/';
       },
       blockBots: true,
       blockClient: true,
@@ -98,6 +111,9 @@ export class CourseClient extends AkairoClient {
       directory: join(__dirname, '..', 'events'),
     });
     // Allowing the handler ot use the events emitted by the commandHandler and the ListenerHandler
+  }
+
+  private async _init() {
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,
       listenerHandler: this.listenerHandler,
@@ -110,5 +126,11 @@ export class CourseClient extends AkairoClient {
     this.logger.info('Listener handler loaded');
     this.commandHandler.loadAll();
     this.logger.info('Command Handler Loaded');
+    this.db.init();
+  }
+
+  public async start(): Promise<string> {
+    await this._init();
+    return this.login(this.config.TOKEN);
   }
 }

@@ -43,14 +43,13 @@ export default class Unban extends Command {
 
     try {
       await message.guild!.members.unban(user, `Unbanned by ${message.author!.tag}`);
-      await this.client.newCase(message, 'unban', user, reason);
+      await this.client.db.NewCase(message, 'unban', user, reason);
     } catch (error) {
       this.client.logger.error(error);
       return message.reply(`there was an error unbanning this user: \`${error.message}\``);
     }
 
-    const unbanEmbed: MessageEmbed = this.client.util
-      .embed()
+    const unbanEmbed: MessageEmbed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setDescription(`User ${message.author.tag} has unbanned user ${user}. The reason was: ${reason}`)

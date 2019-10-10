@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;bot/commands/info/channel&quot; | course-bot</title>
+	<title>CourseConfig | course-bot</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,400,400i,700" rel="stylesheet">
@@ -57,55 +57,60 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_bot_commands_info_channel_.html">&quot;bot/commands/info/channel&quot;</a>
+					<a href="../modules/_bot_client_courseclient_.html">&quot;bot/client/CourseClient&quot;</a>
+				</li>
+				<li>
+					<a href="_bot_client_courseclient_.courseconfig.html">CourseConfig</a>
 				</li>
 			</ul>
-			<h1>External module &quot;bot/commands/info/channel&quot;</h1>
+			<h1>Interface CourseConfig</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">CourseConfig</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_bot_commands_info_channel_.youtubechannel.html" class="tsd-kind-icon">Youtube<wbr>Channel</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Variables</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_bot_commands_info_channel_.html#auth" class="tsd-kind-icon">auth</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_bot_commands_info_channel_.html#service" class="tsd-kind-icon">service</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_bot_client_courseclient_.courseconfig.html#token" class="tsd-kind-icon">TOKEN</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_bot_client_courseclient_.courseconfig.html#uri" class="tsd-kind-icon">URI</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="auth" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> auth</h3>
-					<div class="tsd-signature tsd-kind-icon">auth<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;process.env.YOUTUBETOKEN</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="token" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> TOKEN</h3>
+					<div class="tsd-signature tsd-kind-icon">TOKEN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/0a82d00/src/bot/commands/info/channel.ts#L6">bot/commands/info/channel.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/0a82d00/src/bot/client/CourseClient.ts#L11">bot/client/CourseClient.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="service" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> service</h3>
-					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Youtube</span><span class="tsd-signature-symbol"> =&nbsp;google.youtube(&#x27;v3&#x27;)</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="uri" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> URI</h3>
+					<div class="tsd-signature tsd-kind-icon">URI<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/0a82d00/src/bot/commands/info/channel.ts#L7">bot/commands/info/channel.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/0a82d00/src/bot/client/CourseClient.ts#L10">bot/client/CourseClient.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -118,21 +123,30 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_bot_commands_info_channel_.html">"bot/commands/info/channel"</a>
+						<a href="../modules/_bot_client_courseclient_.html">"bot/client/<wbr>Course<wbr>Client"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_bot_commands_info_channel_.youtubechannel.html" class="tsd-kind-icon">Youtube<wbr>Channel</a>
+						<a href="../classes/_bot_client_courseclient_.courseclient.html" class="tsd-kind-icon">Course<wbr>Client</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_bot_commands_info_channel_.html#auth" class="tsd-kind-icon">auth</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_bot_client_courseclient_.courseconfig.html" class="tsd-kind-icon">Course<wbr>Config</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_bot_client_courseclient_.courseconfig.html#token" class="tsd-kind-icon">TOKEN</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_bot_client_courseclient_.courseconfig.html#uri" class="tsd-kind-icon">URI</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_bot_commands_info_channel_.html#service" class="tsd-kind-icon">service</a>
-					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>

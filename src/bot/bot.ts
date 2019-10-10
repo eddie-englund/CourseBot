@@ -1,13 +1,12 @@
 import { CourseClient } from './client/CourseClient';
 import { Logger } from '@ayana/logger';
 const logger = Logger.get(null);
-import * as db from '../db/init';
 import dotenv from 'dotenv';
 
 // Dotenv
 dotenv.config();
 
-const client: CourseClient = new CourseClient();
+const client: CourseClient = new CourseClient({ URI: process.env.MONGO_CREDENTIALS, TOKEN: process.env.TOKEN });
 
 // Utility
 import guild_util = require('../db/util/guild_util');
@@ -24,9 +23,9 @@ case_util(client);
 
 client
   // @ts-ignore
-  .on('error', error => client.logger.error(error))
-  .on('warn', warn => client.logger.warn(warn));
+  .on('error', error => logger.error(error))
+  .on('warn', warn => logger.warn(warn));
 
 // Initialazation
-db.init();
-client.login(process.env.TOKEN);
+
+client.start();

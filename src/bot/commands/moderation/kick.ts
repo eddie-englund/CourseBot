@@ -42,7 +42,7 @@ export default class Kick extends Command {
 
     try {
       await member.kick(kickReason);
-      await this.client.newCase(message, 'kick', member.user, kickReason);
+      await this.client.db.NewCase(message, 'kick', member.user, kickReason);
     } catch (error) {
       this.client.logger.error(error);
       return message.util!.reply(`Failed to kick user **${member.user}**. Error message: ${error.message}`);
@@ -59,8 +59,7 @@ export default class Kick extends Command {
       )
       .setTimestamp(Date.now());
 
-    const logEmbed: MessageEmbed = this.client.util
-      .embed()
+    const logEmbed: MessageEmbed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setDescription(
         stripIndents`Kicked member: ${member.user.tag}
