@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, MessageEmbed } from 'discord.js';
-import tag from '../../../db/models/Tag';
+import Tag from '../../../db/models/Tag';
 
 export default class TagList extends Command {
   public client: CourseClient;
@@ -19,7 +19,7 @@ export default class TagList extends Command {
 
   public async exec(message: Message) {
     console.log(this.aliases);
-    const data = await tag.find({ guildID: message.guild.id });
+    const data = await Tag.find({ guildID: message.guild.id });
     if (!data) return message.reply(`It seems like I don't have any tags saved for this guild!`);
     if (data.length < 1 || data === undefined)
       return message.util.reply('There are no tags in this guild, consider creating one!');

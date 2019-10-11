@@ -38,7 +38,7 @@ export default class TagDelete extends Command {
     if (tagData.userID !== message.author.id)
       return message.util!.reply(`You're not the creator of this command, thereby you cannot delete it.`);
     try {
-      await this.client.deleteTag(tagName, message.author, message.guild);
+      await this.client.db.DeleteTag(tagName, message.author, message.guild);
     } catch (error) {
       this.client.logger.error(`Failed to delete tag ${tagName} Error: ${error}`);
       return message.util!.reply(`Something went wrong! Error: ${error.message}`);

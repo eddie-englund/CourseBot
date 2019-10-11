@@ -3,10 +3,11 @@ const logger = Logger.get('DB');
 import { Connection, connect, Types, connection } from 'mongoose';
 import { Message, User, MessageEmbed, Guild } from 'discord.js';
 import { stripIndents } from 'common-tags';
-import Case from './models/Case';
+import Case, { ICase } from './models/Case';
 import GuildSchema, { IGuild } from './models/Guild';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import Profile, { IProfile } from './models/Profile';
+import Tag, { ITag } from './models/Tag';
 
 /**
  * Course database handler
@@ -51,7 +52,12 @@ export class DB {
   }
 
   // NOTE: Add user check so that only the person who initated the case can edit it.
-  public async NewCase(message: Message, type?: string, offender?: User, reason?: string) {
+  public async NewCase(
+    message: Message,
+    type?: string,
+    offender?: User,
+    reason?: string
+  ): Promise<ICase> {
     let caseID: number;
     const cases = await GuildSchema.findOne({ guildID: message.guild.id });
     if (!cases) caseID = 1;
@@ -98,13 +104,13 @@ export class DB {
     return newCase.save();
   }
 
-  public async GetCase(caseNumber: Number) {
-    const caseData = await Case.findOne({ case: caseNumber });
-    if (!caseData) return Promise.resolve({ success: false, data: {} });
-    return Promise.resolve({ success: true, data: caseData });
+  public async GetCase(caseNumber: Number): Promise<ICase> {
+    const data = await Case.findOne({ case: caseNumber });
+    if (!data) return Promise.reject(new Error('Failed to find that case.'));
+    return Promise.resolve(data);
   }
 
-  public async UpdateCase(caseNumber: Number, settings: {}) {
+  public async UpdateCase(caseNumber: Number, settings: {}): Promise<ICase> {
     let data = await Case.findOne({ case: caseNumber });
 
     if (typeof data !== 'object') data = {};
@@ -115,7 +121,7 @@ export class DB {
     return await data.updateOne(settings);
   }
 
-  public async CreateGuild(message: Message) {
+  public async CreateGuild(message: Message): Promise<IGuild> {
     const settings: IGuild = {
       guild: message.guild.name,
       guildID: message.guild.id,
@@ -126,14 +132,16 @@ export class DB {
     return newGuild.save();
   }
 
-  public async GetGuild(guild: Guild) {
-    const res = await GuildSchema.findOne({ guildID: guild.id });
-    if (!res) return Promise.resolve({ success: false, data: {} });
-    else return Promise.resolve({ success: true, data: { res } });
+  public async GetGuild(guild: Guild): Promise<IGuild> {
+    const data = await GuildSchema.findOne({ guildID: guild.id });
+    if (!data) return Promise.reject(new Error('No guild found with that id.'));
+    return Promise.resolve(data);
   }
 
-  public async UpdateGuild(guild: Guild, settings: {}) {
+  public async UpdateGuild(guild: Guild, settings: {}): Promise<IGuild> {
     let data = await GuildSchema.findOne({ guildID: guild.id });
+
+    if (!data) return Promise.reject(new Error('No guild found with that id.'));
 
     if (typeof data !== 'object') data = {};
     for (const key in settings) {
@@ -144,7 +152,7 @@ export class DB {
     return await data.updateOne(settings);
   }
 
-  public async NewProfile(message: Message, argUser: User) {
+  public async NewProfile(message: Message, argUser: User): Promise<IProfile> {
     const user = argUser.username || message.author.username;
     const userID = argUser.id || message.author.id;
     const settings: IProfile = {
@@ -157,10 +165,46 @@ export class DB {
     return newProfile.save();
   }
 
-  public async GetProfile(user: User) {
+  public async GetProfile(user: User): Promise<Object> {
     const data = Profile.findOne({ userId: user.id });
-    if (!data) Promise.resolve({ success: false, data: {} });
-    Promise.resolve({ succsess: true, data });
+    if (!data) Promise.reject(new Error('No user found'));
+    return Promise.resolve(data);
+  }
+
+  public async NewTag(message: Message, id: string, content: string): Promise<ITag> {
+    const newTag: ITag = {
+      id: id,
+      guildID: message.guild.id,
+      userID: message.author.id,
+      tag: content,
+    };
+
+    const merged = Object.assign({ _id: Types.ObjectId(), newTag });
+    const newTagModel = await new Tag(merged);
+    return newTagModel.save();
+  }
+
+  public async GetTag(message: Message, id: string): Promise<ITag> {
+    const data = Tag.findOne({ guildId: message.guild.id, id });
+
+    if (!data) return Promise.reject(new Error('No tag found with that name.'));
+    return Promise.resolve(data);
+  }
+
+  public async UpdateTag(message: Message, id: string, settings: {}): Promise<ITag> {
+    let data = Tag.findOne({ guildID: message.guild.id, id });
+    if (!data) Promise.reject(new Error('No tag found with that name.'));
+
+    for (const key in settings) {
+      if (data[key] !== settings[key]) data[key] = settings[key];
+      else return;
+    }
+    // eslint-disable-next-line consistent-return, no-return-await
+    return await data.updateOne(settings);
+  }
+
+  public async DeleteTag(id: string, user: User, guild: Guild) {
+    const data = await Tag.findOne({ id, userID: user.id, guildID: guild.id });
   }
 
   public async init() {

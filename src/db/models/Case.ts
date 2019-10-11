@@ -1,5 +1,20 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import timestamp = require('mongoose-timestamp');
+
+export interface ICase extends Document {
+  case: number;
+  caseType: string;
+  reason?: string;
+  prossecuter: {
+    id: string;
+    name: string;
+  };
+  offender: {
+    id: string;
+    name: string;
+  };
+  timestamp: Date;
+}
 
 const CaseSchema: Schema = new Schema({
   case: Number,
@@ -16,7 +31,7 @@ const CaseSchema: Schema = new Schema({
     id: String,
     name: String,
   },
-  timestamp: String,
+  timestamp: { type: Date, default: Date.now() },
 });
 CaseSchema.plugin(timestamp);
 
