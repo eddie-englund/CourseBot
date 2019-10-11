@@ -38,13 +38,6 @@ export default class Profile extends Command {
       .addField('❯ Joined guild at:', member.joinedAt, true)
       .addField('❯ Created account at:', member.user.createdAt, true);
 
-    const Profile = await this.client.getProfile(member.user);
-    if (!Profile) return message!.util.send(userEmbed);
-    else {
-      userEmbed.addField('❯ Credits: ', Profile.wallet.credits, true);
-      userEmbed.addField('❯ Depbt: ', Profile.wallet.loan.credits, true);
-      userEmbed.addField('❯ Loans taken: ', `${Profile.wallet.loan.loans.length}`, true);
-      return message.util!.send(userEmbed);
-    }
+    return message.util!.send(userEmbed);
   }
 }

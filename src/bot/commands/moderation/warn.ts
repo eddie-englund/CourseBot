@@ -40,68 +40,47 @@ export default class Warn extends Command {
   public async exec(message: Message, { member, reason }: { member: GuildMember; reason: string }) {
     const userData = await this.client.getProfile(member.user);
 
-    const warnEmbed = this.client.util
-      .embed()
+    const warnEmbed: MessageEmbed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setDescription(`**${message.author.tag}** has warned **${member.user.tag}**. Reason: ${reason}`)
       .setTimestamp(Date.now());
     if (!userData) {
-      const newUser: { userID; user; record } = {
-        userID: member.id,
-        user: member.user.tag,
-        record: {
-          warns: {
-            user: message.author.tag,
-            userID: message.author.id,
-            reason: reason,
-            date: Date.now(),
-          },
-        },
-      };
-      await this.client.createProfile(newUser);
+      await this.client.db.NewProfile(message, member.user);
       await this.client.guildLog(message, warnEmbed);
       await this.client.newCase(message, 'warn', member.user, reason);
       return message.util!.send(warnEmbed);
     } else {
       await this.client.updateProfile(member.user, {
-        record: {
-          warns: [
-            {
-              user: message.author.tag,
-              userID: message.author.id,
-              reason: reason,
-              date: Date.now(),
-            },
-          ],
-        },
+        warns: [
+          {
+            warnedBy: message.author,
+            reason,
+            date: Date.now(),
+          },
+        ],
       });
 
-      switch (userData.record.warns.length) {
+      switch (userData.warns.length) {
         case 2:
           message.util!.send(
-            `<@${
-              member.id
-            }>, you now have two warnings. If you exceed two warnings you will be banned from this guild.`
+            `<@${member.id}>, you now have two warnings. If you exceed two warnings you will be banned from this guild.`
           );
           break;
         case 3:
           try {
-            member.ban({ days: 2, reason: reason });
+            member.ban({ days: 2, reason });
           } catch (error) {
-            console.error(error);
-            const failed: MessageEmbed = this.client.util
-              .embed()
+            this.client.logger.error(error);
+            const failed: MessageEmbed = new MessageEmbed()
               .setColor('#ff0008')
               .setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
-              .setDescription(
-                `Failed to ban user: ${member.user.tag} (${member.id}). Error: ${error.message}`
-              )
+              .setDescription(`Failed to ban user: ${member.user.tag} (${member.id}). Error: ${error.message}`)
               .setTimestamp(Date.now());
             this.client.guildLog(message, failed);
+            return message.util!.reply(`Something went wrong! Please try again! \n error message: ${error.message}`);
           }
-          const bannedEmbed: MessageEmbed = this.client.util
-            .embed()
+          const bannedEmbed: MessageEmbed = new MessageEmbed()
             .setColor(this.client.color.main)
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setDescription(

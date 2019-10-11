@@ -2,7 +2,6 @@ import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message, GuildMember, MessageEmbed } from 'discord.js';
 import { stripIndents } from 'common-tags';
-import { TOPICS, EVENTS } from '../../util/logger';
 
 export default class Kick extends Command {
   public client: CourseClient;
@@ -43,9 +42,9 @@ export default class Kick extends Command {
 
     try {
       await member.kick(kickReason);
-      await this.client.newCase(message, 'kick', member.user, kickReason);
+      await this.client.db.NewCase(message, 'kick', member.user, kickReason);
     } catch (error) {
-      this.client.logger.error(error, { topic: TOPICS.DISCORD, event: EVENTS.ERROR });
+      this.client.logger.error(error);
       return message.util!.reply(`Failed to kick user **${member.user}**. Error message: ${error.message}`);
     }
 
@@ -60,8 +59,7 @@ export default class Kick extends Command {
       )
       .setTimestamp(Date.now());
 
-    const logEmbed: MessageEmbed = this.client.util
-      .embed()
+    const logEmbed: MessageEmbed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setDescription(
         stripIndents`Kicked member: ${member.user.tag}

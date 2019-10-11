@@ -38,7 +38,8 @@ export default class Ban extends Command {
   }
 
   public async exec(message: Message, { member, reason }: { member: GuildMember; reason: string }) {
-    if (member.id === message.author!.id) return message.util!.send('Why in gods name would you even try to ban yourself?!');
+    if (member.id === message.author!.id)
+      return message.util!.send('Why in gods name would you even try to ban yourself?!');
 
     const channelEmbed = this.client.util
       .embed()
@@ -59,14 +60,13 @@ export default class Ban extends Command {
       .addField('**Banned by id:**', message.author.id, true)
       .setTimestamp(Date.now());
 
-    await this.client.newCase(message, 'ban', member.user, reason);
     try {
       await member.ban({ days: 2, reason: reason });
-
+      await this.client.db.NewCase(message, 'ban', member.user, reason);
       await this.client.guildLog(message, banEmbed);
       return message.util!.send(channelEmbed);
     } catch (error) {
-      console.error(error);
+      this.client.logger.error(error);
       return message.reply(`Error: ${error.message}`);
     }
   }

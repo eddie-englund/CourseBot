@@ -16,17 +16,12 @@ export default class InitGuild extends Command {
   }
 
   public async exec(message: Message) {
-    const data = await this.client.getGuild(message.guild);
-    const guild: Schema = {
-      guildID: message.guild.id,
-      guild: message.guild.name,
-    };
+    const data = await this.client.db.GetGuild(message.guild);
+
     if (data) {
-      return message.util!.reply(
-        'This guild already has a db instance! If you really want to clean the db include the argument of "clean" after the command name.'
-      );
+      return message.util!.reply('This guild already has a db instance!');
     } else {
-      await this.client.createGuild(guild);
+      await this.client.db.CreateGuild(message);
       return message.util!.reply('This guild has now been initalized!');
     }
   }

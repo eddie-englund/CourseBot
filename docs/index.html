@@ -1,0 +1,405 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>course-bot</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,400,400i,700" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">course-bot</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> course-bot</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<img src="https://yt3.ggpht.com/a/AGF-l7-o7kerdDSATMKwSTOyOznS6OM5-2JCcvDt1g=s288-c-k-c0xffffffff-no-rj-mo" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0; border-radius: 10%;" alt="Runa" >
+				<a href="#course-bot" id="course-bot" style="color: inherit; text-decoration: none;">
+					<h1>Course bot</h1>
+				</a>
+				<blockquote>
+					<p>This bot is currently not invitable</p>
+				</blockquote>
+				<div align="center">
+					<a href="https://discord.gg/AtzDNFB">
+						<img src="https://img.shields.io/discord/446312668823814145.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge">
+					</a>
+					<a href="https://app.codacy.com/app/TitusEntertainment/CourseBot?utm_source=github.com&utm_medium=referral&utm_content=TitusEntertainment/CourseBot&utm_campaign=Badge_Grade_Dashboard">
+						<img src="https://img.shields.io/codacy/grade/183d13ed5a064312b0bc7748f772755b.svg?style=for-the-badge">
+					</a>
+					<a href="https://github.com/TitusEntertainment/Coursebot">
+						<img src="https://img.shields.io/github/languages/top/TitusEntertainment/CourseBot.svg?style=for-the-badge">
+					</a>
+				</div>
+				<p>Course is the inhouse Discord bot developed specifically for the needs that we as moderators have found while moderating our Discord server called DesignCourse(courestro)</p>
+				<a href="#self-hosting" id="self-hosting" style="color: inherit; text-decoration: none;">
+					<h2>Self hosting</h2>
+				</a>
+				<p>To selfhost you will need the following:</p>
+				<ul>
+					<li><a href="https://nodejs.org">nodejs</a></li>
+					<li><a href="https://git-scm.com/">git</a></li>
+				</ul>
+				<p><strong>Step 1</strong></p>
+				<p>open a terminal and execute this command:</p>
+				<pre><code>    git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/Titusentertainment/CourseBot.git</code></pre><p><strong>Step 2</strong></p>
+				<p>cd into that directory</p>
+				<pre><code><span class="hljs-built_in">cd</span> CourseBot</code></pre><p>create a file called .env in the root foder this can be done with the command bellow (if your terminal allows it), if that does not work do it manually.</p>
+				<pre><code>    <span class="hljs-selector-tag">touch</span> <span class="hljs-selector-class">.env</span></code></pre><p><strong>Step 3</strong></p>
+				<p>Open that file and paste in your token and your discord user id. Your file should look like this:</p>
+				<pre><code>    <span class="hljs-attr">TOKEN</span> = WHATEVERMYTOKENIS
+    <span class="hljs-attr">ownerID</span> = MYDISCORID</code></pre><p><strong>Step 4</strong></p>
+				<p>install all the dependencies.</p>
+				<pre><code>    <span class="hljs-built_in">npm</span> i</code></pre><p>or if you use yarn</p>
+				<pre><code>    yarn <span class="hljs-keyword">install</span></code></pre><p><strong>Step 5</strong></p>
+				<p>run the command:</p>
+				<pre><code>    npm <span class="hljs-keyword">run</span><span class="bash"> compile</span></code></pre><p>or of if you use yarn</p>
+				<pre><code>    yarn <span class="hljs-keyword">run</span><span class="bash"> compile</span></code></pre><p>This will compile the code for you.</p>
+				<p><strong>Step 6</strong></p>
+				<p>install pm2</p>
+				<pre><code>    npm <span class="hljs-selector-tag">i</span> -G pm2</code></pre><p>or if you use yarn</p>
+				<pre><code>     yarn global <span class="hljs-keyword">add</span><span class="bash"> pm2 --prefix /usr/<span class="hljs-built_in">local</span></span></code></pre><p><strong>FINAL STEP</strong></p>
+				<p>start the bot</p>
+				<pre><code>    pm2 dist<span class="hljs-regexp">/bot/</span>bot.js</code></pre><p>if the bot does not start now make sure to double check all the previous steps.</p>
+				<a href="#commands" id="commands" style="color: inherit; text-decoration: none;">
+					<h2>Commands</h2>
+				</a>
+				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
+					<h3>Docs</h3>
+				</a>
+				<p><strong>Frameworks:</strong> with this command you can get the link to the documentation for several large frameworks, like vue and react.</p>
+				<p><strong>Mdn:</strong> with this command you can quickly search mdn for anything!</p>
+				<p><strong>Npm:</strong> allows you to search for npm pacakges!</p>
+				<a href="#info" id="info" style="color: inherit; text-decoration: none;">
+					<h3>Info</h3>
+				</a>
+				<p><strong>Channel:</strong> sends live data from the <a href="https://www.youtube.com/user/DesignCourse">DesignCourse(coursetro)</a> youtube channel</p>
+				<p><strong>Guild:</strong> sends information about the current guild.</p>
+				<p><strong>Help:</strong> quite explanitory but it sends a list of commands or a detailed list for a specified command.</p>
+				<p><strong>Profile:</strong> sends information about that users digital profile. Includes such as userID and the amount of credits that user has</p>
+				<a href="#moderation" id="moderation" style="color: inherit; text-decoration: none;">
+					<h3>Moderation</h3>
+				</a>
+				<p><strong>Ban:</strong> bans a specified user, clears two days worth of content sent by that user and allows the moderator to specify a reason for why they banned the specified user.</p>
+				<p><strong>Kick:</strong> kicks a specified user and like the commands above it allows the moderator to specify a reason.</p>
+				<p><strong>Unban:</strong> unbans a banned user, and allows moderator to specify a reason. <code>Needs a valid userID to execute</code></p>
+				<p><strong>Warn:</strong> warns a specified user and allows moderator to specify a reason.</p>
+				<a href="#settings" id="settings" style="color: inherit; text-decoration: none;">
+					<h3>Settings</h3>
+				</a>
+				<p><code>Note that all of these commands must be prefixed with setting. example: &lt;prefix&gt;setting &lt;command&gt; &lt;argument&gt;</code></p>
+				<p><strong>Init:</strong> creates a database instance for that guild. <code>note that this command is just a failsafe in case something went wrong in the process</code>.</p>
+				<p><strong>log:</strong> allows user to either start or stop logging. <code>note that logging is by default turned off</code></p>
+				<p><strong>Channel:</strong> allows user to specify what channel the bot should log to. <code>by default the bot will try to log to a channel with the name &quot;modlogs&quot;</code></p>
+				<p><strong>Prefix:</strong> allows user the specify what prefix the bot should respond to in that specific guild.</p>
+				<a href="#tags" id="tags" style="color: inherit; text-decoration: none;">
+					<h3>Tags</h3>
+				</a>
+				<p><code>note: to use any of these commands the syntax is &lt;prefix&gt;tag &lt;command&gt;</code></p>
+				<p><strong>Add:</strong> adds a tag.</p>
+				<p><strong>Delete:</strong> deletes a specified tag.</p>
+				<p><strong>Edit:</strong> edits a specified tag.</p>
+				<p><strong>List:</strong> sends a list of all tags.</p>
+				<p><strong>Show:</strong> shows a specifed tag.</p>
+				<a href="#related-links" id="related-links" style="color: inherit; text-decoration: none;">
+					<h2>Related links.</h2>
+				</a>
+				<ul>
+					<li><p><strong><a href="https://www.youtube.com/user/DesignCourse">DesignCourse(coursetro)</a> -</strong> <code>Gary Simons youtube channel.</code></p>
+					</li>
+					<li><p><strong><a href="https://www.youtube.com/channel/UCDyNFENFWUR3SE8BOnUF2WA">Titania Mothership</a> -</strong> <code>My tutorial and development youtube channel.</code></p>
+					</li>
+					<li><p><strong><a href="https://discord.gg/AtzDNFB">Discord</a> -</strong> <code>The DesignCourse(courestro) Discord server.</code></p>
+					</li>
+					<li><p><strong><a href="https://discord.js.org">Discord.js</a> -</strong> <code>The api wrapper.</code></p>
+					</li>
+					<li><p><strong><a href="https://discord-akairo.github.io/#/">Discord-akairo</a> -</strong> <code>The framework used.</code></p>
+					</li>
+				</ul>
+				<a href="#author" id="author" style="color: inherit; text-decoration: none;">
+					<h2>Author</h2>
+				</a>
+				<img src="https://i.imgur.com/rAvP1k0.jpg" width="100" height="100" align="left" style="float: left; margin: 0 10px 0 0;" alt="Titus avatar" >
+				<p><strong>Runa</strong> © <a href="https://github.com/TitusEntertainment">Titus</a>.
+				Authored and maintained by Titus.</p>
+				<blockquote>
+					<p>GitHub <a href="https://github.com/TitusEntertainment">@TitusEntertainment</a></p>
+				</blockquote>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_bot_.html">"bot/bot"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_client_courseclient_.html">"bot/client/<wbr>Course<wbr>Client"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_docs_akairo_.html">"bot/commands/docs/akairo"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_docs_discord_js_.html">"bot/commands/docs/discord_<wbr>js"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_docs_frameworks_.html">"bot/commands/docs/frameworks"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_docs_mdn_.html">"bot/commands/docs/mdn"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_docs_npm_.html">"bot/commands/docs/npm"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_info_channel_.html">"bot/commands/info/channel"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_info_guild_.html">"bot/commands/info/guild"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_info_help_.html">"bot/commands/info/help"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_info_profile_.html">"bot/commands/info/profile"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_moderation_ban_.html">"bot/commands/moderation/ban"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_moderation_case_.html">"bot/commands/moderation/case"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_moderation_clear_.html">"bot/commands/moderation/clear"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_moderation_kick_.html">"bot/commands/moderation/kick"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_moderation_unban_.html">"bot/commands/moderation/unban"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_moderation_warn_.html">"bot/commands/moderation/warn"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_settings_init_.html">"bot/commands/settings/init"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_settings_logactive_.html">"bot/commands/settings/log<wbr>Active"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_settings_logchannel_.html">"bot/commands/settings/log<wbr>Channel"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_settings_prefix_.html">"bot/commands/settings/prefix"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_settings_settings_.html">"bot/commands/settings/settings"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_tags_add_.html">"bot/commands/tags/add"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_tags_delete_.html">"bot/commands/tags/delete"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_tags_edit_.html">"bot/commands/tags/edit"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_tags_list_.html">"bot/commands/tags/list"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_tags_show_.html">"bot/commands/tags/show"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_commands_tags_tag_.html">"bot/commands/tags/tag"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_client_guildcreate_.html">"bot/events/client/guild<wbr>Create"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_client_guildmemberadd_.html">"bot/events/client/guild<wbr>Member<wbr>Add"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_client_messagedeletebulk_.html">"bot/events/client/message<wbr>Delete<wbr>Bulk"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_client_ready_.html">"bot/events/client/ready"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_commandhandler_commanderror_.html">"bot/events/command<wbr>Handler/command<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_commandhandler_cooldown_.html">"bot/events/command<wbr>Handler/cooldown"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_commandhandler_missingpermissions_.html">"bot/events/command<wbr>Handler/missing<wbr>Permissions"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_events_commandhandler_taglistener_.html">"bot/events/command<wbr>Handler/tag<wbr>Listener"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bot_util_color_.html">"bot/util/color"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_db_.html">"db/db"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_init_.html">"db/init"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_models_case_.html">"db/models/<wbr>Case"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_models_guild_.html">"db/models/<wbr>Guild"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_models_profile_.html">"db/models/<wbr>Profile"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_models_tag_.html">"db/models/<wbr>Tag"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_util_case_util_.html">"db/util/case_<wbr>util"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_util_guild_util_.html">"db/util/guild_<wbr>util"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_util_profile_util_.html">"db/util/profile_<wbr>util"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_db_util_tag_util_.html">"db/util/tag_<wbr>util"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Made by <a href="https://github.com/Horyus" target="_blank">Horyus</a>. Documentation generated by <a href="http://typedoc.org/" target="_blank">TypeDoc.</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

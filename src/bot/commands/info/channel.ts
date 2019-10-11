@@ -51,9 +51,7 @@ export default class YoutubeChannel extends Command {
       )
       .setDescription(
         stripIndents`
-                Designcourse currently has ${channel.statistics.subscriberCount} subscribers with ${
-          channel.statistics.videoCount
-        } videos.
+                Designcourse currently has ${channel.statistics.subscriberCount} subscribers with ${channel.statistics.videoCount} videos.
                 [Newest Video](https://www.youtube.com/watch?v=${latest.contentDetails.videoId})
             
             `
@@ -61,6 +59,6 @@ export default class YoutubeChannel extends Command {
       .setFooter('Last video uploaded')
       // @ts-ignore
       .setTimestamp(latest.contentDetails.videoPublishedAt);
-    message.util.send(embed);
+    return message.util.send(embed);
   }
 }

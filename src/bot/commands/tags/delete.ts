@@ -1,8 +1,6 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import { Message } from 'discord.js';
-import { TOPICS, EVENTS } from '../../util/logger';
-import { REPL_MODE_SLOPPY } from 'repl';
 
 export default class TagDelete extends Command {
   public client: CourseClient;
@@ -42,10 +40,7 @@ export default class TagDelete extends Command {
     try {
       await this.client.deleteTag(tagName, message.author, message.guild);
     } catch (error) {
-      this.client.logger.error(`Failed to delete tag ${tagName} Error: ${error}`, {
-        topic: TOPICS.DATABASE,
-        event: EVENTS.ERROR,
-      });
+      this.client.logger.error(`Failed to delete tag ${tagName} Error: ${error}`);
       return message.util!.reply(`Something went wrong! Error: ${error.message}`);
     }
     return message.util!.reply(`Alrighty then! Tag **${tagName}** has been deleted.`);
