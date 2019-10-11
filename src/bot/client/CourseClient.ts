@@ -18,31 +18,6 @@ export class CourseClient extends AkairoClient {
   public config: CourseConfig;
   public db: DB;
 
-  // **Db functions**
-  // Guild functions
-  public getGuild: Function;
-  public updateGuild: Function;
-  public createGuild: Function;
-
-  // Profile/User functions
-  public getProfile: Function;
-  public updateProfile: Function;
-  public createProfile: Function;
-
-  // Tags functions
-  public getTag: Function;
-  public updateTag: Function;
-  public createTag: Function;
-  public deleteTag: Function;
-  public getTagAliases: Function;
-
-  // Case functions
-
-  public newCase: Function;
-  public updateCase: Function;
-  public editCase: Function;
-  public getCase: Function;
-
   // Random util
   public guildLog: Function;
   public color: { main: string; red: string; ban: string; kick: string };
@@ -66,13 +41,19 @@ export class CourseClient extends AkairoClient {
     // Importing colors and the db models to this.client.color and this.client.models
     this.color = require('../util/color');
     this.guildLog = async (message: Message, embed: MessageEmbed) => {
-      let channel: Channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'modlogs');
+      let channel: Channel = message.guild.channels
+        .filter(c => c.type === 'text')
+        .find(x => x.name === 'modlogs');
 
-      const data = await this.getGuild(message.guild);
+      const data = await this.db.GetGuild(message.guild);
       if (!data || data.guildLog.channel === 'modlogs') {
-        channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'modlogs');
+        channel = message.guild.channels
+          .filter(c => c.type === 'text')
+          .find(x => x.name === 'modlogs');
       } else {
-        channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.id === data.guildLog.channel);
+        channel = message.guild.channels
+          .filter(c => c.type === 'text')
+          .find(x => x.id === data.guildLog.channel);
       }
       // @ts-ignore
       return channel.send(embed);
@@ -97,7 +78,8 @@ export class CourseClient extends AkairoClient {
           modifyStart: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
           modifyRetry: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
           timeout: 'Guess you took too long, the command has been cancelled.',
-          ended: "More than 3 tries and you still didn't couldn't do it... The command has been cancelled.",
+          ended:
+            "More than 3 tries and you still didn't couldn't do it... The command has been cancelled.",
           cancel: 'The command has been cancelled.',
           retries: 3,
           time: 30000,
