@@ -14,11 +14,7 @@ export default class GuildMemberAdd extends Listener {
 
   public async exec(member: GuildMember) {
     try {
-      const newProfile: { user: string; userID: string } = {
-        user: member.user.tag,
-        userID: member.user.id,
-      };
-      return this.client.createProfile(newProfile);
+      return this.client.db.NewProfile(member.user);
     } catch (error) {
       console.error(error);
     }

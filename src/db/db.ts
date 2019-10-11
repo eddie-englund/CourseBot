@@ -121,10 +121,10 @@ export class DB {
     return await data.updateOne(settings);
   }
 
-  public async CreateGuild(message: Message): Promise<IGuild> {
+  public async CreateGuild(guild: Guild): Promise<IGuild> {
     const settings: IGuild = {
-      guild: message.guild.name,
-      guildID: message.guild.id,
+      guild: guild.name,
+      guildID: guild.id,
     };
     const merged = Object.assign({ _id: Types.ObjectId() }, settings);
 
@@ -152,9 +152,9 @@ export class DB {
     return await data.updateOne(settings);
   }
 
-  public async NewProfile(message: Message, argUser: User): Promise<IProfile> {
-    const user = argUser.username || message.author.username;
-    const userID = argUser.id || message.author.id;
+  public async NewProfile(argUser: User): Promise<IProfile> {
+    const user = argUser.username;
+    const userID = argUser.id;
     const settings: IProfile = {
       user,
       userID,

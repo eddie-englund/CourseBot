@@ -1,6 +1,7 @@
 import { Listener } from 'discord-akairo';
 import { Guild } from 'discord.js';
 import { CourseClient } from '../../client/CourseClient';
+import { IGuild } from '../../../db/models/Guild';
 
 export default class GuildCreate extends Listener {
   public client: CourseClient;
@@ -12,15 +13,11 @@ export default class GuildCreate extends Listener {
     });
   }
 
-  public async exec(guild: Guild) {
+  public async exec(guild: Guild): Promise<IGuild> {
     this.client.logger.info(`Created db instance for guild: ${guild.name} (${guild.id})`);
-    const data = await this.client.getGuild(guild);
+    const data = await this.client.db.GetGuild(guild);
     if (data) return;
-    const newGuild: { guild; guildID } = {
-      guild: guild.name,
-      guildID: guild.id,
-    };
 
-    return this.client.createGuild(newGuild);
+    return this.client.db.CreateGuild(guild);
   }
 }

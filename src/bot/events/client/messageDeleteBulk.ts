@@ -15,7 +15,7 @@ export default class MessageDeleteBulk extends Listener {
 
   public async exec(message: Message) {
     try {
-      await this.client.newCase(message, 'messageDeleteBulk', message.author, 'unknown');
+      await this.client.db.NewCase(message, 'messageDeleteBulk', message.author, 'unknown');
     } catch (error) {
       this.client.logger.error(error);
     }
