@@ -30,7 +30,7 @@ export default class TagDelete extends Command {
   }
 
   public async exec(message: Message, { tagName }: { tagName: string }) {
-    const tagData = await this.client.getTag(tagName, message.guild);
+    const tagData = await this.client.db.GetTag(message, tagName);
     if (!tagData)
       message.util!.reply(
         `There is no tag called ${tagName}, so why are you trying to delete a tag that dosn't exist in the first place?`

@@ -21,7 +21,7 @@ export default class InitGuild extends Command {
     if (data) {
       return message.util!.reply('This guild already has a db instance!');
     } else {
-      await this.client.db.CreateGuild(message);
+      await this.client.db.CreateGuild(message.guild);
       return message.util!.reply('This guild has now been initalized!');
     }
   }

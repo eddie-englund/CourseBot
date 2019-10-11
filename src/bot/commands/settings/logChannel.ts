@@ -17,8 +17,7 @@ export default class logChannel extends Command {
           type: 'channel',
           prompt: {
             optional: false,
-            start: (message: Message): string =>
-              `${message.author}, what channel would you like to me to logg to?`,
+            start: (message: Message): string => `${message.author}, what channel would you like to me to logg to?`,
             retry: (message: Message): string => `${message.author}, please provide a valid channel.`,
           },
         },
@@ -30,7 +29,7 @@ export default class logChannel extends Command {
     if (channel.type !== 'text') return message.util!.reply(`The channel provided is not a text channel!`);
 
     try {
-      await this.client.updateGuild(message.guild, { guildLog: { channel: channel.id } });
+      await this.client.db.UpdateGuild(message.guild, { guildLog: { channel: channel.id } });
     } catch (e) {
       console.error(e);
       return message.util!.reply(`Something went wrong! Error: ${e.message}`);

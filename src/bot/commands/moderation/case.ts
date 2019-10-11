@@ -38,12 +38,19 @@ export default class CaseEdit extends Command {
   }
 
   public async exec(message: Message, args) {
-    const data = await this.client.getCase(args.case);
-    if (!data) return message.util.reply(`There is no case with the id **${args.case}**`);
+    try {
+      await this.client.db.GetCase(args.case);
+    } catch (error) {
+      this.client.logger.error(error);
+      return message.util!.reply(
+        `It appears that there is no such entry in the db! The database returned error: ${error.message}`
+      );
+    }
     try {
       await this.client.db.UpdateCase(args.case, { reason: args.reason });
     } catch (error) {
       this.client.logger.error(error);
+      return message.util!.reply(`Something went wrong updating the tag! Error message: ${error.message}`);
     }
     return message.util!.send(`Updated case **${args.case}**`);
   }

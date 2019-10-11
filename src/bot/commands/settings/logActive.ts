@@ -42,7 +42,7 @@ export default class Logs extends Command {
     switch (value) {
       case 'on' || 'true':
         try {
-          const data = await this.client.getGuild(message.guild);
+          const data = await this.client.db.GetGuild(message.guild);
           if (!data) return message.reply('Error: Database does not exist for this guild');
           await this.client.db.UpdateGuild(message.guild, { guildLog: { active: true } });
           message.util!.reply('Logging has been activated');

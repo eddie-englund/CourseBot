@@ -37,10 +37,7 @@ export default class TagAdd extends Command {
     });
   }
 
-  public async exec(
-    message: Message,
-    { tagName, tagContent }: { tagName: any; tagContent: string }
-  ) {
+  public async exec(message: Message, { tagName, tagContent }: { tagName: any; tagContent: string }) {
     if (tagName && tagName.length >= 1900) {
       return message.util!.reply('messages have a limit of 2000 characters!');
     }
@@ -49,13 +46,11 @@ export default class TagAdd extends Command {
       return message.util!.reply('messages has a maximun length of 2000 characters!');
     }
 
-    const tagData = await this.client.getTag(tagName, message.guild);
+    const tagData = await this.client.db.GetTag(message, tagName);
     if (tagData) return message.reply('This tag name already exists! Please pick another name!');
 
     await this.client.db.NewTag(message, tagName, tagContent);
 
-    return message.util!.reply(
-      `Nice! your tag **${tagName.substring(0, 1900)}** has been created!`
-    );
+    return message.util!.reply(`Nice! your tag **${tagName.substring(0, 1900)}** has been created!`);
   }
 }

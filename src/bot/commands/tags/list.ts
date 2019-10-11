@@ -18,16 +18,15 @@ export default class TagList extends Command {
   }
 
   public async exec(message: Message) {
-    console.log(this.aliases);
     const data = await Tag.find({ guildID: message.guild.id });
-    if (!data) return message.reply(`It seems like I don't have any tags saved for this guild!`);
+    if (!data) return message.reply(`There are not tags in in this guild!`);
     if (data.length < 1 || data === undefined)
-      return message.util.reply('There are no tags in this guild, consider creating one!');
+      return message.util.reply('There are no tags in this guild. Consider creating one!');
     const tagEmbed: MessageEmbed = this.client.util
       .embed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
-      .setTitle('List of all tags in this guild')
+      .setTitle('Tags avalible in this guild')
       .setDescription(
         data
           .map((tag): string => `\`${tag.id}\``)

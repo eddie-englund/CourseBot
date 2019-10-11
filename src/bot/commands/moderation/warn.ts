@@ -38,20 +38,21 @@ export default class Warn extends Command {
   }
 
   public async exec(message: Message, { member, reason }: { member: GuildMember; reason: string }) {
-    const userData = await this.client.getProfile(member.user);
+    const userData = await this.client.db.GetProfile(member.user);
 
     const warnEmbed: MessageEmbed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setDescription(`**${message.author.tag}** has warned **${member.user.tag}**. Reason: ${reason}`)
       .setTimestamp(Date.now());
+
     if (!userData) {
-      await this.client.db.NewProfile(message, member.user);
+      await this.client.db.NewProfile(member.user);
       await this.client.guildLog(message, warnEmbed);
-      await this.client.newCase(message, 'warn', member.user, reason);
+      await this.client.db.NewCase(message, 'warn', member.user, reason);
       return message.util!.send(warnEmbed);
     } else {
-      await this.client.updateProfile(member.user, {
+      await this.client.db.UpdateProfile(member.user, {
         warns: [
           {
             warnedBy: message.author,
@@ -62,11 +63,13 @@ export default class Warn extends Command {
       });
 
       switch (userData.warns.length) {
+        // @ts-ignore
         case 2:
           message.util!.send(
             `<@${member.id}>, you now have two warnings. If you exceed two warnings you will be banned from this guild.`
           );
           break;
+        // @ts-ignore
         case 3:
           try {
             member.ban({ days: 2, reason });
