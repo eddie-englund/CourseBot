@@ -99,8 +99,56 @@ export class DB {
     return newCase.save();
   }
 
+  public async CreateGuild(guild: Guild): Promise<IGuild> {
+    const newGuild = await new GuildSchema({
+      guild: guild.name,
+      guildID: guild.id,
+    });
+    return newGuild.save();
+  }
+
+  public async NewProfile(argUser: User): Promise<IProfile> {
+    const user = argUser.username;
+    const userID = argUser.id;
+
+    const newProfile = await new Profile({
+      user,
+      userID,
+    });
+    return newProfile.save();
+  }
+
+  public async NewTag(message: Message, id: string, content: string): Promise<ITag> {
+    const newTagModel = await new Tag({
+      id: id,
+      guildID: message.guild.id,
+      userID: message.author.id,
+      tag: content,
+    });
+    return newTagModel.save();
+  }
+
   public async GetCase(caseNumber: Number): Promise<ICase> {
     const data = await Case.findOne({ case: caseNumber });
+    if (!data) return Promise.reject(false);
+    return Promise.resolve(data);
+  }
+
+  public async GetGuild(guild: Guild): Promise<IGuild> {
+    const data = await GuildSchema.findOne({ guildID: guild.id });
+    if (!data) return Promise.reject(false);
+    return Promise.resolve(data);
+  }
+
+  public async GetProfile(user: User): Promise<IProfile> {
+    const data = Profile.findOne({ userId: user.id });
+    if (!data) Promise.reject(false);
+    return Promise.resolve(data);
+  }
+
+  public async GetTag(message: Message, id: string): Promise<ITag> {
+    const data = Tag.findOne({ guildId: message.guild.id, id });
+
     if (!data) return Promise.reject(false);
     return Promise.resolve(data);
   }
@@ -114,20 +162,6 @@ export class DB {
       else return;
     }
     return await data.updateOne(settings);
-  }
-
-  public async CreateGuild(guild: Guild): Promise<IGuild> {
-    const newGuild = await new GuildSchema({
-      guild: guild.name,
-      guildID: guild.id,
-    });
-    return newGuild.save();
-  }
-
-  public async GetGuild(guild: Guild): Promise<IGuild> {
-    const data = await GuildSchema.findOne({ guildID: guild.id });
-    if (!data) return Promise.reject(false);
-    return Promise.resolve(data);
   }
 
   public async UpdateGuild(guild: Guild, settings: {}): Promise<IGuild> {
@@ -144,23 +178,6 @@ export class DB {
     return await data.updateOne(settings);
   }
 
-  public async NewProfile(argUser: User): Promise<IProfile> {
-    const user = argUser.username;
-    const userID = argUser.id;
-
-    const newProfile = await new Profile({
-      user,
-      userID,
-    });
-    return newProfile.save();
-  }
-
-  public async GetProfile(user: User): Promise<IProfile> {
-    const data = Profile.findOne({ userId: user.id });
-    if (!data) Promise.reject(false);
-    return Promise.resolve(data);
-  }
-
   public async UpdateProfile(user: User, settings: {}): Promise<IProfile> {
     let data = await Profile.findOne({ userID: user.id });
 
@@ -172,23 +189,6 @@ export class DB {
       else return;
     }
     return await data.updateOne(settings);
-  }
-
-  public async NewTag(message: Message, id: string, content: string): Promise<ITag> {
-    const newTagModel = await new Tag({
-      id: id,
-      guildID: message.guild.id,
-      userID: message.author.id,
-      tag: content,
-    });
-    return newTagModel.save();
-  }
-
-  public async GetTag(message: Message, id: string): Promise<ITag> {
-    const data = Tag.findOne({ guildId: message.guild.id, id });
-
-    if (!data) return Promise.reject(false);
-    return Promise.resolve(data);
   }
 
   public async UpdateTag(message: Message, id: string, settings: {}): Promise<ITag> {
