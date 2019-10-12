@@ -35,7 +35,7 @@
     "node-gyp": "^5.0.3",
     "pluralize": "^8.0.0",
     "pm2": "^3.5.1",
-    "typedocs": "^0.6.6"
+    "typedocs": "^0.6.6",
   },
   "eslintConfig": {
     "extends": "marine/node"
