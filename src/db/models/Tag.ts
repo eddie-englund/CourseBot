@@ -1,7 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document, Model } from 'mongoose';
 import timestamp = require('mongoose-timestamp');
 
-export interface ITag {
+export interface ITag extends Document {
   id: string;
   guildID: string;
   userID: string;

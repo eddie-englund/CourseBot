@@ -16,8 +16,10 @@ import Tag, { ITag } from './models/Tag';
  * const database = new DB({ URI: process.env.MONGO_URI, client:CourseClient});
  *
  * const newCase = datbase.NewCase(message, ban, User, "He spamed the chat with por");
+ * const createGuild = database.CreateGuild(guild);
  * const getCase = dataBase.GetCase(1)
  * const editCase = database.UpdateCase(1, { reason: 'He spammed the chat with pornogrophy' })
+ * const
  *
  */
 

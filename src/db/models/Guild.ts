@@ -1,7 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Model, Document } from 'mongoose';
 import timestamp = require('mongoose-timestamp');
 
-export interface IGuild {
+export interface IGuild extends Document {
   guild: string;
   guildID: string;
   cases?: number;

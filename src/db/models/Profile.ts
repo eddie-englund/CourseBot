@@ -1,7 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document, Model } from 'mongoose';
 import timestamp = require('mongoose-timestamp');
 
-export interface IProfile {
+export interface IProfile extends Document {
   user: string;
   userID: string;
   warns?: [

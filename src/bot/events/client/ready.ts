@@ -1,6 +1,5 @@
 import { Listener } from 'discord-akairo';
 import { CourseClient } from '../../client/CourseClient';
-import { Schema } from 'mongoose';
 import { Guild } from 'discord.js';
 
 export default class Ready extends Listener {
@@ -21,9 +20,7 @@ export default class Ready extends Listener {
         return this.client.db
           .CreateGuild(guild)
           .then(g =>
-            this.client.logger.info(
-              `Created db instance at ready event for guild: ${g.guild}, id: ${g.guildID}`
-            )
+            this.client.logger.info(`Created db instance at ready event for guild: ${g.guild}, id: ${g.guildID}`)
           );
       }
     });
