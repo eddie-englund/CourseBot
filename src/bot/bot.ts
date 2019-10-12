@@ -11,7 +11,6 @@ const client: CourseClient = new CourseClient({ URI: process.env.MONGO_CREDENTIA
 // Error handling
 
 client
-  // @ts-ignore
   .on('error', error => logger.error(error))
   .on('warn', warn => logger.warn(warn));
 

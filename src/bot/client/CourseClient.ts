@@ -4,7 +4,6 @@ import Guild from '../../db/models/Guild';
 import { Logger } from '@ayana/logger';
 import { Message, MessageEmbed, Channel } from 'discord.js';
 import { DB } from '../../db/db';
-import { ClientHttp2Session } from 'http2';
 
 interface CourseConfig {
   URI?: string;
