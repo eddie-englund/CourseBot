@@ -8,7 +8,6 @@ import GuildSchema, { IGuild } from './models/Guild';
 import { CourseClient } from 'src/bot/client/CourseClient';
 import Profile, { IProfile } from './models/Profile';
 import Tag, { ITag } from './models/Tag';
-import { promises } from 'dns';
 
 /**
  * Course database handler
@@ -192,7 +191,7 @@ export class DB {
   }
 
   public async UpdateTag(message: Message, id: string, settings: {}): Promise<ITag> {
-    let data = Tag.findOne({ guildID: message.guild.id, id });
+    const data = Tag.findOne({ guildID: message.guild.id, id });
     if (!data) Promise.reject(false);
 
     for (const key in settings) {
