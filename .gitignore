@@ -1,12 +1,24 @@
+// Modules and dist
+
 node_modules
 dist
-.env
 yarn-error.log
 package-lock.json
 .eslintrc
-tests
-config.json
-test
+
+// Secret data
+
+.env
+
+
+// Logs
 error.log
 warn.log
 logs
+
+
+// tests
+tests
+test
+test.json
+test.js

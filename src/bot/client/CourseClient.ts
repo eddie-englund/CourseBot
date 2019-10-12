@@ -1,46 +1,28 @@
-import { AkairoClient, CommandHandler, ListenerHandler, Flag } from 'discord-akairo';
+import { AkairoClient, CommandHandler, ListenerHandler } from 'discord-akairo';
 import { join } from 'path';
 import Guild from '../../db/models/Guild';
-import { Logger } from 'winston';
-import { logger, TOPICS, EVENTS } from '../util/logger';
-import { Message, MessageEmbed, Channel, ShardingManager } from 'discord.js';
-import { redis } from 'googleapis/build/src/apis/redis';
+import { Logger } from '@ayana/logger';
+import { Message, MessageEmbed, Channel } from 'discord.js';
+import { DB } from '../../db/db';
+import { ClientHttp2Session } from 'http2';
+
+interface CourseConfig {
+  URI?: string;
+  TOKEN?: string;
+}
 
 export class CourseClient extends AkairoClient {
   public commandHandler: CommandHandler;
   public listenerHandler: ListenerHandler;
-  public logger: Logger = logger;
-
-  // **Db functions**
-  // Guild functions
-  public getGuild: Function;
-  public updateGuild: Function;
-  public createGuild: Function;
-
-  // Profile/User functions
-  public getProfile: Function;
-  public updateProfile: Function;
-  public createProfile: Function;
-
-  // Tags functions
-  public getTag: Function;
-  public updateTag: Function;
-  public createTag: Function;
-  public deleteTag: Function;
-  public getTagAliases: Function;
-
-  // Case functions
-
-  public newCase: Function;
-  public updateCase: Function;
-  public editCase: Function;
-  public getCase: Function;
+  public logger: Logger = Logger.get('Client');
+  public config: CourseConfig;
+  public db: DB;
 
   // Random util
   public guildLog: Function;
   public color: { main: string; red: string; ban: string; kick: string };
 
-  constructor() {
+  constructor(config: CourseConfig) {
     super(
       {
         ownerID: process.env.ownerID,
@@ -52,6 +34,10 @@ export class CourseClient extends AkairoClient {
       }
     );
 
+    this.config = config;
+
+    this.db = new DB({ URI: this.config.URI });
+
     // Importing colors and the db models to this.client.color and this.client.models
     this.color = require('../util/color');
     this.guildLog = async (message: Message, embed: MessageEmbed) => {
@@ -59,9 +45,11 @@ export class CourseClient extends AkairoClient {
         .filter(c => c.type === 'text')
         .find(x => x.name === 'modlogs');
 
-      const data = await this.getGuild(message.guild);
+      const data = await this.db.GetGuild(message.guild);
       if (!data || data.guildLog.channel === 'modlogs') {
-        channel = message.guild.channels.filter(c => c.type === 'text').find(x => x.name === 'modlogs');
+        channel = message.guild.channels
+          .filter(c => c.type === 'text')
+          .find(x => x.name === 'modlogs');
       } else {
         channel = message.guild.channels
           .filter(c => c.type === 'text')
@@ -77,7 +65,7 @@ export class CourseClient extends AkairoClient {
       prefix: async msg => {
         const settings = await Guild.findOne({ guildID: msg.guild.id });
         if (settings) return settings.prefix;
-        else return '?';
+        else return 'c/';
       },
       blockBots: true,
       blockClient: true,
@@ -90,7 +78,8 @@ export class CourseClient extends AkairoClient {
           modifyStart: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
           modifyRetry: (_, str): string => `${str}\n\nType \`cancel\` to cancel the command.`,
           timeout: 'Guess you took too long, the command has been cancelled.',
-          ended: "More than 3 tries and you still didn't couldn't do it... The command has been cancelled.",
+          ended:
+            "More than 3 tries and you still didn't couldn't do it... The command has been cancelled.",
           cancel: 'The command has been cancelled.',
           retries: 3,
           time: 30000,
@@ -104,6 +93,9 @@ export class CourseClient extends AkairoClient {
       directory: join(__dirname, '..', 'events'),
     });
     // Allowing the handler ot use the events emitted by the commandHandler and the ListenerHandler
+  }
+
+  private async _init() {
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,
       listenerHandler: this.listenerHandler,
@@ -113,8 +105,14 @@ export class CourseClient extends AkairoClient {
 
     this.commandHandler!.useListenerHandler(this.listenerHandler);
     this.listenerHandler.loadAll();
-    this.logger.info('Listener handler loaded', { topic: TOPICS.DISCORD_AKAIRO, event: EVENTS.INIT });
+    this.logger.info('Listener handler loaded');
     this.commandHandler.loadAll();
-    this.logger.info('Command Handler Loaded', { topic: TOPICS.DISCORD_AKAIRO, event: EVENTS.INIT });
+    this.logger.info('Command Handler Loaded');
+    this.db.init();
+  }
+
+  public async start(): Promise<string> {
+    await this._init();
+    return this.login(this.config.TOKEN);
   }
 }

@@ -1,4 +1,4 @@
-import { Command } from 'discord-akairo';
+import { Command, Argument } from 'discord-akairo';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
 import { CourseClient } from 'src/bot/client/CourseClient';
@@ -23,11 +23,13 @@ export default class Logs extends Command {
       args: [
         {
           id: 'value',
-          type: 'string',
+          type: (message: Message, phrase: string) => {
+            if (phrase !== 'true' || 'false' || 'off' || 'on') return null;
+            return phrase;
+          },
           prompt: {
             optional: false,
-            start: (message: Message): string =>
-              `${message.author}, would you like to turn off or on loggin?`,
+            start: (message: Message): string => `${message.author}, would you like to turn off or on loggin?`,
             retry: (message: Message): string =>
               `${message.author}, comon now don't be shy! Provide me with either; true, false, on or off`,
           },
@@ -40,22 +42,22 @@ export default class Logs extends Command {
     switch (value) {
       case 'on' || 'true':
         try {
-          const data = await this.client.getGuild(message.guild);
+          const data = await this.client.db.GetGuild(message.guild);
           if (!data) return message.reply('Error: Database does not exist for this guild');
-          await this.client.updateGuild(message.guild, { guildLog: { active: true } });
+          await this.client.db.UpdateGuild(message.guild, { guildLog: { active: true } });
           message.util!.reply('Logging has been activated');
         } catch (e) {
-          console.error(e);
-          message.util!.reply(`Something wen't wrong! Error: ${e.message}`);
+          this.client.logger.error(e);
+          return message.util!.reply(`Something wen't wrong! Error: ${e.message}`);
         }
         break;
       case 'off' || 'false':
         try {
-          await this.client.updateGuild(message.guild, { guildLOg: { active: false } });
-          message.util!.reply('Logging has now been turned off');
+          await this.client.db.UpdateGuild(message.guild, { guildLog: { active: false } });
+          return message.util!.reply('Logging has now been turned off');
         } catch (error) {
-          console.error(error);
-          message.util!.reply(`Something wen't wrong! Error: ${error.message}`);
+          this.client.logger.error(error);
+          return message.util!.reply(`Something wen't wrong! Error: ${error.message}`);
         }
     }
   }

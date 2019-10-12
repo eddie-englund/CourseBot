@@ -12,35 +12,30 @@
     "@types/restify-errors": "^4.3.3",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "eslint-config-marine": "^3.0.3",
+    "jsdoc": "^3.6.3",
     "nodemon": "^1.19.1",
     "ts-node": "^8.3.0",
     "ts-node-dev": "^1.0.0-pre.40",
+    "typedoc": "^0.15.0",
+    "typedoc-dark-theme": "^0.0.11",
     "typescript": "^3.5.3"
   },
   "dependencies": {
+    "@ayana/logger": "^2.1.1",
     "common-tags": "^1.8.0",
-    "cors": "^2.8.5",
     "discord-akairo": "discord-akairo/discord-akairo",
     "discord.js": "discordjs/discord.js",
     "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
     "googleapis": "^42.0.0",
-    "graphql": "^14.5.3",
-    "helmet": "^3.20.0",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.6.9",
     "mongoose-timestamp": "^0.6.0",
     "ms": "^2.1.2",
     "node-gyp": "^5.0.3",
-    "passport": "^0.4.0",
     "pluralize": "^8.0.0",
     "pm2": "^3.5.1",
-    "restify-cors-middleware": "^1.1.1",
-    "restify-errors": "^8.0.1",
-    "typeorm": "^0.2.18",
-    "winston": "^3.2.1"
+    "typedocs": "^0.6.6",
   },
   "eslintConfig": {
     "extends": "marine/node"
@@ -49,6 +44,7 @@
     "ts-compile": "tsc -p tsconfig.json --watch",
     "compile": "tsc -p tsconfig.json",
     "api": "nodemon dist/api/app.js",
-    "bot": "tsc -p tsconfig.json && nodemon dist/bot/bot.js"
+    "bot": "tsc -p tsconfig.json && nodemon dist/bot/bot.js",
+    "docs": "typedoc --theme ./node_modules/typedoc-dark-theme/bin/default --tsconfig tsconfig.json --out ./docs/ ./src/*"
   }
 }

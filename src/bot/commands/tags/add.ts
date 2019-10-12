@@ -46,16 +46,10 @@ export default class TagAdd extends Command {
       return message.util!.reply('messages has a maximun length of 2000 characters!');
     }
 
-    const tagData = await this.client.getTag(tagName, message.guild);
+    const tagData = await this.client.db.GetTag(message, tagName);
     if (tagData) return message.reply('This tag name already exists! Please pick another name!');
 
-    const newTag = {
-      id: tagName,
-      guildID: message.guild.id,
-      userID: message.author.id,
-      tag: tagContent,
-    };
-    await this.client.createTag(newTag);
+    await this.client.db.NewTag(message, tagName, tagContent);
 
     return message.util!.reply(`Nice! your tag **${tagName.substring(0, 1900)}** has been created!`);
   }
