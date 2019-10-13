@@ -72,6 +72,12 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_db_models_case_.icase.html" class="tsd-kind-icon">ICase</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_db_models_case_.html#case" class="tsd-kind-icon">Case</a></li>
@@ -89,17 +95,17 @@
 					<div class="tsd-signature tsd-kind-icon">Case<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;model(&#x27;Case&#x27;, CaseSchema)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/0a82d00/src/db/models/Case.ts#L23">db/models/Case.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/873dd6c/src/db/models/Case.ts#L38">db/models/Case.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="caseschema" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> Case<wbr>Schema</h3>
-					<div class="tsd-signature tsd-kind-icon">Case<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Schema</span><span class="tsd-signature-symbol"> =&nbsp;new Schema({case: Number,caseType: String,reason: {type: String,default: &#x27;No reason given&#x27;,},prossectuter: {id: String,name: String,},offender: {id: String,name: String,},timestamp: String,})</span></div>
+					<div class="tsd-signature tsd-kind-icon">Case<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Schema</span><span class="tsd-signature-symbol"> =&nbsp;new Schema({case: Number,caseType: String,reason: {type: String,default: &#x27;No reason given&#x27;,},prossectuter: {id: String,name: String,},offender: {id: String,name: String,},timestamp: { type: Date, default: Date.now() },})</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/0a82d00/src/db/models/Case.ts#L4">db/models/Case.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/TitusEntertainment/CourseBot/blob/873dd6c/src/db/models/Case.ts#L19">db/models/Case.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -118,6 +124,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_db_models_case_.icase.html" class="tsd-kind-icon">ICase</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="_db_models_case_.html#case" class="tsd-kind-icon">Case</a>
 					</li>

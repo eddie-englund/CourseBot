@@ -61,7 +61,7 @@ export default class Ban extends Command {
       .setTimestamp(Date.now());
 
     try {
-      await member.ban({ days: 2, reason: reason });
+      await member.ban({ days: 2, reason });
       await this.client.db.NewCase(message, 'ban', member.user, reason);
       await this.client.guildLog(message, banEmbed);
       return message.util!.send(channelEmbed);

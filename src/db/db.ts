@@ -2,18 +2,19 @@ import { Logger } from '@ayana/logger';
 import { stripIndents } from 'common-tags';
 import { Guild, Message, MessageEmbed, User } from 'discord.js';
 import { connect, Connection, connection } from 'mongoose';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../bot/client/CourseClient';
 import Case, { ICase } from './models/Case';
 import GuildSchema, { IGuild } from './models/Guild';
 import Profile, { IProfile } from './models/Profile';
 import Tag, { ITag } from './models/Tag';
 const logger = Logger.get('DB');
+import color from '../bot/util/color';
 
 /**
  * Course database handler
  * @todo add Tags to the handler!
  * @example
- * const database = new DB({ URI: process.env.MONGO_URI, client: CourseClient});
+ * const database = new DB({ URI: process.env.MONGO_URI, GuildLog: this.guildLog}); note that this has to be done inside the client because we need access to the guildLog function that we get from in there
  *
  * const newCase = datbase.NewCase(message, ban, User, "He spamed the chat with por");
  * const createGuild = database.CreateGuild(guild);
@@ -25,16 +26,16 @@ const logger = Logger.get('DB');
 
 interface Config {
   URI?: string | null;
+  GuildLog?: Function;
 }
 
 export class DB {
   /**
-   * @param {Object} Config.URI MongoURI
-   * @param {CourseClient} CourseClient the CourseClient itself has to be passed in as well.
+   * @param { Object } config. This is where we get access to the mongodb uri but also the guildLog function passed from the client on init
    */
 
   private connection: Connection = connection;
-  private client: CourseClient;
+  private color = color;
   constructor(private config: Config = {}) {
     if (!this.config.URI) throw new Error('Please, provide a valid MongoDB URI');
 
@@ -82,11 +83,9 @@ export class DB {
       )
       .setTimestamp(Date.now());
 
-    ['ban', 'kick'].includes(type)
-      ? caseEmbed.setColor(this.client.color[type])
-      : caseEmbed.setColor(this.client.color.main);
+    ['ban', 'kick'].includes(type) ? caseEmbed.setColor(this.color[type]) : caseEmbed.setColor(this.color.main);
 
-    await this.client.guildLog(message, caseEmbed);
+    await this.config.GuildLog(message, caseEmbed);
     return newCase.save();
   }
 
@@ -135,7 +134,7 @@ export class DB {
   }
 
   public async GetTag({ guild }: Message, id: string): Promise<ITag> {
-    const data = Tag.findOne({ guildId: guild.id, id });
+    const data = Tag.findOne({ guildID: guild.id, id });
 
     if (!data) return Promise.reject(false);
     return Promise.resolve(data);

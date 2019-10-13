@@ -8,6 +8,7 @@ import { DB } from '../../db/db';
 interface CourseConfig {
   URI?: string;
   TOKEN?: string;
+  client?: CourseClient;
 }
 
 export class CourseClient extends AkairoClient {
@@ -35,8 +36,6 @@ export class CourseClient extends AkairoClient {
 
     this.config = config;
 
-    this.db = new DB({ URI: this.config.URI });
-
     // Importing colors and the db models to this.client.color and this.client.models
     this.color = require('../util/color');
     this.guildLog = async (message: Message, embed: MessageEmbed) => {
@@ -51,6 +50,8 @@ export class CourseClient extends AkairoClient {
       // @ts-ignore
       return channel.send(embed);
     };
+
+    this.db = new DB({ URI: this.config.URI, GuildLog: this.guildLog });
 
     // Handlers. Declaring: Directory, Guild specifc prefixes, taking mention as a prefix ,bot blocking, block self, set default settings for arguments and allow usage of the command util
     this.commandHandler = new CommandHandler(this, {
