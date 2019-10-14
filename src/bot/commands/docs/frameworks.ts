@@ -1,8 +1,7 @@
 import { Command, Flag } from 'discord-akairo';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 import { Message } from 'discord.js';
 import { stripIndents } from 'common-tags';
-import { REPL_MODE_SLOPPY } from 'repl';
 
 export default class Frameworks extends Command {
   public client: CourseClient;

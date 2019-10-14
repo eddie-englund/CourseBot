@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 import { Message, User, MessageEmbed } from 'discord.js';
 
 export default class Unban extends Command {

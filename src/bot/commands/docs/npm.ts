@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as moment from 'moment';
 import 'moment-duration-format';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 
 /**
  * I was too lazy to make this command. Credits to Icrawl and the bot yukikaze: https://github.com/Naval-Base/yukikaze/blob/master/src/bot/commands/docs/npm.ts
@@ -43,9 +43,7 @@ export default class NPMCommand extends Command {
     }
     const body = await res.json();
     if (body.time.unpublished) {
-      return message.util!.reply(
-        'whoever was the Commander of this package decided to unpublish it, what a fool.'
-      );
+      return message.util!.reply('whoever was the Commander of this package decided to unpublish it, what a fool.');
     }
     const version = body.versions[body['dist-tags'].latest];
     const maintainers = this._trimArray(body.maintainers.map((user: { name: string }): string => user.name));

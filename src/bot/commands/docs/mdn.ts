@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { Message, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import * as qs from 'querystring';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 
 export default class MDNCommand extends Command {
   public client: CourseClient;
@@ -30,10 +30,7 @@ export default class MDNCommand extends Command {
     });
   }
 
-  public async exec(
-    message: Message,
-    { query, match }: { query: string; match: any }
-  ): Promise<Message | Message[]> {
+  public async exec(message: Message, { query, match }: { query: string; match: any }): Promise<Message | Message[]> {
     if (!query && match) query = match[1];
     const queryString = qs.stringify({ q: query });
     const res = await fetch(`https://developer.mozilla.org/en-US/search.json?locale=en-US&q=${queryString}`);
@@ -44,10 +41,14 @@ export default class MDNCommand extends Command {
 
     const embed = new MessageEmbed()
       .setColor(this.client.color.main)
-      .setAuthor('MDN', 'https://developer.mozilla.org/static/img/favicon32.7f3da72dcea1.png', 'https://developer.mozilla.org/')
+      .setAuthor(
+        'MDN',
+        'https://developer.mozilla.org/static/img/favicon32.7f3da72dcea1.png',
+        'https://developer.mozilla.org/'
+      )
       .setURL(body.documents[0].url)
       .setTitle(body.documents[0].title)
-      .setDescription(body.documents[0].excerpt.replace(/\<mark\>|\<\/mark\>/g, "**"));
+      .setDescription(body.documents[0].excerpt.replace(/\<mark\>|\<\/mark\>/g, '**'));
 
     return message.util!.send(embed);
   }

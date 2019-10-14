@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 import { Message, GuildMember } from 'discord.js';
 import Case from '../../../db/models/Case';
 

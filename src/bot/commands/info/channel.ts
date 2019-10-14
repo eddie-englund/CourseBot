@@ -2,7 +2,7 @@ import { Command } from 'discord-akairo';
 import { google } from 'googleapis';
 import { stripIndents } from 'common-tags';
 import { Message } from 'discord.js';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 const auth = process.env.YOUTUBETOKEN;
 const service = google.youtube('v3');
 

@@ -1,6 +1,6 @@
 import { Listener } from 'discord-akairo';
 import { Message } from 'discord.js';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 
 export default class TagListener extends Listener {
   public client: CourseClient;

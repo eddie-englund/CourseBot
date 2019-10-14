@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 import { Message } from 'discord.js';
 
 export default class TagEdit extends Command {
@@ -21,8 +21,7 @@ export default class TagEdit extends Command {
           id: 'tagName',
           type: 'existingTag',
           prompt: {
-            start: (message: Message): string =>
-              `${message.author}, what tag would you like to edit?`,
+            start: (message: Message): string => `${message.author}, what tag would you like to edit?`,
             retry: (message: Message): string => `${message.author}, please try again.`,
           },
         },
@@ -31,20 +30,15 @@ export default class TagEdit extends Command {
           type: 'string',
           match: 'rest',
           prompt: {
-            start: (message: Message): string =>
-              `${message.author}, what do you want the tag to say?`,
-            retry: (message: Message): string =>
-              `${message.author}, please provide the new content for the tag!`,
+            start: (message: Message): string => `${message.author}, what do you want the tag to say?`,
+            retry: (message: Message): string => `${message.author}, please provide the new content for the tag!`,
           },
         },
       ],
     });
   }
 
-  public async exec(
-    message: Message,
-    { tagName, newTagContent }: { tagName: string; newTagContent: string }
-  ) {
+  public async exec(message: Message, { tagName, newTagContent }: { tagName: string; newTagContent: string }) {
     const tagData = await this.client.db.GetTag(message, tagName);
     if (!tagData) return message.util!.reply(`There is no tag with the name \`\`${tagName}\`\``);
     if (tagData.userID !== message.author.id)

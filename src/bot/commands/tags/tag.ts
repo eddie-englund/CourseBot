@@ -1,6 +1,6 @@
 import { Command, Flag } from 'discord-akairo';
 import { Message } from 'discord.js';
-import { CourseClient } from 'src/bot/client/CourseClient';
+import { CourseClient } from '../../client/CourseClient';
 import { stripIndents } from 'common-tags';
 
 export default class Tag extends Command {
