@@ -2,7 +2,6 @@ import { Logger } from '@ayana/logger';
 import { stripIndents } from 'common-tags';
 import { Guild, Message, MessageEmbed, User } from 'discord.js';
 import { connect, Connection, connection } from 'mongoose';
-import { CourseClient } from '../bot/client/CourseClient';
 import Case, { ICase } from './models/Case';
 import GuildSchema, { IGuild } from './models/Guild';
 import Profile, { IProfile } from './models/Profile';
