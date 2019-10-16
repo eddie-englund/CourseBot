@@ -16,6 +16,8 @@
 
 Course was ment to be the inhouse discord bot for DesignCourse(coursetro) but the owner and an admin lost the intrest so it's now just a standalone bot. Written by me [@TitusEntertainment](https://github.com/TitusEntertainment).
 
+**Note that the docs folder is simply for development purposes**
+
 ## Self hosting
 
 To selfhost you will need the following:
