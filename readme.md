@@ -2,11 +2,9 @@
 
 # Course bot
 
-> This bot is currently not invitable
-
 <div align="center">
-<a href="https://discord.gg/AtzDNFB">
-    <img src="https://img.shields.io/discord/446312668823814145.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge">
+<a href="https://discord.gg/jQ9cN55">
+    <img src="https://img.shields.io/discord/585164156710158337.svg?colorB=Blue&logo=discord&label=Support&style=for-the-badge">
 </a>
 <a href="https://app.codacy.com/app/TitusEntertainment/CourseBot?utm_source=github.com&utm_medium=referral&utm_content=TitusEntertainment/CourseBot&utm_campaign=Badge_Grade_Dashboard">
 <img src="https://img.shields.io/codacy/grade/183d13ed5a064312b0bc7748f772755b.svg?style=for-the-badge">
@@ -16,7 +14,7 @@
 </a>
 </div>
 
-Course is the inhouse Discord bot developed specifically for the needs that we as moderators have found while moderating our Discord server called DesignCourse(courestro)
+Course was ment to be the inhouse discord bot for DesignCourse(coursetro) but the owner and an admin lost the intrest so it's now just a standalone bot. Written by me [@TitusEntertainment](https://github.com/TitusEntertainment).
 
 ## Self hosting
 
@@ -24,6 +22,7 @@ To selfhost you will need the following:
 
 - [nodejs](https://nodejs.org)
 - [git](https://git-scm.com/)
+- a node package manager like npm or yarn
 
 **Step 1**
 
@@ -92,7 +91,9 @@ if the bot does not start now make sure to double check all the previous steps.
 
 ### Docs
 
-**Frameworks:** with this command you can get the link to the documentation for several large frameworks, like vue and react.
+**Djs** with this command you can search the discord.js documentation.
+
+**Akairo** with this command you can search the official [discord-akairo]() documentation
 
 **Mdn:** with this command you can quickly search mdn for anything!
 
@@ -118,6 +119,8 @@ if the bot does not start now make sure to double check all the previous steps.
 
 **Warn:** warns a specified user and allows moderator to specify a reason.
 
+**Case:** this command let's you edit a auto generated case that was created when some moderation commands are used. Note: cases can only be made if logging is on.
+
 ### Settings
 
 `Note that all of these commands must be prefixed with setting. example: <prefix>setting <command> <argument>`
@@ -142,7 +145,7 @@ if the bot does not start now make sure to double check all the previous steps.
 
 **List:** sends a list of all tags.
 
-**Show:** shows a specifed tag.
+**Show:** shows a specifed tag. Note: you can simply do \<prefix>your-tags-name to see the tag.
 
 ## Related links.
 
@@ -150,7 +153,7 @@ if the bot does not start now make sure to double check all the previous steps.
 
 - **[Titania Mothership](https://www.youtube.com/channel/UCDyNFENFWUR3SE8BOnUF2WA) -** `My tutorial and development youtube channel.`
 
-- **[Discord](https://discord.gg/AtzDNFB) -** `The DesignCourse(courestro) Discord server.`
+- **[Discord](https://discord.gg/jQ9cN55) -** `The Titania bot hub Discord server.`
 
 - **[Discord.js](https://discord.js.org) -** `The api wrapper.`
 
