@@ -1,7 +1,6 @@
 import { Command } from 'discord-akairo';
 import { CourseClient } from '../../client/CourseClient';
-import { Message, GuildMember } from 'discord.js';
-import Case from '../../../db/models/Case';
+import { Message, GuildMember, MessageEmbed } from 'discord.js';
 
 export default class Ban extends Command {
   public client: CourseClient;
@@ -41,15 +40,13 @@ export default class Ban extends Command {
     if (member.id === message.author!.id)
       return message.util!.send('Why in gods name would you even try to ban yourself?!');
 
-    const channelEmbed = this.client.util
-      .embed()
+    const channelEmbed: MessageEmbed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setDescription(`User: ${member.user.tag} has been banned. Reason: ${reason}`)
       .setTimestamp(Date.now());
 
-    const banEmbed = this.client.util
-      .embed()
+    const banEmbed: MessageEmbed = new MessageEmbed()
       .setColor(this.client.color.main)
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setThumbnail(member.user.displayAvatarURL())
@@ -67,7 +64,7 @@ export default class Ban extends Command {
       return message.util!.send(channelEmbed);
     } catch (error) {
       this.client.logger.error(error);
-      return message.reply(`Error: ${error.message}`);
+      return message.reply(`Something went wrong! Error message: ${error.message}}`);
     }
   }
 }

@@ -11,9 +11,12 @@
     "@types/restify": "^7.2.12",
     "@types/restify-errors": "^4.3.3",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "eslint-config-marine": "^3.0.3",
+    "eslint": "^6.5.1",
+    "eslint-config-marine": "^5.1.0",
+    "eslint-config-prettier": "^6.4.0",
     "jsdoc": "^3.6.3",
     "nodemon": "^1.19.1",
+    "prettier": "^1.18.2",
     "ts-node": "^8.3.0",
     "ts-node-dev": "^1.0.0-pre.40",
     "typedoc": "^0.15.0",
@@ -37,8 +40,9 @@
     "pm2": "^3.5.1",
     "typedocs": "^0.6.6"
   },
-  "eslintConfig": {
-    "extends": "marine/node"
+  "extends": "marine/prettier/node",
+  "globals": {
+    "BigInt": true
   },
   "scripts": {
     "ts-compile": "tsc -p tsconfig.json --watch",
